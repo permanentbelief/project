@@ -1,0 +1,19 @@
+﻿生成启动时间为 2020/2/18 11:00:02。
+     1>项目“D:\Documents\Visual Studio 2013\Projects\项目相关\p2p\p2p\p2p.vcxproj”在节点 2 上(Build 个目标)。
+     1>ClCompile:
+         E:\AE\VC\bin\x86_amd64\CL.exe /c /I"F:\比特科技\boost_1_72_0" /I"F:\比特科技\boost_1_72_0\boost" /Zi /nologo /W3 /WX- /sdl /Od /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
+         main.cpp
+     1>d:\documents\visual studio 2013\projects\项目相关\p2p\p2p\util.hpp(100): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+     1>d:\documents\visual studio 2013\projects\项目相关\p2p\p2p\util.hpp(138): warning C4244: “参数”: 从“int64_t”转换到“long”，可能丢失数据
+     1>d:\documents\visual studio 2013\projects\项目相关\p2p\p2p\util.hpp(139): warning C4267: “初始化”: 从“size_t”转换到“int”，可能丢失数据
+     1>d:\documents\visual studio 2013\projects\项目相关\p2p\p2p\client.hpp(106): warning C4018: “<”: 有符号/无符号不匹配
+     1>d:\documents\visual studio 2013\projects\项目相关\p2p\p2p\client.hpp(258): warning C4244: “=”: 从“int64_t”转换到“int”，可能丢失数据
+     1>d:\documents\visual studio 2013\projects\项目相关\p2p\p2p\client.hpp(262): warning C4244: “=”: 从“int64_t”转换到“int”，可能丢失数据
+       Link:
+         E:\AE\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Documents\Visual Studio 2013\Projects\项目相关\p2p\x64\Debug\p2p.exe" /INCREMENTAL /NOLOGO /LIBPATH:"F:\比特科技\boost_1_72_0\lib64-msvc-12.0" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Documents\Visual Studio 2013\Projects\项目相关\p2p\x64\Debug\p2p.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Documents\Visual Studio 2013\Projects\项目相关\p2p\x64\Debug\p2p.lib" /MACHINE:X64 x64\Debug\main.obj
+         p2p.vcxproj -> D:\Documents\Visual Studio 2013\Projects\项目相关\p2p\x64\Debug\p2p.exe
+     1>已完成生成项目“D:\Documents\Visual Studio 2013\Projects\项目相关\p2p\p2p\p2p.vcxproj”(Build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:07.28
