@@ -1,144 +1,144 @@
 # pragma once
 
-#include<thread>				//C++´´½¨Ïß³ÌµÄÍ·ÎÄ¼ş
+#include<thread>				//C++åˆ›å»ºçº¿ç¨‹çš„å¤´æ–‡ä»¶
 #include <boost/filesystem.hpp>
 #include "util.hpp"
 #include "httplib.h"
 
 
-#define P2P_PORT 9000    //¶Ë¿ÚºÅ
-#define MAX_IPBUFFER 16 //»º³åÇø
-//1×óÒÆ10Î» 1k ×óÒÆ20Î» 1M  100 ×óÒÆ20Î» 100M  ·Ö¿é´«ÊäµÄ×î´ó¿é
+#define P2P_PORT 9000    //ç«¯å£å·
+#define MAX_IPBUFFER 16 //ç¼“å†²åŒº
+//1å·¦ç§»10ä½ 1k å·¦ç§»20ä½ 1M  100 å·¦ç§»20ä½ 100M  åˆ†å—ä¼ è¾“çš„æœ€å¤§å—
 #define MAX_RANGE (100*1024*1024)
 
 
 
 
 
-#define SHARED_PATH "./Shared/" //¹²ÏíÄ¿Â¼
-#define DOWNLOAD_PATH "./Download/" //ÏÂÔØµÄÄ¿Â¼ÎÄ¼ş¼Ğ
+#define SHARED_PATH "./Shared/" //å…±äº«ç›®å½•
+#define DOWNLOAD_PATH "./Download/" //ä¸‹è½½çš„ç›®å½•æ–‡ä»¶å¤¹
 
 
 //#include "util.hpp"
 //#include <boost/filesystem.hpp>
 //
 //#include "httplib.h"
-//#include "thread" //C++´´½¨Ïß³ÌµÄÍ·ÎÄ¼ş
+//#include "thread" //C++åˆ›å»ºçº¿ç¨‹çš„å¤´æ–‡ä»¶
 
 
 
 class Host
 {
 public:
-	uint32_t _ip_addr; //ÒªÅä¶ÔµÄÖ÷»úipµØÖ·
-	bool _pair_ret; //ÓÃÓÚ´æ·ÅÅä¶Ô½á¹û£¬³É¹¦Îªtrue
+	uint32_t _ip_addr; //è¦é…å¯¹çš„ä¸»æœºipåœ°å€
+	bool _pair_ret; //ç”¨äºå­˜æ”¾é…å¯¹ç»“æœï¼ŒæˆåŠŸä¸ºtrue
 };
 
-//Ïß³ÌÈë¿Úº¯ÊıÕë¶ÔÓÚÒ»¸öÀàµÄÊ¹ÓÃ·½·¨£¬Òª´«Èë&
+//çº¿ç¨‹å…¥å£å‡½æ•°é’ˆå¯¹äºä¸€ä¸ªç±»çš„ä½¿ç”¨æ–¹æ³•ï¼Œè¦ä¼ å…¥&
 class Client
 {
 public:
-	bool Start() //ÆğÊ¼º¯Êı£¬Íê³É¿Í»§¶ËËùÓĞ¹¦ÄÜµÄÕûºÏ
+	bool Start() //èµ·å§‹å‡½æ•°ï¼Œå®Œæˆå®¢æˆ·ç«¯æ‰€æœ‰åŠŸèƒ½çš„æ•´åˆ
 	{
-		while (1)//¿Í»§¶ËĞèÒªÑ­»·ÔËĞĞ£¬ÒòÎªÏÂÔØÎÄ¼ş£¬²»ÄÜÏÂÔØÒ»´ÎÎÄ¼ş¾ÍÖØÆôÒ»´Î¿Í»§¶Ë
-			// GetOnlineHost()ÀïÃæ¶¼»á½øĞĞ¾ÖÓòÍøÄÚÖ÷»úÅä¶Ô£¬ÕâÊÇ²»ºÏÀí£¬Ã»±ØÒªµÄ
+		while (1)//å®¢æˆ·ç«¯éœ€è¦å¾ªç¯è¿è¡Œï¼Œå› ä¸ºä¸‹è½½æ–‡ä»¶ï¼Œä¸èƒ½ä¸‹è½½ä¸€æ¬¡æ–‡ä»¶å°±é‡å¯ä¸€æ¬¡å®¢æˆ·ç«¯
+			// GetOnlineHost()é‡Œé¢éƒ½ä¼šè¿›è¡Œå±€åŸŸç½‘å†…ä¸»æœºé…å¯¹ï¼Œè¿™æ˜¯ä¸åˆç†ï¼Œæ²¡å¿…è¦çš„
 		{
-			GetOnlineHost(); //ÀïÃæ»áµ÷ÓÃµ½GetShareList £¬ ÔÚGetShareListÀïÃæÓÖ»áµ÷ÓÃµ½ RangeDownload();
+			GetOnlineHost(); //é‡Œé¢ä¼šè°ƒç”¨åˆ°GetShareList ï¼Œ åœ¨GetShareListé‡Œé¢åˆä¼šè°ƒç”¨åˆ° RangeDownload();
 			
 		}
 		return true;
 	}
-	//Ö÷»úÅä¶ÔµÄÏß³ÌÈë¿Úº¯Êı
-	void HostPair(Host* host) //ÒòÎªÊÇÀàµÄ³ÉÔ±º¯Êı£¬ÓĞÒ»¸öÒşº¬µÄthis,ËùÒÔÒª´«Ò»¸öthisÖ¸Õë
+	//ä¸»æœºé…å¯¹çš„çº¿ç¨‹å…¥å£å‡½æ•°
+	void HostPair(Host* host) //å› ä¸ºæ˜¯ç±»çš„æˆå‘˜å‡½æ•°ï¼Œæœ‰ä¸€ä¸ªéšå«çš„this,æ‰€ä»¥è¦ä¼ ä¸€ä¸ªthisæŒ‡é’ˆ
 	{
-		//1.×éÖ¯http¸ñÊ½ÇëÇóÊı¾İ
-		//2.´î½¨Ò»¸ötcp¿Í»§¶Ë,½«Êı¾İ·¢ËÍ
-		//3.µÈ´ı·şÎñ¶ËµÄ»Ø¸´£¬²¢½øĞĞ½âÎö
-		//Õâ¸ö¹ı³ÌÊ¹ÓÃµ½µÚÈı·½httplibÊµÏÖ
+		//1.ç»„ç»‡httpæ ¼å¼è¯·æ±‚æ•°æ®
+		//2.æ­å»ºä¸€ä¸ªtcpå®¢æˆ·ç«¯,å°†æ•°æ®å‘é€
+		//3.ç­‰å¾…æœåŠ¡ç«¯çš„å›å¤ï¼Œå¹¶è¿›è¡Œè§£æ
+		//è¿™ä¸ªè¿‡ç¨‹ä½¿ç”¨åˆ°ç¬¬ä¸‰æ–¹httplibå®ç°
 		host->_pair_ret = false;
 		char buf[MAX_IPBUFFER] = { 0 };
-		inet_ntop(AF_INET, &host->_ip_addr, buf, 16); //½«ÍøÂç×Ö½ÚĞòµÄipµØÖ·×ª»»Îª ×Ö·û´®µÄipµØÖ·£¨µã·ÖÊ®½øÖÆµÄ£©
-		httplib::Client cli(buf, P2P_PORT); //ÊµÀı»¯httplib¿Í»§¶Ë¶ÔÏó
-		auto rsp = cli.Get("/hostpair")  ;//Ïò·şÎñ¶Ë·¢ËÍ×ÊÔ´Îª/hostpairµÄGETÇëÇó/ÈôÈı´ÎÎÕÊÖÁ¬½Ó½¨Á¢Ê§°ÜGet»á·µ»ØNULL
-		if (rsp && rsp->status == 200) //ÅĞ¶ÏÏìÓ¦½á¹ûÊÇ·ñÕıÈ·
+		inet_ntop(AF_INET, &host->_ip_addr, buf, 16); //å°†ç½‘ç»œå­—èŠ‚åºçš„ipåœ°å€è½¬æ¢ä¸º å­—ç¬¦ä¸²çš„ipåœ°å€ï¼ˆç‚¹åˆ†åè¿›åˆ¶çš„ï¼‰
+		httplib::Client cli(buf, P2P_PORT); //å®ä¾‹åŒ–httplibå®¢æˆ·ç«¯å¯¹è±¡
+		auto rsp = cli.Get("/hostpair")  ;//å‘æœåŠ¡ç«¯å‘é€èµ„æºä¸º/hostpairçš„GETè¯·æ±‚/è‹¥ä¸‰æ¬¡æ¡æ‰‹è¿æ¥å»ºç«‹å¤±è´¥Getä¼šè¿”å›NULL
+		if (rsp && rsp->status == 200) //åˆ¤æ–­å“åº”ç»“æœæ˜¯å¦æ­£ç¡®
 		{
-			host->_pair_ret = true; //ÖØÖÃÖ÷»úÅä¶Ô½á¹û
+			host->_pair_ret = true; //é‡ç½®ä¸»æœºé…å¯¹ç»“æœ
 		}
 		return;
 	}
-	bool GetOnlineHost() // »ñÈ¡ÔÚÏßÖ÷»ú
+	bool GetOnlineHost() // è·å–åœ¨çº¿ä¸»æœº
 	{
-		char ch = 'Y';  //ÊÇ·ñ½øĞĞÆ¥Åä£¬Ä¬ÈÏÊÇ½øĞĞÆ¥ÅäµÄ
+		char ch = 'Y';  //æ˜¯å¦è¿›è¡ŒåŒ¹é…ï¼Œé»˜è®¤æ˜¯è¿›è¡ŒåŒ¹é…çš„
 		if (!_online_host.empty())
 		{
-			std::cout << "ÊÇ·ñÖØĞÂ²é¿´ÔÚÏßÖ÷»ú(Y/N):";
+			std::cout << "æ˜¯å¦é‡æ–°æŸ¥çœ‹åœ¨çº¿ä¸»æœº(Y/N):";
 			fflush(stdout);
 			std::cin >> ch;
 		}
 		
 		if (ch == 'Y')
 		{
-			std::cout << "¿ªÊ¼Ö÷»úÆ¥Åä..." << std::endl;
-			// 1.s »ñÈ¡Íø¿¨ĞÅÏ¢£¬½ø¶øµÃµ½¾ÖÓòÍøÖĞËùÓĞµÄipµØÖ·ÁĞ±í
+			std::cout << "å¼€å§‹ä¸»æœºåŒ¹é…..." << std::endl;
+			// 1.s è·å–ç½‘å¡ä¿¡æ¯ï¼Œè¿›è€Œå¾—åˆ°å±€åŸŸç½‘ä¸­æ‰€æœ‰çš„ipåœ°å€åˆ—è¡¨
 			std::vector<Adapter> list;
 			AdapterUtil::GetAllAdapter(&list);
 
-			//»ñÈ¡ËùÓĞÖ÷»úipµØÖ·£¬Ìí¼Óµ½host_listÖĞ
+			//è·å–æ‰€æœ‰ä¸»æœºipåœ°å€ï¼Œæ·»åŠ åˆ°host_listä¸­
 			std::vector<Host> host_list;
-			for (int i = 0; i < list.size(); i++) //µÃµ½ËùÓĞÖ÷»úµÄipµØÖ·ÁĞ±í
+			for (int i = 0; i < list.size(); i++) //å¾—åˆ°æ‰€æœ‰ä¸»æœºçš„ipåœ°å€åˆ—è¡¨
 			{
 				uint32_t ip = list[i]._ip_addr;
 				uint32_t mask = list[i]._mask_addr;
 
-				//×¢Òâ£ºÍøÂç×Ö½ÚĞòÊÇ´ó¶Ë×Ö½ÚĞò£¬Ö÷»ú×Ö½ÚĞòÊÇĞ¡¶Ë×Ö½ÚĞò
-				//ÏÈ×ª»»ÎªĞ¡¶Ë×Ö½ÚĞò£¬È»ºóÔÚ½øĞĞ²Ù×÷
-				//ntohs ×ª»»ÎªĞ¡¶Ë×Ö½ÚĞò
+				//æ³¨æ„ï¼šç½‘ç»œå­—èŠ‚åºæ˜¯å¤§ç«¯å­—èŠ‚åºï¼Œä¸»æœºå­—èŠ‚åºæ˜¯å°ç«¯å­—èŠ‚åº
+				//å…ˆè½¬æ¢ä¸ºå°ç«¯å­—èŠ‚åºï¼Œç„¶ååœ¨è¿›è¡Œæ“ä½œ
+				//ntohs è½¬æ¢ä¸ºå°ç«¯å­—èŠ‚åº
 
 
 
-				//¼ÆËãÍøÂçºÅ
+				//è®¡ç®—ç½‘ç»œå·
 				uint32_t net = ntohl(ip&mask);
-				//¼ÆËã×î´óÖ÷»úºÅ
+				//è®¡ç®—æœ€å¤§ä¸»æœºå·
 				uint32_t max_host = (~ntohl(mask)); 
 
 
 				//std::vector<bool> ret_list(max_host);
 				for (int j = 1; j < max_host; j++)
 				{
-					uint32_t host_ip = net + j;//Õâ¸öÖ÷»úµÄip¼ÆËãÓ¦¸ÃÊ¹ÓÃÖ÷»ú×Ö½ÚĞòµÄÍøÂçºÅºÍÖ÷»úºÅ
-					//	// 2. Öğ¸ö¶ÔipµØÖ·ÁĞ±í·¢ËÍÅä¶ÔÇëÇó
+					uint32_t host_ip = net + j;//è¿™ä¸ªä¸»æœºçš„ipè®¡ç®—åº”è¯¥ä½¿ç”¨ä¸»æœºå­—èŠ‚åºçš„ç½‘ç»œå·å’Œä¸»æœºå·
+					//	// 2. é€ä¸ªå¯¹ipåœ°å€åˆ—è¡¨å‘é€é…å¯¹è¯·æ±‚
 					//	//std::thread thr(&Client::HostPair,this,host_ip);
-					//	//thr.join();// ½«Ò»Ö±¿¨ÔÚÕâÀï
+					//	//thr.join();// å°†ä¸€ç›´å¡åœ¨è¿™é‡Œ
 
-					//	// ¾Ö²¿±äÁ¿ ËùÒÔÒªÓÃthread*
+					//	// å±€éƒ¨å˜é‡ æ‰€ä»¥è¦ç”¨thread*
 					//	//thr_list.push_back(std::thread(&Client::HostPair, this, host_ip));1Y9
 					//	thr_list[i] = new std::thread(&Client::HostPair, this, host_ip,&ret_list[i]);
-					//	//Æ¥Åä³É¹¦½«ret_list[i]ÖÃÎªtrue Æ¥ÅäÊ§°Ü½«ret_list[i]ÖÃÎªfalse; 
+					//	//åŒ¹é…æˆåŠŸå°†ret_list[i]ç½®ä¸ºtrue åŒ¹é…å¤±è´¥å°†ret_list[i]ç½®ä¸ºfalse; 
 					//}
 					//for (int j = 1; j < max_host; j++)
 					//{
-					//	thr_list[i]->join();//µÈ´ıÏß³ÌÍË³ö£¬Ïß³ÌÍË³ö£¬Ö÷»úÅä¶ÔÈ´²»Ò»¶¨ÊÇ³É¹¦µÄ¡£ÓĞ¿ÉÄÜÈı´ÎÎÕÊÖ¶¼Ã»ÓĞ½¨Á¢ÆğÀ´
-					//	//Ïß³ÌÍË³ö £¬ËµÃ÷Ïß³ÌÈë¿Úº¯ÊıÔËĞĞÍê±ÏÁË£¬²»Ò»¶¨Åä¶Ô³É¹¦¡£
-					//	//»¹µÃÓĞÒ»ÖÖ·½Ê½È¥ÅĞ¶ÏÊÇ·ñ ³É¹¦ vector<bool>
+					//	thr_list[i]->join();//ç­‰å¾…çº¿ç¨‹é€€å‡ºï¼Œçº¿ç¨‹é€€å‡ºï¼Œä¸»æœºé…å¯¹å´ä¸ä¸€å®šæ˜¯æˆåŠŸçš„ã€‚æœ‰å¯èƒ½ä¸‰æ¬¡æ¡æ‰‹éƒ½æ²¡æœ‰å»ºç«‹èµ·æ¥
+					//	//çº¿ç¨‹é€€å‡º ï¼Œè¯´æ˜çº¿ç¨‹å…¥å£å‡½æ•°è¿è¡Œå®Œæ¯•äº†ï¼Œä¸ä¸€å®šé…å¯¹æˆåŠŸã€‚
+					//	//è¿˜å¾—æœ‰ä¸€ç§æ–¹å¼å»åˆ¤æ–­æ˜¯å¦ æˆåŠŸ vector<bool>
 					//	delete thr_list[i];
 					//}
 					Host host;
-					host._ip_addr = htonl(host_ip); //½«Õâ¸öÖ÷»ú×Ö½ÚĞòµÄIPµØÖ·×ª»»ÎªÍøÂç×Ö½ÚĞò
+					host._ip_addr = htonl(host_ip); //å°†è¿™ä¸ªä¸»æœºå­—èŠ‚åºçš„IPåœ°å€è½¬æ¢ä¸ºç½‘ç»œå­—èŠ‚åº
 					host._pair_ret = false;
 					host_list.push_back(host);
 				}
-				// 2. Öğ¸ö¶ÔipµØÖ·ÁĞ±í·¢ËÍÅä¶ÔÇëÇó
+				// 2. é€ä¸ªå¯¹ipåœ°å€åˆ—è¡¨å‘é€é…å¯¹è¯·æ±‚
 
 			}
-			//¶Ôhost_listÖĞµÄÖ÷»ú´´½¨Ïß³Ì½øĞĞÅä¶Ô                                               //thr_listÖ±½Ó
-			std::vector<std::thread*> thr_list(host_list.size());                               //ÕâÀïÒ²¿ÉÒÔ¶¨ÒåÒ»¸övector<thread> È»ºóvoid Hostpair() ´«ÒıÓÃhost_list[i]µÄÒıÓÃ
+			//å¯¹host_listä¸­çš„ä¸»æœºåˆ›å»ºçº¿ç¨‹è¿›è¡Œé…å¯¹                                               //thr_listç›´æ¥
+			std::vector<std::thread*> thr_list(host_list.size());                               //è¿™é‡Œä¹Ÿå¯ä»¥å®šä¹‰ä¸€ä¸ªvector<thread> ç„¶åvoid Hostpair() ä¼ å¼•ç”¨host_list[i]çš„å¼•ç”¨
 			for (int i = 0; i < host_list.size(); i++)
 			{
 				thr_list[i] = new std::thread(&Client::HostPair, this, &host_list[i]);
 
 			}
-			std::cout << "ÕıÔÚÖ÷»úÆ¥ÅäÖĞ£¬ÇëÉÔºó...\n";
-			// µÈ´ıËùÓĞÏß³ÌÖ÷»úÅä¶ÔÍê±Ï,ÅĞ¶ÏÅä¶Ô½á¹û£¬½«ÔÚÏßÖ÷»úÌí¼Óµ½_online_hostÖĞ
+			std::cout << "æ­£åœ¨ä¸»æœºåŒ¹é…ä¸­ï¼Œè¯·ç¨å...\n";
+			// ç­‰å¾…æ‰€æœ‰çº¿ç¨‹ä¸»æœºé…å¯¹å®Œæ¯•,åˆ¤æ–­é…å¯¹ç»“æœï¼Œå°†åœ¨çº¿ä¸»æœºæ·»åŠ åˆ°_online_hostä¸­
 			for (int i = 0; i < host_list.size(); i++)
 			{
 				thr_list[i]->join();
@@ -146,67 +146,67 @@ public:
 				{
 					_online_host.push_back(host_list[i]);
 				}
-				delete thr_list[i]; //¶ÑÉÏÉêÇëµÄ ÒªÊÍ·Å
+				delete thr_list[i]; //å †ä¸Šç”³è¯·çš„ è¦é‡Šæ”¾
 			}
 			
-				// 3. ÈôÅä¶ÔÇëÇóµÃµ½ÏìÓ¦£¬Ôò¶ÔÓ¦Ö÷»úÎªÔÚÏß£¬Ôò½«ipµØÖ·Ìí¼Óµ½_online_listÁĞ±íÖĞ
+				// 3. è‹¥é…å¯¹è¯·æ±‚å¾—åˆ°å“åº”ï¼Œåˆ™å¯¹åº”ä¸»æœºä¸ºåœ¨çº¿ï¼Œåˆ™å°†ipåœ°å€æ·»åŠ åˆ°_online_liståˆ—è¡¨ä¸­
 
 		}
 		
-		// 4. ´òÓ¡ÔÚÏßÖ÷»úÁĞ±í£¬Ê¹ÓÃ»§Ñ¡Ôñ
+		// 4. æ‰“å°åœ¨çº¿ä¸»æœºåˆ—è¡¨ï¼Œä½¿ç”¨æˆ·é€‰æ‹©
 
-		//½«ËùÓĞµÄÔÚÏßÖ÷»úIP´òÓ¡³öÀ´£¬¹©ÓÃ»§Ñ¡Ôñ
+		//å°†æ‰€æœ‰çš„åœ¨çº¿ä¸»æœºIPæ‰“å°å‡ºæ¥ï¼Œä¾›ç”¨æˆ·é€‰æ‹©
 		for (int i = 0; i < _online_host.size(); i++)
 		{
 			char buf[MAX_IPBUFFER] = { 0 };
 			inet_ntop(AF_INET, &_online_host[i]._ip_addr, buf, MAX_IPBUFFER);
 			std::cout << "\t" << buf << std::endl;
 		}
-		std::cout << "ÇëÑ¡ÔñÅä¶ÔÖ÷»ú£¬»ñÈ¡ÎÄ¼şÁĞ±í: ";
+		std::cout << "è¯·é€‰æ‹©é…å¯¹ä¸»æœºï¼Œè·å–æ–‡ä»¶åˆ—è¡¨: ";
 		fflush(stdout);
 		std::string select_ip;
 		std::cin >> select_ip;
-		GetShareList(select_ip);//ÓÃ»§Ñ¡ÔñÖ÷»úÖ®ºó,µ÷ÓÃ»ñÈ¡ÎÄ¼şÁĞ±í½Ó¿Ú
+		GetShareList(select_ip);//ç”¨æˆ·é€‰æ‹©ä¸»æœºä¹‹å,è°ƒç”¨è·å–æ–‡ä»¶åˆ—è¡¨æ¥å£
 
 		return true;
 	}
-	bool GetShareList(const std::string &host_ip)  // »ñÈ¡ÎÄ¼şÁĞ±í
+	bool GetShareList(const std::string &host_ip)  // è·å–æ–‡ä»¶åˆ—è¡¨
 	{
-		httplib::Client cli(host_ip.c_str(), P2P_PORT); //ÊµÀı»¯³öÒ»¸öcli¿Í»§¶Ë¶ÔÏó
+		httplib::Client cli(host_ip.c_str(), P2P_PORT); //å®ä¾‹åŒ–å‡ºä¸€ä¸ªcliå®¢æˆ·ç«¯å¯¹è±¡
 		auto rsp = cli.Get("/list");
 		if (rsp == NULL || rsp->status != 200)
 		{
-			std::cerr << "»ñÈ¡ÎÄ¼şÁĞ±íÏìÓ¦´íÎó\n";
+			std::cerr << "è·å–æ–‡ä»¶åˆ—è¡¨å“åº”é”™è¯¯\n";
 			return false;
 		}
-		//´òÓ¡ÕıÎÄ--´òÓ¡·şÎñ¶ËÏìÓ¦µÄÎÄ¼şÃû³ÆÁĞ±í¹©ÓÃ»§Ñ¡Ôñ
+		//æ‰“å°æ­£æ–‡--æ‰“å°æœåŠ¡ç«¯å“åº”çš„æ–‡ä»¶åç§°åˆ—è¡¨ä¾›ç”¨æˆ·é€‰æ‹©
 		//body: filename1\r\n filename2 \r\n
 		std::cout << rsp->body << std::endl;
-		std::cout << "\nÇëÑ¡ÔñÒªÏÂÔØµÄÎÄ¼ş:";
+		std::cout << "\nè¯·é€‰æ‹©è¦ä¸‹è½½çš„æ–‡ä»¶:";
 		fflush(stdout);
 		std::string filename;
 		std::cin >> filename;
 		RangeDownload(host_ip, filename);
 		return true;
 	}
-	bool DownloadFile( const std::string& host_ip, const std::string& filename) //  ÏÂÔØÎÄ¼ş
+	bool DownloadFile( const std::string& host_ip, const std::string& filename) //  ä¸‹è½½æ–‡ä»¶
 	{
-		//1. Ïò·şÎñ¶Ë·¢ËÍÎÄ¼şÏÂÔØÇëÇó
-		//2. µÃµ½ÏìÓ¦½á¹û£¬ÏàÓ¦µÄ½á¹ûÖĞbody¶ÔÓ¦µÄ¾ÍÊÇÎÄ¼şÊı¾İ
-		//3. ´´½¨ÎÄ¼ş£¬½«ÎÄ¼şĞ´ÈëÎÄ¼şÖĞ£¬¹Ø±ÕÎÄ¼ş
+		//1. å‘æœåŠ¡ç«¯å‘é€æ–‡ä»¶ä¸‹è½½è¯·æ±‚
+		//2. å¾—åˆ°å“åº”ç»“æœï¼Œç›¸åº”çš„ç»“æœä¸­bodyå¯¹åº”çš„å°±æ˜¯æ–‡ä»¶æ•°æ®
+		//3. åˆ›å»ºæ–‡ä»¶ï¼Œå°†æ–‡ä»¶å†™å…¥æ–‡ä»¶ä¸­ï¼Œå…³é—­æ–‡ä»¶
 		std::string req_path = "/download/" + filename;
 		httplib::Client cli(host_ip.c_str() , P2P_PORT);
 
-		std::cout << "Ïò·şÎñ¶Ë·¢ËÍÎÄ¼şÏÂÔØÇëÇó:" << std::endl;
+		std::cout << "å‘æœåŠ¡ç«¯å‘é€æ–‡ä»¶ä¸‹è½½è¯·æ±‚:" << std::endl;
 
 		auto rsp = cli.Get(req_path.c_str());
 		if (rsp == NULL || rsp->status != 200)
 		{
-			std::cout << "ÏÂÔØÎÄ¼ş£¬»ñÈ¡ÏìÓ¦ĞÅÏ¢Ê§°Ü" << rsp->status << std::endl;
+			std::cout << "ä¸‹è½½æ–‡ä»¶ï¼Œè·å–å“åº”ä¿¡æ¯å¤±è´¥" << rsp->status << std::endl;
 			return false;
 		}
-		std::cout << "»ñÈ¡ÎÄ¼şÏÂÔØÏìÓ¦³É¹¦\n";
-		//¿´¿Í»§¶ËµÄÏÂÔØÄ¿Â¼ÊÇ·ñ´æÔÚ£¬²»´æÔÚÔò´´½¨
+		std::cout << "è·å–æ–‡ä»¶ä¸‹è½½å“åº”æˆåŠŸ\n";
+		//çœ‹å®¢æˆ·ç«¯çš„ä¸‹è½½ç›®å½•æ˜¯å¦å­˜åœ¨ï¼Œä¸å­˜åœ¨åˆ™åˆ›å»º
 		if (!boost::filesystem::exists(DOWNLOAD_PATH))
 		{
 			boost::filesystem::create_directory(DOWNLOAD_PATH); 
@@ -215,45 +215,45 @@ public:
 		std::string realpath = DOWNLOAD_PATH + filename;
 		if (FileUtil::Write(realpath, rsp->body) == false)
 		{
-			std::cerr << "ÎÄ¼şÏÂÔØÊ§°Ü\n";
+			std::cerr << "æ–‡ä»¶ä¸‹è½½å¤±è´¥\n";
 			return false;
 		}
-		std::cout << "ÎÄ¼şÏÂÔØ³É¹¦\n";
+		std::cout << "æ–‡ä»¶ä¸‹è½½æˆåŠŸ\n";
 		return true;
 	}
 	bool RangeDownload(const std::string& host_ip, const std::string& name)
 	{
-		//1.·¢ËÍHEADÇëÇó£¬Í¨¹ıÏìÓ¦ÖĞµÄContent-Length»ñÈ¡ÎÄ¼ş´óĞ¡
-		//2.¸ù¾İÎÄ¼ş´óĞ¡½øĞĞ·Ö¿é
-		//3.ÖğÒ»ÇëÇó·Ö¿éÊı¾İ£¬µÃµ½ÏìÓ¦Ö®ºóĞ´ÈëÎÄ¼şµÄÖ¸¶¨Î»ÖÃ
+		//1.å‘é€HEADè¯·æ±‚ï¼Œé€šè¿‡å“åº”ä¸­çš„Content-Lengthè·å–æ–‡ä»¶å¤§å°
+		//2.æ ¹æ®æ–‡ä»¶å¤§å°è¿›è¡Œåˆ†å—
+		//3.é€ä¸€è¯·æ±‚åˆ†å—æ•°æ®ï¼Œå¾—åˆ°å“åº”ä¹‹åå†™å…¥æ–‡ä»¶çš„æŒ‡å®šä½ç½®
 		std::string req_path = "/download/" + name;
 		httplib::Client cli(host_ip.c_str(), P2P_PORT);
 		auto rsp = cli.Head(req_path.c_str());
 		if (rsp == NULL || rsp->status != 200)
 		{
-			std::cout << "»ñÈ¡ÎÄ¼ş´óĞ¡ĞÅÏ¢Ê§°Ü\n";
+			std::cout << "è·å–æ–‡ä»¶å¤§å°ä¿¡æ¯å¤±è´¥\n";
 			return false;
 		}
-		//ÕâÒ»²½¾Í¿ÉÒÔ»ñÈ¡ÎÄ¼ş´óĞ¡ÁË    
-		std::string clen = rsp->get_header_value("Content-Length"); //Õâ¸ö¡°Content-Length¡±²ÎÊı ÊÇ´òÓ¡³öÀ´µÄÂğ£¿
-		//! !!!!!!!!!!!!!!!!!!!!!!!!!!! ÎªÊ²Ã´ÕâÒ»²½²»ÓÃ ¿âº¯Êı atoi»òstoi ½«×Ö·û´®×ª»»ÎªÕûĞÎ £¿£¿£¿£¿£¿£¿
+		//è¿™ä¸€æ­¥å°±å¯ä»¥è·å–æ–‡ä»¶å¤§å°äº†    
+		std::string clen = rsp->get_header_value("Content-Length"); //è¿™ä¸ªâ€œContent-Lengthâ€å‚æ•° æ˜¯æ‰“å°å‡ºæ¥çš„å—ï¼Ÿ
+		//! !!!!!!!!!!!!!!!!!!!!!!!!!!! ä¸ºä»€ä¹ˆè¿™ä¸€æ­¥ä¸ç”¨ åº“å‡½æ•° atoiæˆ–stoi å°†å­—ç¬¦ä¸²è½¬æ¢ä¸ºæ•´å½¢ ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
 		int64_t filesize = StringUtil::Str2Dig(clen);
-		//2.¸ù¾İÎÄ¼ş´óĞ¡½øĞĞ·Ö¿é
-		//a.ÈôÎÄ¼ş´óĞ¡Ğ¡ÓÚ¿é´óĞ¡£¬ÔòÖ±½ÓÏÂÔØÎÄ¼ş
+		//2.æ ¹æ®æ–‡ä»¶å¤§å°è¿›è¡Œåˆ†å—
+		//a.è‹¥æ–‡ä»¶å¤§å°å°äºå—å¤§å°ï¼Œåˆ™ç›´æ¥ä¸‹è½½æ–‡ä»¶
 		//int range_count = filesize / MAX_RANGE;
 		if (filesize < MAX_RANGE)
 		{
-			std::cout << "ÎÄ¼ş½ÏĞ¡£¬Ö±½ÓÏÂÔØÎÄ¼ş" << std::endl;
+			std::cout << "æ–‡ä»¶è¾ƒå°ï¼Œç›´æ¥ä¸‹è½½æ–‡ä»¶" << std::endl;
 			return DownloadFile(host_ip, name);
 		}
-		//b.ÈôÎÄ¼ş´óĞ¡²»ÄÜÕû³ı¿é´óĞ¡£¬ÔòÎÄ¼ş´óĞ¡³ıÒÔ·Ö¿é´óĞ¡È»ºó+1
-		//c. ÈôÎÄ¼ş´óĞ¡¸ÕºÃÕû³ı¿é´óĞ¡£¬Ôò·Ö¿é¸öÊı¾ÍÊÇÎÄ¼ş´óĞ¡³ıÒÔ·Ö¿é´óĞ¡
+		//b.è‹¥æ–‡ä»¶å¤§å°ä¸èƒ½æ•´é™¤å—å¤§å°ï¼Œåˆ™æ–‡ä»¶å¤§å°é™¤ä»¥åˆ†å—å¤§å°ç„¶å+1
+		//c. è‹¥æ–‡ä»¶å¤§å°åˆšå¥½æ•´é™¤å—å¤§å°ï¼Œåˆ™åˆ†å—ä¸ªæ•°å°±æ˜¯æ–‡ä»¶å¤§å°é™¤ä»¥åˆ†å—å¤§å°
 		
 
-		std::cout << "ÎÄ¼ş¹ı´ó£¬·Ö¿é½øĞĞÏÂÔØ\n" << std::endl;
-		//¼ÆËã·Ö¿é¸öÊı
+		std::cout << "æ–‡ä»¶è¿‡å¤§ï¼Œåˆ†å—è¿›è¡Œä¸‹è½½\n" << std::endl;
+		//è®¡ç®—åˆ†å—ä¸ªæ•°
 		int range_count = 0;
-		if (filesize % MAX_RANGE == 0) // MAX_RANGE¶¨ÒåÎª 100M
+		if (filesize % MAX_RANGE == 0) // MAX_RANGEå®šä¹‰ä¸º 100M
 		{
 			range_count = (filesize / MAX_RANGE);
 		}
@@ -266,7 +266,7 @@ public:
 		for (int i = 0; i < range_count; i++)
 		{
 			range_start = i*MAX_RANGE;
-			if (i == (range_count - 1)) //×îºóÒ»¸ö·Ö¿éµÄ´óĞ¡
+			if (i == (range_count - 1)) //æœ€åä¸€ä¸ªåˆ†å—çš„å¤§å°
 			{
 				range_end = filesize - 1;
 			}
@@ -274,28 +274,28 @@ public:
 			{
 				range_end = (i + 1)*MAX_RANGE - 1;
 			}
-			std::cout << "¿Í»§¶ËÇëÇó·Ö¿é£º" << range_start << "-" << range_end << std::endl;
+			std::cout << "å®¢æˆ·ç«¯è¯·æ±‚åˆ†å—ï¼š" << range_start << "-" << range_end << std::endl;
 
-			//3.ÖğÒ»ÇëÇó·Ö¿éÇø¼äÖĞµÄÊı¾İ£¬µÃµ½ÏìÓ¦Ö®ºóĞ´ÈëÎÄ¼şµÄÖ¸¶¨Î»ÖÃ
-			////ÕâÒ»²½×éÖ¯RangeÍ·ĞÅÏ¢
+			//3.é€ä¸€è¯·æ±‚åˆ†å—åŒºé—´ä¸­çš„æ•°æ®ï¼Œå¾—åˆ°å“åº”ä¹‹åå†™å…¥æ–‡ä»¶çš„æŒ‡å®šä½ç½®
+			////è¿™ä¸€æ­¥ç»„ç»‡Rangeå¤´ä¿¡æ¯
 			//std::stringstream tmp;
-			//tmp << "bytes=" << range_start << "-" << range_end; //×éÖ¯Ò»¸öRangeÍ·ĞÅÏ¢µÄÇø¼äÖµ
+			//tmp << "bytes=" << range_start << "-" << range_end; //ç»„ç»‡ä¸€ä¸ªRangeå¤´ä¿¡æ¯çš„åŒºé—´å€¼
 
-			//HeadersÒ»¸ömapÀàĞÍµÄ±í
+			//Headersä¸€ä¸ªmapç±»å‹çš„è¡¨
 			httplib::Headers header;
-			header.insert(httplib::make_range_header({ { range_start, range_end } }));//ÉèÖÃÒ»¸örangeÇø¼ä
+			header.insert(httplib::make_range_header({ { range_start, range_end } }));//è®¾ç½®ä¸€ä¸ªrangeåŒºé—´
 			httplib::Client cli(host_ip.c_str(), P2P_PORT);
 
-			//header.insert(std::make_pair("Range", tmp.str()));// tmp.str()ÊÇ»ñÈ¡stringstream¶ÔÏóÀïÃæµÄĞÅÏ¢£¬×÷Îªstring¶ÔÏó·µ»Ø
-			auto rsp = cli.Get(req_path.c_str(), header); //GetÓĞºÜ¶àµÄÖØÔØº¯Êı£¬¿ÉÒÔ´«Í·ĞÅÏ¢£¬»ñÈ¡·şÎñ¶Ë·µ»ØµÄ
+			//header.insert(std::make_pair("Range", tmp.str()));// tmp.str()æ˜¯è·å–stringstreamå¯¹è±¡é‡Œé¢çš„ä¿¡æ¯ï¼Œä½œä¸ºstringå¯¹è±¡è¿”å›
+			auto rsp = cli.Get(req_path.c_str(), header); //Getæœ‰å¾ˆå¤šçš„é‡è½½å‡½æ•°ï¼Œå¯ä»¥ä¼ å¤´ä¿¡æ¯ï¼Œè·å–æœåŠ¡ç«¯è¿”å›çš„
 			if (rsp == NULL || rsp->status != 206)
 			{
-				std::cout << "Çø¼äÏÂÔØÎÄ¼şÊ§°Ü\n";
+				std::cout << "åŒºé—´ä¸‹è½½æ–‡ä»¶å¤±è´¥\n";
 				return false;
 			}
-			FileUtil::Write(name, rsp->body, range_start);//ÎÄ¼şÃû ÕıÎÄ Æ«ÒÆÁ¿
+			FileUtil::Write(name, rsp->body, range_start);//æ–‡ä»¶å æ­£æ–‡ åç§»é‡
 		}
-		std::cout << "ÎÄ¼şÏÂÔØ³É¹¦" << std::endl;
+		std::cout << "æ–‡ä»¶ä¸‹è½½æˆåŠŸ" << std::endl;
 		return true;
 	}
 private:
@@ -304,13 +304,13 @@ private:
 
 
 
-//Ö÷»úÅä¶Ô 
+//ä¸»æœºé…å¯¹ 
 /*
-¸æËßºóÕß
+å‘Šè¯‰åè€…
 
 
-ÎªÊ²Ã´Ñ¡Ôñ¶àÏß³Ì£¿
-ÒòÎªÔÚÒ»¸ö¾ÖÓòÍøÄÚµÄÖ÷»ú£¬´ó¶àÊÇÁ¬½Ó²»ÉÏµÄ£¬²»»áÓĞ»Ø¸´¡£ÎªÁË²¢ĞĞ´¦Àí£¬½ÚÊ¡Ê±¼ä¡£
+ä¸ºä»€ä¹ˆé€‰æ‹©å¤šçº¿ç¨‹ï¼Ÿ
+å› ä¸ºåœ¨ä¸€ä¸ªå±€åŸŸç½‘å†…çš„ä¸»æœºï¼Œå¤§å¤šæ˜¯è¿æ¥ä¸ä¸Šçš„ï¼Œä¸ä¼šæœ‰å›å¤ã€‚ä¸ºäº†å¹¶è¡Œå¤„ç†ï¼ŒèŠ‚çœæ—¶é—´ã€‚
 */
 
 class Server
@@ -318,10 +318,10 @@ class Server
 public:
 	bool Start()
 	{
-		//Õë¶Ô¿Í»§¶ËÇëÇóµÄ´¦Àí·½Ê½½¨Á¢¶ÔÓ¦¹ØÏµ£¬Ò²¾ÍÊÇ×¢²áĞÅÏ¢
+		//é’ˆå¯¹å®¢æˆ·ç«¯è¯·æ±‚çš„å¤„ç†æ–¹å¼å»ºç«‹å¯¹åº”å…³ç³»ï¼Œä¹Ÿå°±æ˜¯æ³¨å†Œä¿¡æ¯
 		_srv.Get("/hostpair",HostPair);
 		_srv.Get("/list",ShareList);
-		_srv.Get("/download/.*", DownLoad); //ÕıÔò±í´ïÊ½
+		_srv.Get("/download/.*", DownLoad); //æ­£åˆ™è¡¨è¾¾å¼
 
 		_srv.listen("0.0.0.0", P2P_PORT);
 		return true;
@@ -334,20 +334,20 @@ private:
 		rsp.status = 200;
 		return;
 	}
-	//»ñÈ¡¹²ÏíÎÄ¼şÁĞ±í--ÔÚÖ÷»úÉÏÉèÖÃÕâÒ»¸ö¹²ÏíÄ¿Â¼£¬·²ÊÇÕâ¸öÄ¿Â¼ÏÂµÄÎÄ¼ş¶¼ÊÇÒª¹²Ïí¸ø±ğÈËµÄ
+	//è·å–å…±äº«æ–‡ä»¶åˆ—è¡¨--åœ¨ä¸»æœºä¸Šè®¾ç½®è¿™ä¸€ä¸ªå…±äº«ç›®å½•ï¼Œå‡¡æ˜¯è¿™ä¸ªç›®å½•ä¸‹çš„æ–‡ä»¶éƒ½æ˜¯è¦å…±äº«ç»™åˆ«äººçš„
 	static void ShareList(const httplib::Request& req, httplib::Response& rsp)
 	{
-		//1.²é¿´Ä¿Â¼ÊÇ·ñ´æÔÚ´æÔÚ£¬ÈôÄ¿Â¼²»´æÔÚ£¬Ôò´´½¨Õâ¸öÄ¿Â¼
+		//1.æŸ¥çœ‹ç›®å½•æ˜¯å¦å­˜åœ¨å­˜åœ¨ï¼Œè‹¥ç›®å½•ä¸å­˜åœ¨ï¼Œåˆ™åˆ›å»ºè¿™ä¸ªç›®å½•
 		if (!boost::filesystem::exists(SHARED_PATH))
 		{
 			boost::filesystem::create_directory(SHARED_PATH);
 		}
-		boost::filesystem::directory_iterator begin(SHARED_PATH);//ÊµÀı»¯Ä¿Â¼µü´úÆ÷
-		boost::filesystem::directory_iterator end; //ÊµÀı»¯Ä¿Â¼µü´úÆ÷µÄÄ©Î²
-		//¿ªÊ¼Ä¿Â¼µü´ú
+		boost::filesystem::directory_iterator begin(SHARED_PATH);//å®ä¾‹åŒ–ç›®å½•è¿­ä»£å™¨
+		boost::filesystem::directory_iterator end; //å®ä¾‹åŒ–ç›®å½•è¿­ä»£å™¨çš„æœ«å°¾
+		//å¼€å§‹ç›®å½•è¿­ä»£
 		for (; begin != end; ++begin)
 		{
-			//µ±Ç°ÎÒÃÇÖ»»ñÈ¡ÆÕÍ¨µÄÎÄ¼şÃû³Æ£¬²¢²»¶à²ã¼¶²Ù×÷
+			//å½“å‰æˆ‘ä»¬åªè·å–æ™®é€šçš„æ–‡ä»¶åç§°ï¼Œå¹¶ä¸å¤šå±‚çº§æ“ä½œ
 			if (boost::filesystem::is_directory(begin->status()))
 				continue;
 			std::string name = begin->path().string(); //filename1\r\nfilename2\r\n
@@ -358,20 +358,20 @@ private:
 		return;
 	}
 
-	//ÏÂÔØÎÄ¼ş
+	//ä¸‹è½½æ–‡ä»¶
 	static void DownLoad(const httplib::Request &req, httplib::Response& rsp)
 	{
-		//// std::cout << "·şÎñ¶ËÊÕµ½ÎÄ¼şÏÂÔØÇëÇó£º" << req.path << std::endl;
-		//req.path --¿Í»§¶ËÇëÇó×ÊÔ´µÄÂ·¾¶  /download/filename.txt
-		boost::filesystem::path req_path(req.path); //ÊµÀı»¯³öreq_path
-		std::string name = req_path.filename().string(); //Ö»»ñÈ¡ÎÄ¼şÃû³Æ£º filename.txt
+		//// std::cout << "æœåŠ¡ç«¯æ”¶åˆ°æ–‡ä»¶ä¸‹è½½è¯·æ±‚ï¼š" << req.path << std::endl;
+		//req.path --å®¢æˆ·ç«¯è¯·æ±‚èµ„æºçš„è·¯å¾„  /download/filename.txt
+		boost::filesystem::path req_path(req.path); //å®ä¾‹åŒ–å‡ºreq_path
+		std::string name = req_path.filename().string(); //åªè·å–æ–‡ä»¶åç§°ï¼š filename.txt
 
-		////std::cout << "·şÎñ¶ËÊµ¼ÊÊÕµ½µÄÎÄ¼şÏÂÔØÃû³Æ£º" << name << "Â·¾¶£º" << SHARED_PATH << std::endl;
+		////std::cout << "æœåŠ¡ç«¯å®é™…æ”¶åˆ°çš„æ–‡ä»¶ä¸‹è½½åç§°ï¼š" << name << "è·¯å¾„ï¼š" << SHARED_PATH << std::endl;
 
-		std::string realpath = SHARED_PATH  + name;// Êµ¼ÊÎÄ¼şµÄÂ·¾¶Ó¦¸ÃÊÇÔÚ¹²ÏíµÄÄ¿Â¼ÏÂ
-		//boost::filesystem::exists()ÎÄ¼şÊÇ·ñ´æÔÚ
+		std::string realpath = SHARED_PATH  + name;// å®é™…æ–‡ä»¶çš„è·¯å¾„åº”è¯¥æ˜¯åœ¨å…±äº«çš„ç›®å½•ä¸‹
+		//boost::filesystem::exists()æ–‡ä»¶æ˜¯å¦å­˜åœ¨
 
-		//std::cout << "·şÎñ¶ËÊµ¼ÊÊÕµ½µÄÎÄ¼şÏÂÔØÂ·¾¶£º" << realpath << std::endl;
+		//std::cout << "æœåŠ¡ç«¯å®é™…æ”¶åˆ°çš„æ–‡ä»¶ä¸‹è½½è·¯å¾„ï¼š" << realpath << std::endl;
 
 	
 		if (!boost::filesystem::exists(realpath) || boost::filesystem::is_directory(realpath))
@@ -382,12 +382,12 @@ private:
 	
 		if (req.method == "GET")
 		{ 
-			//ÒÔÇ°µÄGETÇëÇó£¬¾ÍÊÇÖ±½ÓÏÂÔØÍêÕûµÄÎÄ¼ş£¬µ«ÊÇÏÖÔÚ²»Ò»ÑùÁË£¬ÏÖÔÚÓĞÁË·Ö¿é´«ÊäÕâ¸ö¹¦ÄÜ
-			//ÅĞ¶ÏÊÇ·ñÓĞ·Ö¿é´«ÊäµÄÒÀ¾İ£¬¾ÍÊÇÕâ´ÎÇëÇóÖĞÊÇ·ñÓĞRangeÍ·²¿×Ö¶Î
-			if (req.has_header("Range"))  //ÅĞ¶ÏÇëÇóÍ·ÖĞÊÇ·ñ°üº¬Range×Ö¶Î
+			//ä»¥å‰çš„GETè¯·æ±‚ï¼Œå°±æ˜¯ç›´æ¥ä¸‹è½½å®Œæ•´çš„æ–‡ä»¶ï¼Œä½†æ˜¯ç°åœ¨ä¸ä¸€æ ·äº†ï¼Œç°åœ¨æœ‰äº†åˆ†å—ä¼ è¾“è¿™ä¸ªåŠŸèƒ½
+			//åˆ¤æ–­æ˜¯å¦æœ‰åˆ†å—ä¼ è¾“çš„ä¾æ®ï¼Œå°±æ˜¯è¿™æ¬¡è¯·æ±‚ä¸­æ˜¯å¦æœ‰Rangeå¤´éƒ¨å­—æ®µ
+			if (req.has_header("Range"))  //åˆ¤æ–­è¯·æ±‚å¤´ä¸­æ˜¯å¦åŒ…å«Rangeå­—æ®µ
 			{
-				//ÕâÊÇÒ»¸ö·Ö¿é´«Êä
-				//ĞèÒªÖªµÀ·Ö¿éÇø¼äÊÇ¶àÉÙ
+				//è¿™æ˜¯ä¸€ä¸ªåˆ†å—ä¼ è¾“
+				//éœ€è¦çŸ¥é“åˆ†å—åŒºé—´æ˜¯å¤šå°‘
 				std::string range_str = req.get_header_value("Range");// byte=start-end
 				httplib::Ranges ranges;// vector<Range>          Range-std::pair<start,end>
 				httplib::detail::parse_range_header(range_str, ranges);
@@ -400,7 +400,7 @@ private:
 			}
 			else
 			{
-				//Ã»ÓĞRangeÍ·²¿£¬ÔòÊÇÒ»¸öÍêÕûµÄÎÄ¼şÏÂÔØ
+				//æ²¡æœ‰Rangeå¤´éƒ¨ï¼Œåˆ™æ˜¯ä¸€ä¸ªå®Œæ•´çš„æ–‡ä»¶ä¸‹è½½
 				if (FileUtil::Read(realpath, &rsp.body) == false)
 				{
 					rsp.status = 500;
@@ -411,10 +411,10 @@ private:
 			
 		}
 		else // req.method == "HEAD"  
-			//Õâ¸öÊÇÕë¶ÔÓÚHEADÇëÇóµÄ---¿Í»§¶ËÖ»ÒªÍ·²¿£¬²»ÒªÕıÎÄ
+			//è¿™ä¸ªæ˜¯é’ˆå¯¹äºHEADè¯·æ±‚çš„---å®¢æˆ·ç«¯åªè¦å¤´éƒ¨ï¼Œä¸è¦æ­£æ–‡
 		{
-			int64_t filesize = FileUtil::GetFileSize(realpath); //»ñÈ¡ÎÄ¼şµÄ´óĞ¡
-			rsp.set_header("Content-Length", std::to_string(filesize));//ÉèÖÃÏìÓ¦ĞÅÏ¢£¬ÏòÍ·²¿Ìí¼ÓÏìÓ¦×Ö¶Î¡£ key-valueÄ£ĞÍ
+			int64_t filesize = FileUtil::GetFileSize(realpath); //è·å–æ–‡ä»¶çš„å¤§å°
+			rsp.set_header("Content-Length", std::to_string(filesize));//è®¾ç½®å“åº”ä¿¡æ¯ï¼Œå‘å¤´éƒ¨æ·»åŠ å“åº”å­—æ®µã€‚ key-valueæ¨¡å‹
 																	  //set_header(const string &key,const string& value)
 			rsp.status = 200;
 		}
@@ -422,11 +422,3 @@ private:
 };
 
 
-//µÚ5½Ú¿Î  1:28µ÷ÊÔµÄ md5 ·Ö¿é´«Êä
-//  1:40 - 1:45¶Î´íÎó
-
-
-//¿´µ½ËÄ½Ú¿Î 46min
-
-
-//µÚÈı½Ú¿Î¿´µ½ 2 19min
