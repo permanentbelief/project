@@ -1,0 +1,48 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+  }
+  
+  .item input {
+    text-align: right;
+  }
+  
+  .left {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .left text:last-child {
+    color: #ccc;
+    font-size: 26rpx;
+  }
+  
+  .picker {
+    color: #3c48ed;
+  }
+  
+  .last {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50rpx;
+  }
+  
+  .last view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10rpx;
+    background-color: #00479c;
+    color: #fff;
+    width: 60%;
+    padding: 20rpx 0;
+  }
+  
+  .item image {
+    width: 50rpx;
+    height: 50rpx;
+  }

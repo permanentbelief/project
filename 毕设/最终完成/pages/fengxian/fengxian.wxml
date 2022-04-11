@@ -1,0 +1,180 @@
+<view class="box">
+ <view wx:if="{{kinds == 1}}">
+  <view class="temp"></view>
+  <view class="detail">
+    <view class="up">
+      <view class="top">
+        <text class="iconfont icon-fengxian"></text>
+        <text>高风险地区<text> {{num1}} </text>个</text>
+      </view>
+      <view class="btom">
+        <text>统计截止{{groups1[0]._createTime}}</text>
+      </view>
+    </view>
+    <view wx:for="{{hightlist}}" wx:key="*this" class="last">
+      <view>
+        <text>{{item.province}}</text>
+      </view>
+      <view class="item">
+        <view wx:for="{{item.list}}" wx:key="*this"  class="right">
+          <text>{{item.city}}</text>
+          <text>{{item.communitys}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="detail" style="margin-top: 50px;">
+    <view class="up">
+      <view class="top">
+        <text class="iconfont icon-fengxian"></text>
+        <text>中风险地区<text> {{num2}} </text>个</text>
+      </view>
+      <view class="btom">
+        <text>统计截止{{groups2[0]._createTime}}</text>
+      </view>
+    </view>
+    <view wx:for="{{groups2}}" wx:key="*this" class="last">
+      <view>
+        <text>{{item.name}}</text>
+      </view>
+      <view class="item">
+        <view wx:for="{{item.list}}" wx:key="*this"  class="right">
+          <text>{{item.cityz}}</text>
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="detail" style="margin-top: 60px;">
+    <view class="up">
+      <view class="top">
+        <text class="iconfont icon-fengxian"></text>
+        <text>低风险地区<text> {{num3}} </text>个</text>
+      </view>
+      <view class="btom">
+        <text>统计截止{{groups3[0]._createTime}}</text>
+      </view>
+    </view>
+    <view wx:for="{{groups3}}" wx:key="*this"  class="last">
+      <view>
+        <text>{{item.name}}</text>
+      </view>
+      <view class="item">
+        <view wx:for="{{item.list}}" wx:key="*this"  class="right">
+          <text>{{item.cityz}}</text>
+          <text>{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+  <view style="height: 100rpx;"></view>
+  </view>
+
+
+<view wx:else>
+
+<view class = "newbox">
+<view class="fxitem">
+    <text><text style="color: red;">*</text> 省份：</text>
+    <input value="{{province}}" bindinput="getProvince"  placeholder="请输入要查询的省份" data-name="province" type="text" />
+  </view>
+  <view class="fxitem">
+      <text><text style="color: red;">*</text> 市区(县)：</text>
+      <input value="{{cityz}}" bindinput="getCityz" placeholder="请输入要查询的市区" data-name="cityz" type="text" />
+  </view>
+  <view class="fxitem">
+      <text style="margin-left:25rpx"> 街道：</text>
+      <input value="{{street}}" bindinput="getStreet" placeholder="请输入要查询的县市" data-name="street" type="text" />
+  </view>  
+  <van-button class="center" type="primary" bindtap="Click"  color="linear-gradient(to right, #4bb0ff, #6149f6)"> 查询数据 </van-button>
+</view>
+
+    <!-- 高风险地区查到了 -->
+  <view wx:if="{{getG}}">  
+    <view style="background-color:pink; border-radius:9rpx;font-weight:500;margin-top:20rpx"> 高风险地区 </view>
+    <view class="last">
+      <view>
+        <text>{{gethighlist[0].province}}</text>
+      </view>
+      <view class="item">
+        <view wx:for="{{gethighlist}}" wx:key="*this"  class="right">
+          <text  class="itemCity">{{item.cityz}}</text>
+          <text  class="itemAre">{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 中风险地区查到了 -->
+  <view wx:if="{{getZ}}">
+      <view style="background-color:pink; border-radius:8rpx;font-weight:500;margin-top:20rpx"> 中风险地区 </view>
+    <view class="last">
+      <view>
+        <text>{{getmidlist[0].province}}</text>
+      </view>
+      <view class="item">
+        <view wx:for="{{getmidlist}}" wx:key="*this"  class="right">
+          <text  class="itemCity">{{item.cityz}}</text>
+          <text  class="itemAre">{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+
+</view>
+<view class="temp"></view>
+  <view class="detail">
+    <view class="up">
+      <view class="top">
+        <text class="iconfont icon-fengxian"></text>
+        <text>高风险地区<text> {{result.high_count}} </text>个</text>
+      </view>
+      <view class="btom">
+        <text>统计截止{{result.updated_date}}</text>
+      </view>
+    </view>
+    <view wx:for="{{apigroup4}}" wx:key="*this" class="last">
+      <view>
+        <text>{{item.name}}</text>
+      </view>
+      <view class="item">
+        <view wx:for="{{item.list}}" wx:key="*this"  class="right">
+          <text  class="itemCity">{{item.cityz}}</text>
+          <text  class="itemAre">{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="detail" style="margin-top: 50px;">
+    <view class="up">
+      <view class="top">
+        <text class="iconfont icon-fengxian"></text>
+        <text>中风险地区<text> {{result.middle_count}} </text>个</text>
+      </view>
+      <view class="btom">
+        <text>统计截止{{result.updated_date}}</text>
+      </view>
+    </view>
+    <view wx:for="{{apigroup5}}" wx:key="*this" class="last">
+      <view>
+        <text>{{item.name}}</text>
+      </view>
+      <view class="item">
+        <view wx:for="{{item.list}}" wx:key="*this"  class="right">
+          <text class="itemCity">{{item.cityz}}</text>
+          <text class="itemAre">{{item.address}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+    
+ </view>
+
+
+</view>
+
+
+
+
+

@@ -1,0 +1,220 @@
+@import '../../utils/main.wxss';
+@import '../../utils/icon.wxss';
+.box {
+    height: 100vh;
+}
+
+.user-info {
+    height: 100rpx;
+    width: 100%;
+    border: 7rpx rgb(220, 220, 220) solid;
+    border-left: none;
+    border-right: none;
+    display: flex;
+    align-items: center;
+    background-color: rgb(219, 242, 255);
+}
+
+.user-info button {
+    float: left;
+    margin-left: 20rpx;
+}
+
+.userPhoto_1 {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+}
+
+.newtop {
+    width: 100%;
+    height: 300rpx;
+}
+
+.background {
+    width: 100%;
+    height: 330rpx;
+    position: relative;
+    background-size: 100% 100%;
+    z-index: -1;
+    opacity: 0.8;
+}
+
+.userPhoto {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50%;
+    position: relative;
+    top: -250rpx;
+    left: 10rpx;
+    z-index: 110;
+}
+
+.name_tip {
+    position: relative;
+    top: -270rpx;
+    left: 10rpx;
+    z-index: 100;
+}
+
+
+/* ------------------------------------------------------- old logic  */
+
+.top {
+    position: relative;
+    height: 30%;
+    width: 100%;
+    z-index: -1000;
+}
+
+.top image {
+    width: 100%;
+    height: 100%;
+}
+
+.avatar {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.pos {
+    position: absolute;
+    top: 50%;
+    left: 35rpx;
+    transform: translateY(-50%);
+    display: flex;
+}
+
+.pos view:last-child {
+    display: flex;
+    flex-direction: column;
+    margin-left: 30rpx;
+    color: #fff;
+    font-size: 28rpx;
+}
+
+.avatar image {
+    width: 100%;
+    height: 100%;
+}
+
+page {
+    background-color: #f5f5f5;
+}
+
+.myOrder {
+    background-color: white;
+    border-radius: 25rpx;
+    margin: 0 20rpx;
+    padding: 30rpx 0;
+    z-index: 20;
+    margin-top: -100rpx;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25rpx;
+    align-items: center;
+    margin-bottom: 50rpx;
+}
+
+.title text:first-child {
+    font-size: 35rpx;
+    font-weight: 700;
+}
+
+.title text:last-child {
+    color: #99a3aa;
+    font-size: 28rpx;
+}
+
+.item image {
+    width: 65rpx;
+    height: 65rpx;
+}
+
+.btn view {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 28rpx;
+}
+
+.item text {
+    margin-top: 10rpx;
+}
+
+.myService {
+    background-color: #fff;
+    margin: 0 20rpx;
+    border-radius: 25rpx;
+    margin-top: 20rpx;
+}
+
+.title2 {
+    font-weight: 700;
+    font-size: 35rpx;
+    padding: 20rpx 30rpx;
+}
+
+.service {
+    padding: 20rpx 30rpx;
+    border-bottom: 1px solid #f6f6f6;
+    display: flex;
+    justify-content: space-between;
+}
+
+button text {
+    font-size: 35rpx;
+}
+
+.dio-img {
+    width: 70rpx;
+    height: 70rpx;
+}
+
+
+/* 去除button默认样式 */
+
+
+/* 
+button::after {
+    border: none;
+}
+
+button {
+    background-color: transparent;
+    padding-left: 0;
+    padding-right: 0;
+    line-height: inherit;
+}
+
+button {
+    border-radius: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    font-weight: normal !important;
+    padding: 20rpx 30rpx !important;
+    border-bottom: 1px solid #f6f6f6;
+    font-size: 30rpx !important;
+}
+
+button:active {
+    background-color: #fff !important;
+    color: #000;
+}
+
+button::after {
+    background-color: #fff;
+    color: #000;
+}
+
+button:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+} */

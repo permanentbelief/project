@@ -1,0 +1,8 @@
+
+
+{
+    "usingComponents": {
+        "van-toast": "@vant/weapp/toast/index"
+    },
+    "navigationBarTitleText": "核酸预约"
+}

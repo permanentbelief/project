@@ -1,0 +1,14 @@
+.dio-img {
+    width: 70rpx;
+    height: 70rpx;
+}
+
+.top1 {
+    background-color: rebeccapurple;
+}
+
+.top {
+    margin: 10rpx 10rpx;
+    background-color: red;
+    color: rgb(235, 172, 79);
+}

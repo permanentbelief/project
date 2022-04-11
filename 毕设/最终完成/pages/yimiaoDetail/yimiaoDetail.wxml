@@ -1,0 +1,142 @@
+<view class="box">
+  <view bindtap="showTip" class="tips">
+    <text class="iconfont icon-tishi"></text>
+    <text>近期核酸检测预约量出现暴发性增长,部分预</text>
+    <text class="iconfont icon-youjiantou"></text>
+  </view>
+  <!-- 图片区域 -->
+  <view class="img">
+    <image src="{{detail.img}}"></image>
+  </view>
+  <view class="content">
+    <text wx:if="{{detail.group.time==1}}">【4-8h出报告】{{detail.title}}（含上门服务费）</text>
+    <text wx:if="{{detail.group.time==2}}">【8-12h出报告】{{detail.title}}（含上门服务费）</text>
+    <text wx:if="{{detail.group.time==3}}">【12-24h出报告】{{detail.title}}（含上门服务费）</text>
+    <text wx:if="{{detail.group.time==4}}">【1-2h出报告】{{detail.title}}(含上门服务费) </text>
+
+  </view>
+  <view class="price">
+    <text>￥{{detail.renshu * detail.group.hesuanPrice}}</text>
+    <text>已售{{detail.num?detail.num:0}}</text>
+  </view>
+  <view style="height: 8px;background-color: #f4f4f4;margin: 20rpx 0;"></view>
+  <view class="nav">
+    <view class="{{nav==0?'green':''}}" bindtap="chooseNav" data-index="0">服务详情</view>
+    <view class="{{nav==1?'green':''}}" bindtap="chooseNav" data-index="1">详情</view>
+    <view class="{{nav==2?'green':''}}" bindtap="chooseNav" data-index="2">服务</view>
+    <view class="{{nav==3?'green':''}}" bindtap="chooseNav" data-index="3">服务须知</view>
+  </view>
+  <!-- 点击详情 -->
+  <view wx:if="{{nav==0}}">
+    <view class="box1">
+    <view>
+    <text style="color:darkblue; font-weight:500; font-size:40rpx"> 采样时间 </text> <text>上午8:00-12:00  下午13:00-16:00 </text>
+    </view>
+    <text style="color:darkblue; font-weight:500; font-size:40rpx; margin-top:30rpx"> 检测费用</text>
+      按照国家最新规定，无症状自愿检测为 自费， 单管单采80元/人。
+      结果获取时间：采样后，可通过微信中的th检测预约小程序查询检测结果。
+      
+      团队预约提示：
+      本机构院同时可接受 300人以上的 团队核酸检测，如有相关需要可与院方联系。
+      温馨提示：
+      请按照预约日期来院进行核酸采集，并根据工作人员安排，严格进行预检分诊流程。
+      <view> 1.请携带居民身份证实名检测 </view>
+      <view> 2.按到场顺序排队候检，请佩戴口罩，与他人保持一米以上安全距离 </view>
+      <view> 3.为避免呕吐，采样前2小时内请勿进食，采样前30分钟内请勿吸烟、喝酒或嚼口香糖 </view>
+      <view> 4.如体温高于37.3℃，或有其它呼吸道感染症状，需要到发热筛查门诊进行筛查 </view>
+     <view class="line"> </view>
+      <view style="color:lightcoral;font-size:30rpx;margin-top:20rpx ">
+      市民朋友们，疫情防控，关乎你我！让我们团结一心、共同抗疫，全面做好个人健康防护，
+      主动参与区域核酸检测，认真执行各项防控措施，让社会真正“静下来”，尽快阻断病毒传播链条，
+      共同打赢疫情防控阻击战。感谢广大市民朋友的理解、支持与配合！
+        </view>
+    </view>
+
+   
+  </view>
+  <view wx:if="{{nav==1}}">
+    <view class="top">
+      <text>上门地址</text>
+      <input bindinput="getAddress" value="{{address}}" placeholder="请填写上门地址" type="text" />
+      <text bindtap="chooseAddress">填写地址<text class="iconfont icon-youjiantou"></text></text>
+    </view>
+    <view class="tabs">
+      <view>
+        <text class="iconfont icon-gouxuan"></text>
+        <text>上门采样</text>
+      </view>
+      <view>
+        <text class="iconfont icon-gouxuan"></text>
+        <text>可退改</text>
+      </view>
+      <view>
+        <text class="iconfont icon-gouxuan"></text>
+        <text>购后在线预约</text>
+      </view>
+    </view>
+    <!-- <view class="city">
+      <text>抱歉，当前城市没有门店</text>
+      <text>切换城市</text>
+    </view> -->
+  </view>
+  <view wx:for="{{3}}" wx:if="{{nav==2}}">
+    <view class="nr">
+      <text>*预约须知</text>
+    </view>
+    <view class="nr-content">
+      1.客户需提供固定场所，上门地址请勿选择人流密集或其
+      他公共场所作为采样场所(如公园，广场，店铺等)，此类
+      地址暂无法接受预约。中高风险地区暂时无法提供上门服
+      务。2.健康码为红码、黄码人员;有发热(体温
+      237.3"C)、咳嗽等症状或近期阳性密切接触史人员，无法
+      进行上门检测。
+    </view>
+      <view class="nr-content">
+      1.客户需提供固定场所，上门地址请勿选择人流密集或其
+      他公共场所作为采样场所(如公园，广场，店铺等)，此类
+      地址暂无法接受预约。中高风险地区暂时无法提供上门服
+      务。2.健康码为红码、黄码人员;有发热(体温
+      237.3"C)、咳嗽等症状或近期阳性密切接触史人员，无法
+      进行上门检测。
+    </view>
+  </view>
+
+  <view wx:if="{{nav==3}}">
+
+
+  </view>
+  
+  <view style="height: 200rpx;"></view>
+  <!-- 预约按钮 -->
+  <view class="btn">
+    <view class="left">
+      <view bindtap="skipIndex">
+        <image src="/images/index-s.png"></image>
+        <text>首页</text>
+      </view>
+    </view>
+    <view class="right">
+      <view data-id="{{detail._id}}" bindtap="skipDetail">预约</view>
+    </view>
+  </view>
+</view>
+<!-- 通知弹框 -->
+<view wx:if="{{tip}}">
+  <view class="warp">
+    <view class="template">
+      <view class="title">
+        <text>通知</text>
+        <text bindtap="showTip" class="iconfont icon-Close pos"></text>
+      </view>
+      <view class="neirong">
+        近期国内疫情局势严峻，大部分地区无症状感染较多。
+        所以这段时间以至于长期以后的核酸检测预约量会爆发性增长,
+        团体核酸的报告结果出炉可能出现延迟。请在下单前充分考虑
+        这一因素，避免影响行程。报告出具最快2小
+        时，报告查询仅限微信公众号的th核酸快捷预约服务。
+        提供核酸服务的机构根据最新政策部署，投入最大资源，在保证服务水平
+        的同时，努力提升检测能力和效率，非常感谢理解与支持
+      </view>
+    </view>
+  </view>
+</view>

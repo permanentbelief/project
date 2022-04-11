@@ -1,0 +1,51 @@
+<view class="box">
+    <view class="item">
+        <view style="display: flex; flex-direction: column;">
+            <view>姓名</view>
+            <input data-name="realName" bindinput="getValue" type="text" />
+        </view>
+        <view style="display: flex; flex-direction: column;">
+            <view>证件号码</view>
+            <input data-name="idCard" bindinput="getValue" type="idcard" />
+        </view>
+        <view>
+            <button bindtap="chaxun" type="primary">查询</button>
+        </view>
+    </view>
+    <view class="title">
+        <text>接种信息</text>
+    </view>
+    <view wx:for="{{order}}" class="item">
+        <view>
+            <text>剂次：</text>
+            <text wx:if="{{item.jici==1}}">第一剂次</text>
+            <text wx:if="{{item.jici==2}}">第二剂次</text>
+            <text wx:if="{{item.jici==3}}">第三剂次</text>
+        </view>
+        <view>
+            <text>姓名</text>
+            <text>{{item.realName}}</text>
+        </view>
+        <view>
+            <text>身份证号</text>
+            <text>{{item.idCard}}</text>
+        </view>
+
+        <view>
+            <text>疫苗名称</text>
+            <text>新冠疫苗（Vero）</text>
+        </view>
+        <view>
+            <text>生产企业</text>
+            <text>{{item.jiciName}}</text>
+        </view>
+        <view>
+            <text>接种日期</text>
+            <text>{{item.yuyueDate}}</text>
+        </view>
+        <view>
+            <text>接种地</text>
+            <text>{{item.province}}</text>
+        </view>
+    </view>
+</view>

@@ -1,0 +1,72 @@
+<view class="box">
+    <!-- 搜索框 -->
+    <view class="search">
+        <text class="iconfont icon-sousuo"></text>
+        <input confirm-type="search" bindconfirm="searCh" placeholder="搜索医院/机构名称" type="text" />
+    </view>
+    <!-- 查询条件 -->
+    <view class="con">
+        <picker bindchange="bindChangeType" value="{{index1}}" range-key='name' range="{{groupType}}">
+            <view class="picker">
+                <text>{{groupType[index1].name?groupType[index1].name:'机构类型'}}<text class="iconfont icon-xiala ccc"></text></text>
+            </view>
+        </picker>
+        <picker bindchange="bindChangeTime" value="{{index2}}" range="{{groupTime}}">
+            <view class="picker">
+                <text>{{groupTime[index2]?groupTime[index2]:'出报告时间'}}<text class="iconfont icon-xiala ccc"></text></text>
+            </view>
+        </picker>
+        <picker bindchange="bindChangeYuyue" value="{{index3}}" range="{{groupYuyue}}">
+            <view class="picker">
+                <text>{{groupYuyue[index3]?groupYuyue[index3]:'是否可预约'}}<text class="iconfont icon-xiala ccc"></text></text>
+            </view>
+        </picker>
+    </view>
+    <!-- 机构列表 -->
+    <view class="item" wx:for="{{list}}">
+        <view class="top">
+            <image wx:if="{{item.selfimage}}" src="{{item.selfimage}}"></image>
+            <image wx:else src="/images/group1.png"></image>
+            <view class="right">
+                <view class="tt">
+                    <text>{{item.type==1?'民营':'公立'}}</text>
+                    <text>{{item.name}}</text>
+                </view>
+                <view class="lt">
+                    <view class="loc">
+                        <text class="iconfont icon--didian"></text>
+                        <text>{{item.juli}}km</text>
+                        <text style="margin: 0 10rpx;color: #ccc;">|</text>
+                        <text>{{item.street}}</text>
+                    </view>
+                    <view bindtap="daohang" data-item="{{item}}" class="dh">
+                        <text class="iconfont icon-daohang"></text>
+                        <text>导航</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="last">
+            <text bindtap="callPhone" class="iconfont icon-dianhua" data-phone="{{item.phone}}" style="font-size: 14px">电话</text>
+            <text bindtap="showPopup">检测须知<text class="iconfont icon-zhuyi"></text></text>
+        </view>
+    </view>
+</view>
+
+
+<!-- 检测须知 -->
+<van-popup
+  show="{{ show }}"
+  closeable
+  close-icon="close"
+  position="bottom"
+  custom-style="height: 70%; padding-top: 40rpx; background-color: wheat; padding-left:15rpx; padding-right: 15rpx"  
+  bind:close="onClose">
+   <view class="popup">检测须知</view>
+   <view class="popup-text">1.带好手机，因为核酸检测的时候需要扫码签到 </view>
+   <view class="popup-text">2.采样前的30min以内不吸烟，不喝酒</view>
+   <view class="popup-text">3.到达检测机构公共场所需要正确佩戴口罩，检测前不要取下口罩 </view>
+   <view class="popup-text">4.检测后立即戴好，可准备一个备用口罩，污染后方便随时更换。</view>
+   <view class="popup-text">5.检测后可以在th快捷预约小程序上根据手机号进行快速查询。</view>
+   <view class="popup-text">6.防疫三字经要记牢,走到哪里都要戴口罩</view>
+  </van-popup> 

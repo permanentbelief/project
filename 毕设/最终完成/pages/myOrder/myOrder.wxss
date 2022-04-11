@@ -1,0 +1,158 @@
+.nav {
+  display: flex;
+  background-color: #f6f6f6;
+  justify-content: space-around;
+}
+
+.item {
+  padding: 15rpx 0;
+}
+
+.bb {
+  border-bottom: 3px solid #4991f2;
+  color: #4991f2;
+}
+
+.null {
+  margin-top: 100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ced7e2;
+}
+
+.null image {
+  width: 300rpx;
+  height: 300rpx;
+}
+
+page {
+  background-color: #f4f5f7;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid #f4f5f7;
+}
+
+.detail {
+  background-color: #fff;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.left text:first-child {
+  color: #fff;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  padding-top: 5rpx;
+  padding-bottom: 5rpx;
+  border-radius: 15rpx;
+  display: inline-block;
+  font-size: 25rpx;
+  background-color: #e98856;
+}
+
+.left text:nth-child(2) {
+  margin-left: 10rpx;
+  font-size: 28rpx;
+}
+
+.left text:last-child {
+  margin-left: 10rpx;
+}
+
+.top view:last-child {
+  font-size: 29rpx;
+  color: #d0d0d0;
+}
+
+.mid {
+  display: flex;
+  padding: 30rpx 10rpx 0 10rpx;
+}
+
+.mid image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 20rpx;
+}
+
+.first {
+  position: relative;
+}
+
+.mid-mid {
+  margin-left: 20rpx;
+}
+
+.price-last {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -80rpx;
+  color: #c2c2c2;
+  font-size: 27rpx;
+}
+
+.mid-last {
+  background-color: #f7f7f7;
+  border-radius: 5rpx;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rpx;
+  color: #c1c1c1;
+  font-size: 26rpx;
+  padding: 10rpx 10rpx;
+}
+
+.price-mid {
+  font-size: 35rpx;
+  font-weight: 700;
+}
+
+.price {
+  text-align: right;
+  font-size: 28rpx;
+}
+
+.price text:last-child {
+  color:#e18459;
+}
+
+.last {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30rpx;
+}
+
+.last view {
+  border-radius: 50rpx;
+  border: 2px solid #e7e7e7;
+  color: #2e2e2e;
+  padding: 8rpx 20rpx;
+  margin-left: 20rpx;
+}
+
+.zf {
+  background-color: #62c1ff;
+  color: #fff !important;
+}
+
+.qd {
+  background-color: #8bc34a;
+  color: #fff !important;
+}
+
+.tk {
+  background-color: #dd5145;
+  color: #fff !important;
+}

@@ -1,0 +1,65 @@
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 30rpx;
+    align-items: center;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.item>text {
+    flex: 3;
+    font-size: 35rpx;
+}
+
+.item input {
+    flex: 7;
+    text-align: right;
+}
+
+.ty {
+    display: flex;
+    justify-content: center;
+    margin-top: 40rpx;
+    align-items: center;
+}
+
+.cg {
+    display: flex;
+    align-items: center;
+}
+
+.ty text {
+    color: #ddba8b;
+}
+
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40rpx;
+}
+
+.btn view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 60rpx;
+    background-color: #F5F5DC;
+    color: black;
+    width: 75%;
+    padding: 20rpx 0;
+}
+
+.popup {
+    text-align: center;
+    color: red;
+    font-size: 40rpx;
+}
+
+.popup-text {
+    margin: 0px;
+    padding: 0px;
+    color: black;
+    font-family: "微软雅黑", "黑体", "宋体";
+    font-size: 18px;
+}

@@ -1,0 +1,80 @@
+
+
+
+<van-cell-group >
+    <van-cell title="检测人姓名" value="{{res.name}}" />
+    <van-cell title="检测订单号" value="{{res.orderId}}" />
+    <van-cell title="检测机构"   value="{{res.groupName}}" />
+</van-cell-group>
+
+
+<view style="height:130rpx;"> </view>
+
+<view style="margin-left:10rpx; font-size:35rpx; color:rgb(235, 172, 79)">状态流转图</view>
+<!-- 退款 和 订单不存在 这个特殊情况就单列出去 -->
+<l-steps active-index="{{index}}" class="top1">
+  <l-step title="下单中"    wx:if="{{index==0}}" describe="未下单或未支付" />
+  <l-step title="下单中"    wx:if="{{index!=0}}" describe="" />
+  <l-step title="签到中"    wx:if="{{index==1}}" describe="要记得签到时间" />
+  <l-step title="签到中"    wx:if="{{index!=1}}" describe="" />
+  <l-step title="检测中"    wx:if="{{index==2}}" describe="机构还未出结果" />
+  <l-step title="检测中"    wx:if="{{index!=2}}" describe="" />
+  <l-step title="订单完成"  wx:if="{{index==3}}" describe="检测结果可以查询" />
+  <l-step title="订单完成"  wx:if="{{index != 3}}" describe="" />
+
+</l-steps>
+<view style="height:200rpx"> </view>
+
+<view style="margin-left:10rpx; font-size:35rpx; color:rgb(235, 172, 79)">账单状态详细流程</view>
+<!-- 自定义描述内容 -->
+<l-steps direction="column" active-index="{{active}}">
+  <l-step title="下单">
+    <view wx:if="{{0 < active}}"class="describe-container" slot="describe">
+       <view> 订单号:{{res.orderId}} (^_-)下单已完成 </view>
+       <view> 下单时间：{{res.payTime}} </view> 
+    </view>
+    <view wx:else class="describe-container" slot="describe">
+        暂无数据~
+    </view>
+  </l-step>
+  <l-step title="签到 ">
+    <view wx:if="{{1 < active}}"class="describe-container" slot="describe">
+         <view> 订单号:{{res.orderId}} (^_-)签到已完成  </view> 
+       <view>  签到时间：{{res.qiandaoTime}} </view>
+    </view>
+    <view wx:else class="describe-container" slot="describe">
+        暂无数据~
+    </view>
+  </l-step>
+  <l-step title="检测">
+    <view wx:if="{{2 < active}}"class="describe-container" slot="describe">
+        订单号:{{res.order_id}} (^_-)检测已完成
+    </view>
+    <view wx:else class="describe-container" slot="describe">
+        暂无数据~
+    </view>
+    </l-step>
+    <l-step title="已完成">
+    <view wx:if="{{3 <= active}}"class="describe-container" slot="describe">
+        订单号:{{res.order_id}} (^_-)检测结果已出
+    </view>
+    <view wx:else class="describe-container" slot="describe">
+       暂无数据~
+    </view>
+  </l-step>
+</l-steps>
+
+
+
+<l-dialog 
+  show="{{res}}"
+  type="alert"  
+  title="友情提醒~"
+  content="此账户现在还没有账单信息wow~"
+  confirm-color="#f60"
+  cancel-color="#999" 
+>
+  <image class='dio-img' src="../../images/my/xiaomao.png"></image>
+  
+  </l-dialog>
+

@@ -1,0 +1,103 @@
+<view class="box">
+  <view class="item">
+    <view class="left">
+      <text>姓名</text>
+      <text>Full Name</text>
+    </view>
+    <input data-name="realName" bindinput="getValue" placeholder="请输入姓名" type="text" />
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>证件类型</text>
+      <text>Category</text>
+    </view>
+    <picker bindchange="bindChange" data-name="categoryType" value="{{cateIndex}}" range="{{category}}">
+      <view class="picker">
+        {{category[cateIndex]}} >
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>证件号码</text>
+      <text>No</text>
+    </view>
+    <input data-name="idCard" bindinput="getValue" placeholder="请输入证件号码" type="idcard" />
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>性别</text>
+      <text>Sex</text>
+    </view>
+    <picker bindchange="bindChangeGender" data-name="genderType" value="{{genIndex}}" range="{{gender}}">
+      <view class="picker">
+        {{gender[genIndex]}} >
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>年龄</text>
+      <text>Age</text>
+    </view>
+    <input data-name="age" bindinput="getValue" placeholder="请输入年龄" type="number" />
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>手机号码</text>
+      <text>0Phone</text>
+    </view>
+    <input data-name="phone" bindinput="getValue" placeholder="请输入手机号码" type="number" />
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>采集点</text>
+      <text>Location</text>
+    </view>
+    <picker bindchange="bindChangeGroup" value="{{groupIndex}}" range-key="name" range="{{groups}}">
+      <view class="picker">
+        {{groups[groupIndex].name?groups[groupIndex].name:'请选择采集点'}} >
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>接种剂次</text>
+      <text>Location</text>
+    </view>
+    <picker bindchange="bindChangeJici" value="{{jcIndex}}" range-key="jici" range="{{jici}}">
+      <view class="picker">
+        <text wx:if="{{jcIndex==0}}">第一剂次 ></text>
+        <text wx:elif="{{jcIndex==1}}">第二剂次 ></text>
+        <text wx:elif="{{jcIndex==2}}">第三剂次 ></text>
+        <text wx:else>请选择剂次 ></text>
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>就诊时间段</text>
+      <text>Time</text>
+    </view>
+    <view class="section">
+      <text wx:if="{{!groupIndex&&groupIndex!=0}}">请选择采集点 ></text>
+      <text wx:elif="{{!jcIndex&&jcIndex!=0}}">请选择剂次 ></text>
+      <picker wx:else mode="multiSelector" bindchange="bindChangeTime" bindcolumnchange="bindMultiPickerColumnChange" value="{{timeIndex}}" range-key="value" range="{{dateTimes}}">
+        <view class="picker">
+          {{dateTimes[0][timeIndex[0]].value}} {{dateTimes[0][timeIndex[0]].name?'('+dateTimes[0][timeIndex[0]].name+')':''}}
+        </view>
+      </picker>
+    </view>
+  </view>
+  <view class="item">
+    <view class="left">
+      <text>上传健康码</text>
+      <text>Code</text>
+    </view>
+    <image wx:if="{{tempPath}}" bindtap="chooseImg" src="{{tempPath}}"></image>
+    <text wx:else bindtap="chooseImg" style="font-size: 38rpx;color: #3c48ed;" class="iconfont icon-camera"></text>
+  </view>
+  <view class="last">
+    <view bindtap="submit">提交</view>
+  </view>
+</view>

@@ -1,0 +1,62 @@
+<view class="box">
+  <view class="bgc"></view>
+  <!-- 上面机构信息 -->
+  <view class="top">
+    <view class="up">
+      <text class="iconfont icon-yiyuanguanli"></text>
+      <text>{{order.type==1?'核酸检测':'疫苗服务'}}-{{order.group}}采样点</text>
+    </view>
+    <view>
+      <text class="title" wx:if="{{!order.title}}">[通用]{{order.type==1?'核酸检测预约服务':'疫苗接种预约服务'}}（{{order.province}}）</text>
+      <text class="title" wx:else>[通用]{{order.title}}（{{order.province}}）</text>
+      <text class="tip">近期核酸检测预约量徒增，部分报告的出具可能出现延迟，望理解！</text>
+      <text class="price">￥{{order.price}}</text>
+    </view>
+  </view>
+  <!-- 订单详情部分 -->
+  <view class="detail">
+    <view>
+      <text>订单编号：</text>
+      <text>{{order.orderNum}}</text>
+    </view>
+    <view>
+      <text>支付单号：</text>
+      <text>{{order.payNum}}</text>
+    </view>
+    <view>
+      <text>下单时间：</text>
+      <text>{{order.createTime}}</text>
+    </view>
+    <view>
+      <text>付款时间：</text>
+      <text>{{order.payTime}}</text>
+    </view>
+  </view>
+  <view class="mid"></view>
+  <!-- 预约人信息 -->
+  <view style="margin-top: 0;" class="detail">
+    <view>
+      <text>预约人：</text>
+      <text>{{order.realName}}</text>
+    </view>
+    <view>
+      <text>联系电话：</text>
+      <text>{{order.phone}}</text>
+    </view>
+    <view wx:if="{{!order.tuanti}}">
+      <text>证件号码：</text>
+      <text>{{order.idCard}}</text>
+    </view>
+    <view>
+      <text>预约日期：</text>
+      <text>{{order.yuyueDate}}</text>
+    </view>
+  </view>
+
+  <view class="butt">
+    <view class="last">
+      <view data-id="{{order._id}}" bindtap="deleteOrder">删除订单</view>
+      <view class="look" wx:if="{{order.status==4&&order.type==1}}" bindtap="skipReport" data-id="{{order._id}}">查看报告</view>
+    </view>
+  </view>
+</view>

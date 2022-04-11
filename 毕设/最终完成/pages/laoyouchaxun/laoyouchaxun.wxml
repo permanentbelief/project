@@ -1,0 +1,33 @@
+<view class="box">
+    <image class="img" src="cloud://cloud1-3gv2wkcsd018f504.636c-cloud1-3gv2wkcsd018f504-1309139788/img/fengmian/bg3.jpg">
+        <view class="font">
+            <view>新冠肺炎核酸和</view>
+            <view>抗体检测老幼助查</view>
+        </view>
+    </image>
+    <view class="shuru">
+        <view>
+            <text>姓名</text>
+            <input bindinput="getValue" data-name="realName" value="{{realName}}" placeholder="请输入姓名" type="text" />
+        </view>
+        <view>
+            <text>身份证号</text>
+            <input bindinput="getValue" data-name="idCard" value="{{idCard}}" placeholder="请输入身份证号" type="idcard" />
+        </view>
+    </view>
+
+    <view bindtap="chaxun" class="btn">
+        老幼助查
+    </view>
+    <view class="concat">
+        <text bindtap="skipConcat">我的就诊人</text>
+    </view>
+
+    <view class="tip">
+        <text>服务提醒：</text>
+        <view>1.本服务需经本人授权后，帮助老幼以及无智能手机的亲朋好友代查。</view>
+        <view>2.该查询可支持查询16周岁以下、60周岁以上人员的核 酸检测结果和血清特异性lgG抗体检测结果。</view>
+        <view>3.相关查询结果基于th核酸快捷预约数据库，仅仅只支持这一个数据库平台，
+            正在不断的与其他疫情系统数据汇聚中。</view>
+    </view>
+</view>

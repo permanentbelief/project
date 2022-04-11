@@ -1,0 +1,25 @@
+{
+    "vsicons.presets.nestjs": true,
+    "files.exclude": {
+        "node_modules": true,
+        "dist": false
+    },
+    "editor": {
+        "formatOnSave": true
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "octref.vetur"
+    },
+    "vetur.validation.template": false,
+    "vetur.experimental.templateInterpolationService": false,
+    "vetur.format.defaultFormatterOptions": {
+        "prettier": {
+            "semi": true,
+            "singleQuote": true,
+            "printWidth": 100
+        }
+    },
+    "less.compile": {
+        "outExt": ".wxss"
+    }
+}

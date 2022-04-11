@@ -1,0 +1,117 @@
+<import src="../../wxParse/wxParse.wxml" />
+<view class="title">
+    <text>来源:{{detail.source}}</text>
+    <text>{{last_update}}</text>
+</view>
+<view class="box">
+    <template is="wxParse" data="{{wxParseData:detail_content.nodes}}" />
+</view>
+<view style="color: #ccc; padding: 0 20rpx;"><text>浏览量：{{liulan}}</text></view>
+
+ <view class="newdas">
+     <view class="mewicon1" bindtap="clickDz"> 
+        <image wx:if="{{isDz}}"  class="image1"  src ="{{dzimgUrl}}" > </image>
+        <image wx:else src="{{nonedzimgUrl}}" class="image1"> </image>
+        <view class="icon1-text"> 点赞{{!dz?'':dz}} </view>
+    </view>
+    <view class="newicon2" bindtap="clickSc">
+        <image wx:if="{{isSc}}"  class="image2"  src ="{{scimgUrl}}" > </image>
+        <image wx:else src="{{nonescimgUrl}}"  class="image2"> </image>
+        <view class="icon1-text"> 收藏{{!sc?'':sc}} </view>
+    </view>
+</view>
+
+
+<view class="comment">
+    <view class="title2">
+        <text style="font-size: 24px">评论区</text>
+    </view>
+ <view wx:for="{{commentArray}}" wx:for-item="fitem" class="list" >
+        <view class="tx">
+            <image src="{{fitem.avatarUrl}}"></image>
+            <text>{{fitem.nickName}}:</text>
+        </view>
+        <view class="wenzi">
+            <text>{{fitem.content}}</text>
+        </view>
+        <view class="timeS">
+            <text>{{fitem.submitTime}}</text>
+        </view>
+     
+  </view>
+    <!-- <view wx:for="{{comment}}" wx:for-item="fitem" class="list" >
+       <view wx:for="{{fitem.comment}}" wx:for-item="sitem" class="list">
+        <view class="tx">
+            <image src="{{fitem.avatarUrl}}"></image>
+            <text>{{fitem.nickName}}:</text>
+        </view>
+        <view class="wenzi">
+            <text>{{sitem.content}}</text>
+        </view>
+        <view class="timeS">
+            <text>{{sitem.submitTime}}</text>
+        </view>
+     </view> 
+    </view> -->
+</view>
+
+<view style="height: 100rpx;"></view>
+
+<!-- 点赞和收藏 -->
+<!--            <image wx:if="{{item.selfimage}}" src="{{item.selfimage}}"></image>
+            <image wx:else src="/images/group1.png"></image> -->
+<!-- <view class="das">
+<view class="icon1" bindtap="clickDz">
+    <image wx:if="{{isDz}}"  class="image1"   src ="{{dzimgUrl}}" > </image>
+    <image wx:else src="{{nonedzimgUrl}}" class="image1"> </image>
+    <view class="icon1-text"> 点赞出 </view>
+</view>
+  <view class="icon2" bindtap="clickSc"> 
+    <image wx:if="{{isSc}}"  class="image2"  src ="{{scimgUrl}}" > </image>
+    <image wx:else src="{{nonescimgUrl}}"  class="image2"> </image>
+    <view class="icon2-text"> 收藏{{!sc?'':sc}}</view>
+ </view>
+ </view> -->
+
+
+
+
+<!-- 按钮区域  old-logic-->
+<!-- <view class="last">
+    <view class="{{dianzan?'red':''}}" bindtap="dianzan">
+        <text class="iconfont icon-good"></text>
+        <text>点赞{{!dz?'':dz}}</text>
+    </view>
+    <view class="{{shoucang?'red':''}}" bindtap="shoucang">
+        <text class="iconfont icon-shoucang"></text>
+        <text>收藏{{!sc?'':sc}}</text>
+    </view>
+    <view bindtap="openPL" class="iconfont icon-pinglun">
+        <text></text>
+        <text>评论</text>
+    </view>
+</view> -->
+
+<!-- 点击显示点赞爱心 -->
+<block wx:if="{{isShowLetter}}">
+    <view class="showSlectedLetter">
+        <!-- <text style="font-size: 100rpx; color: red;" class="iconfont icon-aixin1"></text> -->
+        <image style="" src="../../images/luntan/dianzan_test1.png"> </image>
+    </view>
+</block>
+<!-- 评论窗口 -->
+<!-- <block wx:if="{{commTan}}">
+    <view bindtap="openPL" class="template">
+
+    </view>
+    <view class="pl">
+        <textarea bindinput="getContent" placeholder="评论内容" maxlength="500" name="" id="" cols="30" rows="10"></textarea>
+        <view bindtap="pinlun">确定</view>
+    </view>
+</block> -->
+
+
+
+
+<textarea  class ="input" placeholder="请输入评论内容" bindinput="getContent" value="{{content}}"> </textarea >
+<button class="submit"  bindtap="fabiao"> 发表评论 </button>

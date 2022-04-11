@@ -1,0 +1,94 @@
+<!-- <Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+    
+     bindtap="changeColor" data-index1="1"
+ bindtap="changeColor" data-index1="0"
+</Tabs> -->
+
+<!-- 监听这个事件 -->
+ <Tabs tabs="{{tabs}}" bindtabsItemChange="handleTabsItemChange">
+    <block wx:if="{{tabs[0].isActive}}">
+    
+    <view class="fd_main">
+        <view class = "fd_title">问题的种类</view>
+        <view class = "fd_tips">
+            <block wx:if="{{index1==='1'}}">   
+                <text class="noChoose" bindtap="changeColor" data-index1="0" data-source="1">  功能建议 </text>
+            </block>
+            <block wx:else> 
+                <text class="choose" bindtap="changeColor" data-index1="1" data-source="1"> 功能建议 </text>
+            </block>
+          <block wx:if="{{index2==='1'}}">   
+                <text class="noChoose" bindtap="changeColor" data-index2="0" data-source="2">  使用问题 </text>
+            </block>
+            <block wx:else> 
+                <text class="choose" bindtap="changeColor" data-index2="1" data-source="2"> 使用问题 </text>
+            </block>
+          <block wx:if="{{index3==='1'}}">   
+                <text class="noChoose" bindtap="changeColor" data-index3="0" data-source="3">  性能问题 </text>
+            </block>
+            <block wx:else> 
+                <text class="choose" bindtap="changeColor" data-index3="1" data-source="3"> 性能问题 </text>
+            </block>
+          <block wx:if="{{index4==='1'}}">   
+                <text class="noChoose" bindtap="changeColor" data-index4="0" data-source="4">  其他 </text>
+            </block>
+            <block wx:else> 
+                <text class="choose" bindtap="changeColor" data-index4="1" data-source="4"> 其他 </text>
+            </block>        
+        </view>
+        <view class = "fd_content">
+            <textarea value="{{textVal}}" bindinput="handleTextInput"placeholder="请描述一下您的问题" ></textarea>
+            <view class = "fd_tool">
+                <button bindtap="handleChooseImage">+</button>
+                <view class="up_img_item"
+                wx:for="{{chooseImgs}}"
+                wx:key="*this"
+                bindtap="handleRemoveImg"
+                data-index="{{index}}"
+                > 
+                <UpImg src="{{item}}"></UpImg>
+                </view>
+            </view>
+        </view>
+    <view class = "form_btn_wrap"> 
+        <button bindtap="handleFormSubmit" type = "warn">
+        <icon type = "success_no_circle" size="25" color="white">
+        </icon >
+         提交 
+        </button>
+    </view>
+    </view>
+    </block>
+    <block wx:elif="{{tabs[1].isActive}}">
+
+<view class="star">
+  <van-rate
+    value="{{ star }}"
+    allow-half
+    void-icon="star"
+    color="#ffd21e"
+    void-color="#eee"
+    bind:change="onChange"
+  />
+  <view class="text">{{status}}</view>
+</view>
+
+
+
+
+    <view class="fd_main">
+        <view class = "fd_content">
+            <textarea value="{{textValTS}}" bindinput="handleTextInputTS"placeholder="请对于服务进行合理的建议" ></textarea>
+        </view>
+        <view class = "form_btn_wrap"> 
+        <button bindtap="handleFormSubmitTS" type = "warn">
+        <icon type = "success_no_circle" size="20" color="white">
+        </icon>
+         提交 
+        </button>
+    </view>
+    
+    </view>
+    
+    </block>
+ </Tabs>

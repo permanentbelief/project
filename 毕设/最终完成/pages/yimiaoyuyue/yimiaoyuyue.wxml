@@ -1,0 +1,20 @@
+<view class="box">
+    <view data-id="{{item._id}}" bindtap="skipDetail" wx:for="{{groups}}" class="item">
+        <view class="img">
+            <image src="{{item.ymImg}}"></image>
+        </view>
+        <view class="mid">
+            <view class="top">
+                <text>{{item.type==1?'民营':'公立'}}</text>
+                <text>【{{item.name}}】</text>
+            </view>
+            <view class="btom">
+                <text wx:for="{{item.childs}}">{{item.name}} </text>
+            </view>
+            <view class="last">
+                <text>￥{{item.hesuanPrice}}</text>
+                <text>热卖中</text>
+            </view>
+        </view>
+    </view>
+</view>

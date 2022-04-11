@@ -1,0 +1,160 @@
+<!-- 去掉导航栏 -->
+<!-- "navigationStyle": "custom",  -->
+
+<!-- 一坨 -->
+<!-- <view class="user">
+  <view wx:if="{{isLogin!=true}}" class="user-info">
+    <image class="userPhoto_1" src="{{userPhoto}}"></image>
+    <button type="primary" size="mini"
+      bindtap="login">点击登录</button>
+  </view>
+  <view wx:if="{{isLogin==true}}" class="newtop">
+    <image class="background" mode="scaleToFill" src="https://7869-xiezi-6gtck5es3b9dd944-1304542037.tcb.qcloud.la/144340_96650718.jpg?sign=d4247d775897b166cdc2b0735f16fccd&t=1617617011">
+    </image>   <image class="userPhoto" src="{{user.avatarUrl}}"></image>
+    
+    <text class="name_tip"> th快捷预约欢迎您
+        {{user.nickName}}</text>
+
+  </view>
+</view>  -->
+  
+
+<view bindtap="{{isLogin?'':'login'}}" class="box">
+  
+  <view wx:if="{{isLogin!=true}}" class="user-info">
+    <image class="userPhoto_1" src="{{userPhoto}}"> </image>
+    <button type="primary" size="mini" bindtap="">点击登录</button>
+  </view>
+  
+    <view wx:else class="top">
+        <image src="../../images/my/bj3.png"></image>
+      
+        <view class="pos">
+            <view class="avatar">
+                <image src="{{user.avatarUrl}}"></image>
+            </view>
+            <view>
+                <text style="font-size:30rpx;color: black">{{user.nickName}}</text>
+            </view>
+        </view>
+    </view>
+
+
+
+    <view wx:if="{{isLogin}}" class="myOrder">
+        <view class="title">
+            <text>我的订单</text>
+            <text data-index="0" bindtap="skipMyOrder">查看全部<text style="margin-left: 10rpx;" class="iconfont icon-youjiantou"></text></text>
+        </view>
+        <view class="btn">
+            <view data-index="1" bindtap="skipMyOrder" class="item">
+                <image src="/images/my/daifukuan.png"></image>
+                <text>待付款</text>
+            </view>
+            <view data-index="2" bindtap="skipMyOrder" class="item">
+                <image src="/images/my/daiqiandao.png"></image>
+                <text>待签到</text>
+            </view>
+            <view data-index="3" bindtap="skipMyOrder" class="item">
+                <image src="/images/my/jiancezhong.png"></image>
+                <text>检测中</text>
+            </view>
+            <view data-index="4" bindtap="skipMyOrder" class="item">
+                <image src="/images/my/yiwancheng.png"></image>
+                <text>已完成</text>
+            </view>
+            <view data-index="5" bindtap="skipMyOrder" class="item">
+                <image src="/images/my/tuikuan.png"></image>
+                <text>退款</text>
+            </view>
+        </view>
+    </view> 
+
+
+     <!-- 我的订单部分 -->
+    <view wx:if="{{isLogin}}" class="myService">
+        <view class="title2">我的服务</view>
+        <block class="" wx:for="{{myService}}">
+            <view data-url="{{item.tabUrl}}" bindtap="skip" class="service">
+                <text>{{item.name}}</text>
+                <view>
+                    <text style="margin-right: 20rpx; color: #ccc;" wx:if="{{index==3}}">{{user.phone}}</text>
+                    <text style="margin-right: 20rpx; color: #ccc;" wx:if="{{index==6}}">当前版本 1.0.1 </text>
+                    <text class="iconfont icon-youjiantou"></text>
+                </view>
+            </view>
+          
+        </block>
+    </view>
+
+    <view wx:if="{{isLogin}}" class="myService">
+        <view class="title2">防疫专区</view>
+        <view data-url="{{item.tabUrl}}" bindtap="skip" wx:for="{{personalArticleCentor}}" class="service">
+            <text>{{item.name}}</text>
+            <text class="iconfont icon-youjiantou"></text>
+        </view>
+    </view>
+
+</view>
+
+
+
+<van-cell title="显示分享面板"/>
+<van-share-sheet    
+  show="{{ showShare }}"
+  title="立即分享给好友"
+  options="{{ options }}"
+  bind:select="onSelect"
+  bind:close="onClose"
+>
+</van-share-sheet> 
+
+
+
+<!-- 提示框 -->
+<!-- 
+<l-dialog 
+  show="{{true}}"
+  type="alert"     
+  title="标题"
+  content="这个是提示框" /> -->
+
+
+
+<l-dialog 
+  show="{{sshow}}"
+  type="alert"  
+  title="版本提示~"
+  content="当前版本暂时为开发版本,当前版本为1.0.2,请敬请期待服务更新~"
+  confirm-color="#f60"
+  cancel-color="#999" 
+>
+  <image class='dio-img' src="{{userPhoto}}"></image>
+  
+  </l-dialog>
+
+
+<l-dialog 
+  show="{{dshow}}"
+  type="confirm"  
+  title="友情提示~"
+  content="情亲您确定要退出此用户吗"
+  confirm-text="yes"
+  bind:linconfirm="tuichu"
+  confirm-color="#f60"
+  cancel-text="no~"
+  cancel-color="#999" />
+
+
+
+<l-toast
+  show="{{toastQuit}}"
+  icon="success"
+  title="退出成功,期待下次再见"
+/>
+
+<l-toast
+  show="{{toastisLogin}}"
+  icon="success"
+  title="登录成功"
+/>

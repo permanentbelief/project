@@ -1,0 +1,62 @@
+<view class="box">
+    <!-- 导航栏 -->
+    <view class="nav">
+        <view data-index="{{index}}" bindtap="chooseNav" wx:for="{{navs}}" class="item {{item.isActive?'bb':''}}">
+            <text>{{item.name}}</text>
+        </view>
+    </view>
+    <!-- 第一个导航栏 以此类推 -->
+    <block>
+        <view wx:for="{{list}}" class="detail">
+            <!-- 上面部分 -->
+            <view class="top">
+                <view data-id="{{item._id}}" bindtap="skipDetail" class="left">
+                    <text>{{item.type==1?'检查':'疫苗'}}</text>
+                    <text>{{item.type==1?'核酸检测':'接种疫苗'}}-{{item.group}}采样点</text>
+                    <text class="iconfont icon-youjiantou"></text>
+                </view>
+                <view>
+                    <text wx:if="{{item.status==1}}">待付款</text>
+                    <text wx:if="{{item.status==2}}">待签到</text>
+                    <text wx:if="{{item.status==3}}">检测中</text>
+                    <text wx:if="{{item.status==4}}">订单完成</text>
+                    <text wx:if="{{item.status==5}}">已退款</text>
+                </view>
+            </view>
+            <!-- 中间部分 -->
+            <view class="mid">
+                <view>
+                    <image src="{{item.img}}"></image>
+                </view>
+                <view class="mid-mid">
+                    <view class="first">
+                        <text class="price-mid">{{item.type==1?(item.tuanti?item.title:'核酸检测预约服务'):'接种疫苗预约服务'}} （{{item.province}}）</text>
+                        <text class="price-last">￥{{item.price}}</text>
+                    </view>
+                    <view class="mid-last">
+                        <text>检测人：{{item.realName}}</text>
+                        <text wx:if="{{item.qiandaoTime}}">检测时间：{{item.qiandaoTime}}</text>
+                        <text wx:else>预约时间：{{item.createTime}}</text>
+                    </view>
+                </view>
+            </view>
+            <!-- 价格部分 -->
+            <view class="price">
+                <text>实付款:</text>
+                <text>￥{{item.price}}</text>
+            </view>
+            <!-- 按钮部分 -->
+            <view class="last">
+                <view data-id="{{item._id}}" bindtap="deleteOrder">删除订单</view>
+                <view class="zf" wx:if="{{item.status==1}}" data-index="{{index}}" bindtap="goPay">去支付</view>
+                <view class="qd" wx:if="{{item.status==2}}" data-index="{{index}}" bindtap="qiandao">待签到</view>
+                <view class="tk" wx:if="{{item.status==4||item.status==3}}" data-id="{{item._id}}" bindtap="tuikuan">申请退款</view>
+            </view>
+        </view>
+    </block>
+    <!-- 如果没有数据 -->
+    <view wx:if="{{!list.length}}" class="null">
+        <image src="/images/null-order.png"></image>
+        <text>暂无订单信息~</text>
+    </view>
+</view>
