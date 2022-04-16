@@ -1,0 +1,50 @@
+.item {
+    padding: 20rpx;
+    border-bottom: 1rpx solid #ccc;
+    display: flex;
+    align-items: center;
+  }
+  
+  .item view:first-child {
+    flex: 3;
+    height: 120rpx;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .item image {
+    width: 80%;
+    height: 100%;
+  }
+  
+  .content {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical
+  }
+  
+  .right{
+    flex: 7;
+    margin-left: 10rpx;
+  }
+  
+  .zz,.time{
+    margin-top: 20rpx;
+    font-size: 25rpx;
+    color: #ccc;
+    
+  }
+  
+  .time {
+    margin-left: 40rpx;
+  }
+
+  .null {
+    display: flex;
+    justify-content: center;
+    margin-top: 100rpx;
+  }

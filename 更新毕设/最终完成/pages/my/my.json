@@ -1,0 +1,10 @@
+{
+    "usingComponents": {
+        "van-share-sheet": "@vant/weapp/share-sheet/index",
+        "l-dialog": "/miniprogram_npm/lin-ui/dialog/index",
+        "l-icon": "/miniprogram_npm/lin-ui/icon/index",
+        "l-toast": "/miniprogram_npm/lin-ui/toast/index"
+
+    },
+    "navigationBarTitleText": "个人中心"
+}

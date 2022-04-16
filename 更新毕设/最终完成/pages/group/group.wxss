@@ -1,0 +1,124 @@
+page {
+    background-color: #f5f5f5;
+}
+
+.popup {
+    text-align: center;
+    color: red;
+    font-size: 40rpx;
+}
+
+.popup-text {
+    margin: 0px;
+    padding: 0px;
+    color: #3eb3fe;
+    font-family: "微软雅黑", "黑体", "宋体";
+    font-size: 18px;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    border: 2px solid #3eb3fe;
+    margin: 20rpx 30rpx;
+    padding: 10rpx;
+    border-radius: 10rpx;
+}
+
+.search text {
+    font-size: 40rpx;
+    color: #2e2e2e;
+    margin: 0 20rpx 0 10rpx;
+}
+
+.search input {
+    width: 100%;
+}
+
+.con {
+    display: flex;
+    justify-content: space-around;
+}
+
+.ccc {
+    color: #ccc;
+    font-size: 25rpx;
+    margin-left: 10rpx;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 20rpx;
+    padding: 20rpx;
+    margin: 20rpx;
+}
+
+.top {
+    display: flex;
+}
+
+.top image {
+    width: 90rpx;
+    height: 90rpx;
+    border-radius: 30rpx;
+}
+
+.right {
+    margin-left: 20rpx;
+    width: 80%;
+}
+
+.tt text:first-child {
+    padding: 3rpx 6rpx;
+    font-size: 25rpx;
+    border-radius: 9rpx;
+    color: #fff;
+    background-color: #3fb4fd;
+}
+
+.tt text:last-child {
+    margin-left: 10rpx;
+}
+
+.loc {
+    font-size: 27rpx;
+    margin-top: 15rpx;
+}
+
+.loc text:nth-child(2) {
+    margin-left: 10rpx;
+}
+
+.loc text:last-child {
+    margin-left: 10rpx;
+}
+
+.lt {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.last {
+    margin-top: 30rpx;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-size: 30rpx;
+}
+
+.last text:first-child {
+    color: #63a5fb;
+}
+
+.last text:last-child {
+    color: #d1d1d1;
+    margin-left: 5rpx;
+}
+
+.last>text:last-child {
+    margin-left: 40rpx;
+}

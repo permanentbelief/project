@@ -1,0 +1,72 @@
+.item {
+    display: flex;
+    padding: 10rpx 0;
+    border-bottom: 1px solid rgb(102, 98, 98)
+}
+
+
+/* 上下内边距 左右内边距 */
+
+.img {
+    flex: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img image {
+    width: 150rpx;
+    height: 150rpx;
+}
+
+.mid {
+    flex: 15;
+}
+
+.top {
+    margin: 18rpx;
+}
+
+.top text:first-child {
+    padding: 3rpx 10rpx;
+    color: wheat;
+    background-color: #16af7c;
+    font-size: 25rpx;
+}
+
+.top text:last-child {
+    margin-left: 17rpx;
+    font-weight: 550;
+}
+
+.btom {
+    margin-top: 20rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-left: 15rpx;
+}
+
+.btom text {
+    font-weight: 700;
+    font-size: 25rpx;
+    color: darkolivegreen;
+    margin-left: 18rpx;
+}
+
+.last {
+    margin-top: 20rpx;
+    margin-left: 10rpx;
+}
+
+.last text:first-child {
+    color: #fe590d;
+    font-weight: 700;
+    font-size: 35rpx;
+}
+
+.last text:last-child {
+    color: #b0b0b0;
+    margin-left: 20rpx;
+    font-size: 27rpx;
+}

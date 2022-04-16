@@ -1,0 +1,140 @@
+<view class="box">
+  <view class="bgc"></view>
+  <!-- 上面机构信息 -->
+  <view class="top">
+    <view class="up">
+      <text class="iconfont icon-yiyuanguanli"></text>
+      <text>{{order.type==1?'核酸检测':'疫苗服务'}}-{{order.group}}采样点</text>
+    </view>
+    <view>
+      <text class="title" wx:if="{{!order.title}}">[通用]{{order.type==1?'核酸检测预约服务':'疫苗接种预约服务'}}（{{order.province}}）</text>
+      <text class="title" wx:else>[通用]{{order.title}}（{{order.province}}）</text>
+      <text class="tip">近期核酸检测预约量徒增，部分报告的出具可能出现延迟，望理解！</text>
+      <text class="price">￥{{order.price}}</text>
+    </view>
+  </view>
+  <!-- 订单详情部分 -->
+   <view class = "bord">
+    <!-- <text class="title1"> 订单详情 </text> -->
+  <view class="detail">
+     
+    <view>
+      <text>订单编号：</text>
+      <text>{{order.orderNum}}</text>
+    </view>
+    <view>
+      <text>支付单号：</text>
+      <text wx:if="{{order.payNum}}">{{order.payNum}}</text>
+      <text wx:else> 未支付状态 </text>
+    </view>
+    <view>
+      <text>预约日期：</text>
+      <text>{{order.yuyueDate}}</text>
+    </view>
+    <view>
+      <text>下单时间：</text>
+      <text>{{order.createTime}}</text>
+    </view>
+    <view>
+      <text>付款时间：</text>
+      <text>{{order.payTime}}</text>
+    </view>
+    <view>
+      <text>检测时间: </text>
+      <text wx:if="{{!order.qiandao}}"> 暂无检测数据  </text>
+      <text wx:else>{{order.qiandaoTime}} </text>
+    </view>
+
+  
+  </view>
+  </view>
+
+  <view class="mid"></view>
+
+  <view class="bord1">
+   <!-- 疫苗服务 -->
+  <view wx:if="{{order.type == 2}}" style="margin-top: 0;" class="detail">
+    <view> 
+      <text>疫苗剂次:</text>
+      <text wx:if="{{order.jici == 1}}">第一剂次</text>
+      <text wx:elif="{{order.jici == 2}}">第二剂次</text>
+      <text wx:else> 第三剂次 </text>
+    </view>
+    <view>
+      <text> 疫苗厂商</text>
+      <text> {{order.jiciName}} </text> 
+    </view>
+  </view>
+  </view>
+
+
+  <view class="mid"></view>
+  <!-- 预约人信息 -->
+  <view wx:if="{{!order.tuanti}}" style="margin-top: 0;" class="detail">
+    <view>
+      <text>预约人：</text>
+      <text>{{order.realName}}</text>
+    </view>
+    <view>
+      <text>联系方式：</text>
+      <text>{{order.phone}}</text>
+    </view>
+    <view>
+      <text>证件号码：</text>
+      <text>{{order.idCard}}</text>
+    </view>
+    <view>
+       <text>证件类型：</text>
+       <text>{{order.categoryType}} </text>
+    </view>
+  </view>
+
+  <view wx:else style="margin-top: 0;" class="detail">  
+    <view>
+      <text>公司名称: </text>
+      <text> {{order.companyName}}</text>
+    </view>
+    <view>
+      <text>公司地址  </text>
+      <text> {{order.address}}</text>
+    </view>
+    <view>
+      <text> 公司代表人 </text>
+      <text> {{order.realName}} </text>
+    </view>
+    <view>
+      <text> 联系方式 </text>
+      <text> {{order.phone}} </text> 
+    </view>
+
+  <view wx:if="{{order.status == 5 }}"> 
+    <text> 退款原因 </text>
+    <text> {{order.yuanyin}}</text>
+  </view>
+
+  </view>
+
+
+
+  <view class="butt">
+    <view class="last">
+      <view data-id="{{order._id}}" data-status="{{order.status}}" bindtap="deleteOrder">删除订单</view>
+      <view class="look" wx:if="{{order.status==4}}" bindtap="skipReport" data-id="{{order._id}}" data-td="{{order.tuanti}}">查看报告</view>
+    </view>
+  </view>
+</view>
+
+
+
+<l-dialog 
+  show="{{sshow}}"
+  type="alert"  
+  title="友情提示~"
+  content="当前版本暂时为开发版本,团队核酸报告结果暂时无法查看"
+  confirm-color="#f60"
+  cancel-color="#999" 
+>
+  <image class='dio-img' src="../../images/my/xiaomao.png"></image>
+  
+  </l-dialog>
+

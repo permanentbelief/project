@@ -1,0 +1,9 @@
+{
+    "usingComponents": {
+        "Tabs": "../../components/Tabs/Tabs",
+        "UpImg": "../../components/UpImg/UpImg",
+        "van-rate": "@vant/weapp/rate/index",
+        "van-button": "@vant/weapp/button/index"
+    },
+    "navigationBarTitleText": "意见反馈"
+}

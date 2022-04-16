@@ -1,0 +1,151 @@
+.temp {
+    height: 100rpx;
+    background-color: #353fdf;
+}
+
+.detail {
+    background-color: #fff;
+    border-radius: 30rpx;
+    margin-top: -50rpx;
+    padding: 0 20rpx;
+}
+
+.up {
+    border-bottom: 1px solid #fbfbfb;
+    padding: 30rpx 0 20rpx;
+    display: flex;
+    flex-direction: column;
+}   
+
+.top>text:first-child {
+    color: #d10807;
+    font-size: 35rpx;
+}
+
+.top>text:last-child {
+    margin-left: 20rpx;
+}
+
+.btom {
+    padding-left: 60rpx;
+    font-size: 26rpx;
+    color: #ccc;
+    margin-top: 10rpx;
+}
+
+.top text:first-child {
+    font-size: 40rpx;
+    color: #d10807;
+}
+
+.last {
+    display: flex;
+    margin-top: 20rpx;
+    background-color: #fdf7f7;
+}
+
+.last>view:first-child {
+    background-color: #fce7e7;
+    border-radius: 20rpx;
+    padding: 20rpx;
+    letter-spacing: 10rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right text:first-child {
+    margin: 0 30rpx;
+}
+
+.item view:not(:first-child) {
+    margin-top: 20rpx;
+}
+
+
+/* 
+.right text:last-child{
+  margin-left: 40rpx;
+  color:blue
+} */
+
+.city {
+    color: red
+}
+
+.last>view:first-child text {
+    writing-mode: vertical-rl;
+}
+
+.item view {
+    flex-direction: column;
+}
+
+.yichu {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.address {
+    margin-left: 40rpx;
+}
+
+.newitem {
+    display: flex;
+}
+
+.detail1 {
+    background-color: pink;
+    border-radius: 30rpx;
+    margin-top: -50rpx;
+    padding: 0 20rpx;
+}
+
+.itemCity {
+    font-weight: 500;
+    color: rgb(218, 67, 7);
+}
+
+.itemAre {
+    font-size: 30rpx;
+}
+
+.fxitem {
+    display: flex;
+    justify-content: space-between;
+    padding: 30rpx;
+    align-items: center;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.fxitem>text {
+    flex: 3;
+    font-size: 35rpx;
+}
+
+.fxitem input {
+    flex: 7;
+    text-align: right;
+}
+
+page {
+    background-color: rgb(184, 189, 197);
+}
+
+.newbox {
+    border-radius: 30rpx;
+    margin-bottom: 10rpx;
+    background-color: antiquewhite;
+    margin-top: 10rpx;
+    margin-left: 8rpx;
+    margin-right: 10rpx;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

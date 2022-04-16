@@ -1,0 +1,14 @@
+{
+    "usingComponents": {
+
+        "van-steps": "@vant/weapp/steps/index",
+        "l-steps": "/miniprogram_npm/lin-ui/steps/index",
+        "l-step": "/miniprogram_npm/lin-ui/step/index",
+        "l-dialog": "/miniprogram_npm/lin-ui/dialog/index",
+        "l-icon": "/miniprogram_npm/lin-ui/icon/index",
+        "l-toast": "/miniprogram_npm/lin-ui/toast/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index"
+    },
+    "navigationBarTitleText": "检测报告进度"
+}

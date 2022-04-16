@@ -1,0 +1,218 @@
+@import "/wxParse/wxParse.wxss";
+.box {
+    padding: 20rpx;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20rpx;
+    color: #ccc;
+}
+
+.comment {
+    padding: 20rpx;
+    background-color: whitesmoke;
+    border-radius: 13rpx;
+}
+
+.tx {
+    display: flex;
+    align-items: center;
+    margin-top: 10rpx;
+}
+
+.tx image {
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
+}
+
+.tx text {
+    margin-left: 10rpx;
+    color: #ccc;
+}
+
+.timeS {
+    font-size: 25rpx;
+    color: gray;
+    text-align: right;
+}
+
+.wenzi {
+    margin: 10rpx 30rpx;
+}
+
+.showSlectedLetter {
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    margin: -50px;
+    width: 400rpx;
+    height: 20%;
+    border-radius: 10px;
+    font-size: 26px;
+    z-index: 1
+}
+
+.pl {
+    position: fixed;
+    top: 30%;
+    transform: translateY(-50%);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20rpx;
+    border-radius: 20rpx;
+    z-index: 1000;
+    box-shadow: 1px 1px 5px #ccc;
+}
+
+.pl textarea {
+    border-bottom: 1px solid #ccc;
+    overflow: none;
+}
+
+.pl view {
+    padding: 10rpx 20rpx;
+    border-radius: 10rpx;
+    background-color: #42a5f5;
+    margin-top: 10rpx;
+}
+
+.template {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.red {
+    color: red !important;
+}
+
+.title2 {
+    font-size: 40rpx;
+    color: darkblue;
+}
+
+.last {
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 20rpx;
+    width: 100%;
+}
+
+.last view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #00b26a;
+    width: 100%;
+    margin: 0 20rpx;
+    padding: 20rpx;
+    color: #fff;
+}
+
+.last view text:last-child {
+    margin-left: 20rpx;
+}
+
+.input {
+    border: 1px solid gainsboro;
+    margin-top: 25rpx;
+    margin-bottom: 60rpx;
+    height: 300rpx;
+    width: 100%;
+    margin-left: 3rpx;
+    margin-right: 3rpx;
+}
+
+
+/* .das {
+    width: 100%;
+    height: 70px;
+    background-color: black;
+    flex-direction: row;
+}
+
+.icon1 {
+    height: 40px;
+    width: 70px;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+}
+
+.icon1-text {
+    margin-left: 30rpx;
+    color: saddlebrown;
+}
+
+.icon2 {
+    width: 70px;
+    height: 40px;
+    margin-left: 150rpx;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #00b26a;
+} */
+
+.newdas {
+    display: flex;
+}
+
+.image1 {
+    height: 40px;
+    width: 40px;
+    margin-left: 30rpx;
+}
+
+.image2 {
+    height: 40px;
+    width: 40px;
+    margin-left: 20rpx;
+}
+
+.mewicon1 {
+    flex-direction: column;
+    justify-content: center;
+    width: 60px;
+    background-color: #8ff0c9;
+}
+
+.newicon2 {
+    flex-direction: column;
+    justify-content: center;
+    width: 60px;
+    background-color: salmon;
+    margin-left: 30rpx;
+}
+
+.icon1-text {
+    margin-left: 30rpx;
+    color: saddlebrown;
+}
+
+.submit {
+    margin-top: 40rpx;
+    background: linear-gradient(to right, #ead6ee, #a0f1ea);
+    color: black;
+    font-weight: 300;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    border-radius: 10rpx;
+}

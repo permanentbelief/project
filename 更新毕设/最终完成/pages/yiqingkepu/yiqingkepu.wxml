@@ -1,0 +1,75 @@
+<!-- 实时资讯和疫情科普 -->
+<view class="over">
+  <view class="over-nav">
+    <view data-index="0" bindtap="chooseLastNav" class="{{lastIndex==0?'green':''}}">
+      <text>实时资讯</text>
+      <text></text>
+    </view>
+    <view data-index="1" bindtap="chooseLastNav" class="{{lastIndex==1?'green':''}}">
+      <text>疫情科普</text>
+      <text></text>
+    </view>
+    <view data-index="2" bindtap="chooseLastNav" class="{{lastIndex==2?'green': ''}}">
+      <text>疫情追踪</text>
+      <text></text>
+    </view>
+  </view>
+  <!-- 详情 -->
+  <view wx:if="{{lastIndex==0}}" class="detail">
+    <block wx:for="{{zixun}}">
+      <view class="time">
+        <text>{{item.createTime}}</text>
+        <text class="zuixin" wx:if="{{index==0}}">最新</text>
+      </view>
+      <view class="content">
+        <view class="last-title">
+          {{item.title}}
+        </view>
+        <view class="last-content">
+          {{item.content}}
+        </view>
+        <view class="laiyuan">
+          <text>来源：{{item.laiyuan}}</text>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:if="{{lastIndex==1}}" class="detail">
+    <view class="yq-nav">
+      <view class="{{kpIndex==0?'bg':''}}" data-index="0" bindtap="chooseKp">全部</view>
+      <view class="{{kpIndex==1?'bg':''}}" data-index="1" bindtap="chooseKp">症状表现</view>
+      <view class="{{kpIndex==2?'bg':''}}" data-index="2" bindtap="chooseKp">如何预防</view>
+      <view class="{{kpIndex==3?'bg':''}}" data-index="3" bindtap="chooseKp">防疫焦点</view>
+    </view>
+    <view bindtap="skipDetail" data-id="{{item._id}}" wx:for="{{kepu}}" class="yq-content">
+      <view class="yq-bt">
+        <text>{{item.title}}</text>
+        <text wx:if="{{item.type==1}}">症状表现</text>
+        <text wx:if="{{item.type==2}}">如何预防</text>
+        <text wx:if="{{item.type==3}}">防疫焦点</text>
+      </view>
+      <view class="yq-img">
+        <image src="{{item.img}}"></image>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{lastIndex == 2}}" class="detail">
+    <block wx:for="{{track}}">
+      <view class="time">
+        <text>{{item.createTime}}</text>
+        <text class="zuixin" wx:if="{{index==0}}">最新</text>
+      </view>
+      <view class="content">
+        <view class="last-title">
+          {{item.title}}
+        </view>
+        <view class="last-content">
+          {{item.content}}
+        </view>
+        <view class="laiyuan">
+          <text>追踪消息:{{item.laiyuan}}</text>
+        </view>
+      </view>
+    </block>
+  </view> 
+</view>

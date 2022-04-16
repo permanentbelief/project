@@ -1,0 +1,77 @@
+/* pages/feedback/feedback.wxss */
+page{
+    background-color: #eeeeee;
+}
+
+.fd_main {
+    padding:20rpx;
+    color: #666;
+    .fd_title{
+      font-weight: bold;
+    }
+    .fd_tips {
+        display: flex;
+        flex-wrap: wrap;
+        .choose {
+          color: black;
+          background-color: rgb(250, 79, 79)
+        }
+        .noChoose {
+          color: blue;
+          background-color: yellow
+        }
+        text{
+            width: 25%;
+            height: 15%;
+            padding: 10rpx;
+            text-align: center;
+            background-color: #fff;
+            margin: 20rpx;
+        }
+    }
+    .fd_content {
+     background-color: #fff;
+     margin-top: 20rpx;
+      textarea {
+        padding: 10rpx;
+      }
+      .fd_tool {
+          display: flex;
+          flex-wrap: wrap;
+          padding-bottom:10rpx;
+        button{
+          margin: 0;
+          width: 90rpx;
+          height: 90rpx;
+          margin-top: 20rpx;
+          font-size: 40rpx;
+          padding: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 20rpx;
+          margin-bottom: 10rpx;
+          font-size: 60%;
+          color:#ccc
+        }
+        .up_img_item{
+            margin-left: 20rpx;
+            margin-top: 20rpx;
+        }
+      }
+    }
+  
+    .form_btn_wrap {
+        margin-top: 20rpx;
+        display: flex;
+        justify-content: flex-end;
+       
+        button{
+            background-color: red;
+            width: 30%;
+            margin: 0;
+        }
+ 
+    }
+    
+  }

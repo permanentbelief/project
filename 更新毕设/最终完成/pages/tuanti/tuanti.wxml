@@ -1,0 +1,27 @@
+<view class="box">
+  <view data-id="{{item._id}}" bindtap="skipDetail" wx:for="{{list}}" class="item">
+    <view class="img">
+      <image src="{{item.img}}"></image>
+    </view>
+    <view class="mid">
+      <view class="top">
+        <text>{{item.group.type==1?'民营':'公立'}}</text>
+        <text wx:if="{{item.group.time==1}}">【4-8h出报告】</text>
+        <text wx:if="{{item.group.time==2}}">【8-12h出报告】</text>
+        <text wx:if="{{item.group.time==3}}">【12-24h出报告】</text>
+        <text wx:if="{{item.group.time==4}}">【2-4h出报告】 </text>
+        <text wx:if="{{item.group.time==5}}">【1-2h出报告】 </text>
+      </view>
+      <view class="btom">
+        <text>{{item.title}}</text>
+      </view>
+      <view class="last">
+        <text>￥{{item.renshu * item.group.hesuanPrice}}</text>
+        <text>热卖中</text>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{!list.length}}" class="null">
+    <image src="/images/null-order.png"></image>
+  </view>
+</view>

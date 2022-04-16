@@ -1,0 +1,12 @@
+<view class="news">
+  <view class="item" wx:for="{{list}}" data-id="{{item._id}}" bindtap="skipNewDetail">
+    <view>
+      <image src="{{item.img}}"></image>
+    </view>
+    <view class="right">
+      <text class="content">{{item.title}}</text>
+      <text class="zz">来源:{{item.source}}</text>
+      <text class="time">{{item.createTime}}</text>
+    </view>
+  </view>
+</view>

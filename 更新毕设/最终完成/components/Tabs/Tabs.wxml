@@ -1,0 +1,14 @@
+<view class="tabs">
+    <view class="tabs_title">
+        <view wx:for="{{tabs}}" wx:key="id" class="title_item {{item.isActive ? 'active':'' }} " bindtap="handleItemTap" data-index="{{index}}">
+            {{item.value}}
+        </view>
+    </view>
+    <view class="tabs_content">
+         <!-- 不加这个标签,在每一个组件中都显示不出来 -->
+        <slot></slot>
+    </view>
+</view>
+
+
+

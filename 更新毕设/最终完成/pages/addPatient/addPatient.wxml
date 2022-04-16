@@ -1,0 +1,55 @@
+<view class="box">
+    <view class="item">
+        <text><text style="color: red;">*</text> 姓名：</text>
+        <input value="{{patient.realName}}" bindinput="getValue" data-name="realName" placeholder="请输入姓名" type="text" />
+    </view>
+    <view class="item">
+        <text><text style="color: red;">*</text> 身份证号：</text>
+        <input value="{{patient.idCard}}" bindinput="getValue" data-name="idCard" placeholder="请输入身份证号" type="idcard" />
+    </view>
+    <view class="item">
+        <text><text style="color: red;">*</text> 地址：</text>
+        <picker mode="region" bindchange="bindRegionChange" value="{{region}}">
+            <view wx:if="{{region.length}}" class="picker">
+                {{region[0]}},{{region[1]}},{{region[2]}}
+            </view>
+            <view wx:else class="picker">
+                请选择地址
+            </view>
+        </picker>
+    </view>
+    <view class="item">
+        <text><text style="color: red;">*</text> 详细地址：</text>
+        <input value="{{patient.address}}" bindinput="getValue" data-name="address" placeholder="请输入详细地址" type="text" />
+    </view>
+    <view class="item">
+        <text><text style="color: red;">*</text> 手机号：</text>
+        <input value="{{patient.phone}}" bindinput="getValue" data-name="phone" placeholder="请输入手机号" type="number" />
+    </view> 
+
+    <view class="ty">
+        <checkbox-group class="cg" bindchange="checkG">
+            <checkbox style="font-size: 20rpx;" value="true"/><text bindtap="showPopup">阅读并同意用户协议</text>
+        </checkbox-group>
+    </view>
+    <view class="btn">
+        <view bindtap="bindPatient">绑定</view>
+    </view>
+</view>
+
+
+<van-popup
+  show="{{ show }}"
+  closeable
+  close-icon="close"
+  position="bottom"
+  custom-style="height: 70%; padding-top: 40rpx; background-color: wheat; padding-left:15rpx; padding-right: 15rpx"  
+  bind:close="onClose">
+   <view class="popup">检测须知</view>
+   <view class="popup-text">1.就诊人可以是家中的老人，小孩以及不具备智能手机使用的人群 </view>
+   <view class="popup-text">2.就诊人的地址信息如果后期发现是阳性的情况下起很大的作用，所以还是详细一些摇号</view>
+   <view class="popup-text">3.请确保就诊人的名称和身份证号信息填写正确，因为查询的时候要根据身份证号和名字 </view>
+   <!-- <view class="popup-text">4.检测后立即戴好，可准备一个备用口罩，污染后方便随时更换。</view>
+   <view class="popup-text">5.检测后可以在th快捷预约小程序上根据手机号进行快速查询。</view> -->
+   <view class="popup-text">4.防疫三字经要记牢,走到哪里都要戴口罩</view>
+  </van-popup> 

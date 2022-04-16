@@ -1,0 +1,30 @@
+<view class="box">
+    <view wx:if="{{!list.length}}" class="null">
+        <image src="/images/null-1.png"></image>
+        <text>暂无就诊人</text>
+    </view>
+    <block wx:else>
+        <view class="title"> 
+            <image class="img" src="../../images/paient/jiuzhenren1.png"> </image>
+             <view class="txt"> 就诊人列表 </view> 
+        </view>
+        <view wx:for="{{list}}" class="item">
+            <view class="oneline"><text style="font-size:30rpx;color: black; font-weight:500">姓名:</text> 
+            <text style="color:darkgreen; margin-left:30rpx" >{{item.realName}} </text> </view>
+            <view class="oneline"><text style="font-size:30rpx;color: black; font-weight:500"> 身份证号:</text>
+            <text style="color:darkgreen;"> {{item.idCard}}</text> </view>
+            <view class="oneline"><text style="font-size:30rpx;color: black; font-weight:500">住址信息: </text>
+             <text style="color:darkgreen;"> {{item.region[0]}}{{item.region[1]}}{{item.region[2]}}{{item.address}}</text></view>
+            <view class="oneline"><text style="font-size:30rpx;color: black; font-weight:500">电话号码: </text> 
+            <text style="color:darkgreen;"> {{item.phone}} </text></view>
+            <view wx:if="{{type==2}}" data-index="{{index}}" bindtap="choose" class="choose">
+                选择
+            </view>
+            <text data-id="{{item._id}}" bindtap="delete" class="iconfont icon-Close pos1"></text>
+            <text data-id="{{item._id}}" bindtap="edit" class="iconfont icon-xiugai pos2"></text>
+        </view>
+    </block>    
+    <view wx:if="{{list.length<5}}" class="btn">
+        <view bindtap="bindPatient">绑定就诊人</view>
+    </view>
+</view>
