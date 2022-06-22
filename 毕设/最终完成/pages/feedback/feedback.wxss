@@ -4,23 +4,29 @@ page {
     background-color: #eeeeee;
 }
 
+.dio-img {
+    width: 70rpx;
+    height: 70rpx;
+}
+
 .fd_main {
     padding: 20rpx;
     color: #666;
 }
 
-.choose{
-    color: red;    
-    
+.choose {
+    color: red;
 }
+
 .fd_main .fd_tips {
     display: flex;
     flex-wrap: wrap;
 }
-.fd_main .fd_title{
+
+.fd_main .fd_title {
     font-weight: bold;
     font-size: 30rpx;
-    color: rgb(78, 99, 99);    
+    color: rgb(78, 99, 99);
 }
 
 .fd_main .fd_tips text {
@@ -28,7 +34,7 @@ page {
     height: 15%;
     padding: 10rpx;
     text-align: center;
-    background-color:whitesmoke;
+    background-color: whitesmoke;
     margin: 20rpx;
 }
 
@@ -80,20 +86,21 @@ page {
     margin: 0;
 }
 
-.star{
+.star {
     text-align: center;
     padding: 30rpx;
     margin: 20rpx;
     background: #fff;
     border-radius: 20rpx;
-  }
-  .text{
+}
+
+.text {
     margin-top: 20rpx;
     font-size: 28rpx;
     color: #666;
-  }
+}
 
-  .vant{
-      width: 70%;
-      border-radius: 40rpx;
-  }
+.vant {
+    width: 70%;
+    border-radius: 40rpx;
+}

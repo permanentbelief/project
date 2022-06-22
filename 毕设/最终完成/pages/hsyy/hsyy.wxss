@@ -1,0 +1,55 @@
+.up {
+  background-color: rgba(205, 209, 248, 0.788);
+  margin-bottom: -5rpx;
+  justify-content: space-between;
+  text-align: right;
+  /*居右*/
+}
+
+.list {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  border-bottom: 1px solid #f5e0e0;
+
+}
+
+.right {
+  margin-left: 250rpx
+}
+
+
+.picker {
+  color: #3c48ed;
+}
+
+
+
+.last view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10rpx;
+ 
+  color: rgb(2, 2, 2);
+  font-weight: 520;
+  width: 60%;
+  padding: 20rpx 0;
+}
+
+.item image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.Submit {
+  margin-top: 70rpx;
+}
+.center {
+  margin-top:90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

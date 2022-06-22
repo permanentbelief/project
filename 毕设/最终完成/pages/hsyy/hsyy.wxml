@@ -1,0 +1,96 @@
+<view class="up" bindtap="chooseOCRImg"> 
+  <text> 拍照识别身份证 </text>
+  <text style="font-size: 38rpx;color:#3c48ed;" class="iconfont icon-camera"></text>
+   </view>
+
+
+  <view class="list">
+    <view  style="display: flex; flex-direction: column;">
+      <text>姓名</text>
+      <text style="color: rgb(211, 206, 206); font-size: 28rpx; text-align: left;">Name</text>
+    </view>
+    <input style="text-align: right;" value="{{name}}"  bindinput="inputName" placeholder="请输入姓名"/>
+  </view>
+  <view class="list">
+    <view style="display: flex; flex-direction: column;">
+      <text>证件类型</text>
+      <text style="color: rgb(211, 206, 206); font-size: 28rpx; text-align: left;">Category</text>
+    </view>
+    <picker bindchange="bindCate" value="{{cateIndex}}" range="{{category}}">
+      <view class="picker">
+        {{category[cateIndex]}} >
+      </view>
+    </picker>
+  </view>
+  <view  class="list">
+    <view  style="display: flex; flex-direction: column;">
+      <text>证件号码</text>
+      <text style="color: rgb(211, 206, 206); font-size: 28rpx; text-align: left;">Number</text>
+    </view>
+    <input style="text-align: right;" value="{{idNo}}" bindinput="inputNo" placeholder="请输入证件号码"/>
+  </view>
+  <view class="list">
+    <view  style="display: flex; flex-direction: column;">
+      <text>性别</text>
+      <text style="color: rgb(211, 206, 206); font-size: 28rpx; text-align: left;">Sex</text>
+    </view>
+    <picker bindchange="bindGen" value="{{genIndex}}" range="{{gender}}">
+      <view class="picker">
+        {{gender[genIndex]}} >
+      </view>
+    </picker>
+  </view>
+  <view  class="list">
+    <view  style="display: flex; flex-direction: column;">
+      <text>年龄</text>
+      <text style="color: rgb(211, 206, 206); font-size: 28rpx; text-align: left;">Age</text>
+    </view>
+    <input style="text-align: right;" value="{{age}}"  bindinput="inputAge" placeholder="请输入年龄" type="number" />
+  </view>
+  <view class="list">
+    <view  style="display: flex; flex-direction: column;">
+      <text>手机号码</text>
+      <text style="color: rgb(211, 206, 206); font-size: 28rpx; text-align: left;">Phone</text>
+    </view>
+    <input style="text-align: right;" value="{{phone}}" bindinput="inputPhone" placeholder="请输入手机号码" type="number" />
+  </view>
+
+  <view class="list">
+    <view style="display:flex; flex-direction: column;">
+      <text>预约时间</text>
+      <text style="color: rgb(211, 206, 206); font-size: 28rpx; text-align: left;">Time</text>
+    </view>
+      <text wx:if="{{dateTimes.length == 0}}"> 检测时间选择 </text>
+      <picker mode="multiSelector" bindchange="bindChangeTime" range-key="value" range="{{dateTimes}}">
+        <view class="picker">
+          {{dateTimes[0][timeIndex[0]].value}} {{dateTimes[1][timeIndex[1]].value}}
+        </view>
+      </picker>
+  
+  </view>
+
+    <van-button class="center" type="primary" bindtap="submit"  color="linear-gradient(to right, #4bb0ff, #6149f6)"> 提交订单 </van-button>
+
+
+
+
+    <l-dialog 
+  show="{{dshow}}"
+  type="confirm"  
+  title="友情提示~"
+  content="确认支付此核酸订单吗，共计30元"
+  confirm-text="yes~"
+  bind:linconfirm="goPay"
+  confirm-color="#f60"
+  cancel-text="no~"
+  bind:lincancel="goOrder"
+  cancel-color="#999" />
+
+
+
+<l-toast
+  show="{{toastsuccess}}"
+  icon="success"
+  title="支付成功,订单信息已更新"
+/>
+

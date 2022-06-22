@@ -1,25 +1,4 @@
-<!-- 去掉导航栏 -->
-<!-- "navigationStyle": "custom",  -->
-
-<!-- 一坨 -->
-<!-- <view class="user">
-  <view wx:if="{{isLogin!=true}}" class="user-info">
-    <image class="userPhoto_1" src="{{userPhoto}}"></image>
-    <button type="primary" size="mini"
-      bindtap="login">点击登录</button>
-  </view>
-  <view wx:if="{{isLogin==true}}" class="newtop">
-    <image class="background" mode="scaleToFill" src="https://7869-xiezi-6gtck5es3b9dd944-1304542037.tcb.qcloud.la/144340_96650718.jpg?sign=d4247d775897b166cdc2b0735f16fccd&t=1617617011">
-    </image>   <image class="userPhoto" src="{{user.avatarUrl}}"></image>
-    
-    <text class="name_tip"> th快捷预约欢迎您
-        {{user.nickName}}</text>
-
-  </view>
-</view>  -->
-  
-
-<view bindtap="{{isLogin?'':'login'}}" class="box">
+<view bindtap="{{isLogin?'':'login'}}" class="tt">
   
   <view wx:if="{{isLogin!=true}}" class="user-info">
     <image class="userPhoto_1" src="{{userPhoto}}"> </image>
@@ -38,68 +17,55 @@
             </view>
         </view>
     </view>
-
-
-
-    <view wx:if="{{isLogin}}" class="myOrder">
-        <view class="title">
-            <text>我的订单</text>
-            <text data-index="0" bindtap="skipMyOrder">查看全部<text style="margin-left: 10rpx;" class="iconfont icon-youjiantou"></text></text>
+    <view wx:if="{{isLogin}}" class="orderList">
+        <view class="">
+            <text data-index="0" bindtap="skOrder" style=
+            "color: #4a84aa; font-size: 30rpx; margin-left:75%">订单信息<text style="margin-left:6rpx; color: #0a2a3f" > > </text></text>
         </view>
-        <view class="btn">
-            <view data-index="1" bindtap="skipMyOrder" class="item">
-                <image src="/images/my/daifukuan.png"></image>
-                <text>待付款</text>
-            </view>
-            <view data-index="2" bindtap="skipMyOrder" class="item">
-                <image src="/images/my/daiqiandao.png"></image>
-                <text>待签到</text>
-            </view>
-            <view data-index="3" bindtap="skipMyOrder" class="item">
-                <image src="/images/my/jiancezhong.png"></image>
-                <text>检测中</text>
-            </view>
-            <view data-index="4" bindtap="skipMyOrder" class="item">
-                <image src="/images/my/yiwancheng.png"></image>
-                <text>已完成</text>
-            </view>
-            <view data-index="5" bindtap="skipMyOrder" class="item">
-                <image src="/images/my/tuikuan.png"></image>
-                <text>退款</text>
-            </view>
-        </view>
+        <view style="height:40rpx;"></view>
+
+     <view class="">
+      <van-grid column-num="4" border="{{ false }}" icon-size='{{35}}'>
+        <van-grid-item wx:for-items="{{grids}}" wx:for-item="item" icon="{{item.iamgeurl}}" text="{{item.text}}"
+          wx:key="type" data-index="{{item.orderindex}}" bindtap="skOrder" />
+      </van-grid>
+     </view>
+
     </view> 
+   
 
 
-     <!-- 我的订单部分 -->
-    <view wx:if="{{isLogin}}" class="myService">
-        <view class="title2">我的服务</view>
-        <block class="" wx:for="{{myService}}">
-            <view data-url="{{item.tabUrl}}" bindtap="skip" class="service">
-                <text>{{item.name}}</text>
-                <view>
-                    <text style="margin-right: 20rpx; color: #ccc;" wx:if="{{index==3}}">{{user.phone}}</text>
-                    <text style="margin-right: 20rpx; color: #ccc;" wx:if="{{index==6}}">当前版本 1.0.1 </text>
-                    <text class="iconfont icon-youjiantou"></text>
-                </view>
-            </view>
-          
-        </block>
-    </view>
+ <!-- 这里测试 vant-weapp -->
 
-    <view wx:if="{{isLogin}}" class="myService">
-        <view class="title2">防疫专区</view>
-        <view data-url="{{item.tabUrl}}" bindtap="skip" wx:for="{{personalArticleCentor}}" class="service">
-            <text>{{item.name}}</text>
-            <text class="iconfont icon-youjiantou"></text>
-        </view>
-    </view>
+ <view wx:if="{{isLogin}}" class="list">
+ <van-cell-group >
+  <van-cell title="检测报告" value=">" data-url="{{tabUrl1}}" bindtap="click1"/>
+  <van-cell title="报告进度" value=">" data-url="{{tabUrl2}}" bindtap="click2"/>
+  <!-- <van-cell title="个人信息" value="{{user.phone}}" data-url="{{tabUrl3}}" bindtap="click3"/> -->
+  <van-field label-class="van-field"
+    value= "{{user.phone}}"
+    label="手机号码"
+    placeholder="请绑定用户手机信息"
+    bind:click-icon="click3"
+    type="number"
+    icon="question-o"
+    bind:change="onChange"
+   
+  />
 
+  <van-cell title="意见反馈" value=">" data-url="{{tabUrl4}}" bindtap="click4"/>
+  <van-cell title="分享" value=">" data-url="{{tabUrl5}}" bindtap="click5"/>
+  <van-cell title="设置" value=">" data-url="{{tabUrl6}}" bindtap="click6"/>
+  <van-cell title="退出登录" value=">" data-url="{{tabUrl7}}" bindtap="click7"/>
+
+
+</van-cell-group>
 </view>
 
 
 
-<van-cell title="显示分享面板"/>
+</view>
+
 <van-share-sheet    
   show="{{ showShare }}"
   title="立即分享给好友"
@@ -118,6 +84,34 @@
   type="alert"     
   title="标题"
   content="这个是提示框" /> -->
+
+
+
+  <l-dialog 
+  show="{{phone1}}"
+  type="alert"  
+  title="友情提示~"
+  content="当前手机号信息错误"
+  confirm-color="#f60"
+  cancel-color="#999" 
+>
+  <image class='dio-img' src="{{userPhoto}}"></image>
+  
+  </l-dialog>
+
+  <l-dialog 
+  show="{{phone2}}"
+  type="alert"  
+  title="友情提示~"
+  content="手机号信息不能为空"
+  confirm-color="#f60"
+  cancel-color="#999" 
+>
+  <image class='dio-img' src="{{userPhoto}}"></image>
+  
+  </l-dialog>
+
+
 
 
 

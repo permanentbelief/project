@@ -2,9 +2,12 @@
 
 
 <van-cell-group >
-    <van-cell title="检测人姓名" value="{{res.name}}" />
-    <van-cell title="检测订单号" value="{{res.orderId}}" />
-    <van-cell title="检测机构"   value="{{res.groupName}}" />
+    <van-cell title="检测人姓名" wx:if="{{res.name}}" value="{{res.name}}" />
+    <van-cell title="检测人姓名" wx:else value="暂无检测人~" />
+    <van-cell title="检测订单号" wx:if="{{res.orderId}}" value="{{res.orderId}}" />
+    <van-cell title="检测订单号" wx:else value="暂无检测订单~" />
+    <van-cell title="检测机构" wx:if="{{res.groupName}}" value="{{res.groupName}}" />
+    <van-cell title="检测机构" wx:else value="暂无检测机构~" />
 </van-cell-group>
 
 
@@ -67,10 +70,10 @@
 
 
 <l-dialog 
-  show="{{res}}"
+  show="{{res.length == 0}}"
   type="alert"  
   title="友情提醒~"
-  content="此账户现在还没有账单信息wow~"
+  content="此账户现在还没有订单信息wow~"
   confirm-color="#f60"
   cancel-color="#999" 
 >

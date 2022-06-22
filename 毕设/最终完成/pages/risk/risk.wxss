@@ -1,0 +1,99 @@
+.detail {
+    background-color: #fff;
+    margin-top: 50rpx;
+    padding: 0 20rpx;
+}
+
+.dingduan {
+    margin-top:29rpx;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.last {
+    display: flex;
+    margin-top: 40rpx;
+    background-color: #fdf7f7;
+}
+
+.last-top {
+    background-color: #fce7e7;
+    border-radius: 20rpx;
+    padding: 20rpx;
+    text-align: left;
+}
+
+
+
+
+.city {
+    color: red
+}
+
+
+
+.right {
+    display: flex;
+    flex-direction: column;
+}
+
+.yichu {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.address {
+    margin-left: 40rpx;
+}
+
+.newitem {
+    display: flex;
+}
+
+.detail1 {
+    background-color: pink;
+    border-radius: 30rpx;
+    margin-top: -50rpx;
+    padding: 0 20rpx;
+}
+
+
+.fxitem {
+    display: flex;
+    justify-content: space-between;
+    padding: 30rpx;
+    align-items: center;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+.fxitem>text {
+    flex: 3;
+    font-size: 35rpx;
+}
+
+.fxitem input {
+    flex: 7;
+    text-align: right;
+}
+
+
+
+.newbox {
+    border-radius: 30rpx;
+    margin-bottom: 10rpx;
+    background-color: antiquewhite;
+    margin-top: 10rpx;
+    margin-left: 8rpx;
+    margin-right: 10rpx;
+}
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

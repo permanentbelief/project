@@ -1,0 +1,29 @@
+<!-- <view class="news">
+  <view class="item" wx:for="{{article_list}}" data-message="{{item._id}}" bindtap="skipNewDetail">
+    <view>
+      <image src="{{item.img}}"></image>
+    </view>
+    <view class="right">
+      <text class="content">{{item.title}}</text>
+      <text class="time">{{item.createTime}}</text>
+    </view>
+  </view>
+</view> -->
+
+
+<!--index.wxml-->
+<view class="first_tab">
+
+<view class="list_item" wx:for="{{article_list}}" wx:key="id" data-message="{{item._id}}" bindtap="skipSparticle" >
+
+  <view class="list_img_wrap">
+    <image src="{{item.img}}" mode="widthFix" width="30%">
+    </image>
+  </view>
+
+  <view class="list_info_wrap">
+    <text class="list_name">{{item.title}}</text>
+    <text style="margin-top: 10rpx; font-size: 23rpx; text-align: right;">{{item.createTime}}</text> 
+  </view>
+</view>
+</view>

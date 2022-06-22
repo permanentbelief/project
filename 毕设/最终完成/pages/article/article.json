@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+      "van-button": "@vant/weapp/button/index"
+  },
+  "navigationBarTitleText": "文章内容"
+
+}

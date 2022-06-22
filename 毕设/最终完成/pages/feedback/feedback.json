@@ -3,7 +3,12 @@
         "Tabs": "../../components/Tabs/Tabs",
         "UpImg": "../../components/UpImg/UpImg",
         "van-rate": "@vant/weapp/rate/index",
-        "van-button": "@vant/weapp/button/index"
+        "van-button": "@vant/weapp/button/index",
+        "l-steps": "/miniprogram_npm/lin-ui/steps/index",
+        "l-step": "/miniprogram_npm/lin-ui/step/index",
+        "l-dialog": "/miniprogram_npm/lin-ui/dialog/index",
+        "l-icon": "/miniprogram_npm/lin-ui/icon/index",
+        "l-toast": "/miniprogram_npm/lin-ui/toast/index"
     },
     "navigationBarTitleText": "意见反馈"
 }

@@ -1,0 +1,237 @@
+<view wx:if="{{res}}" class="box">
+    <view class="tt">
+      <van-cell-group >
+        <van-cell title="姓名" wx:if="{{res.realName}}" value="{{res.realName}}" />
+        <van-cell title="姓名" wx:else value="暂无检测人~" />
+        <!-- <van-cell title="检测人国籍" wx:if="{{}}" value="{{res.orderId}}" /> -->
+        <van-cell title="国籍" value="中国" />
+        <van-cell title="证件号码" wx:if="{{res.idCard}}" value="{{res.idCard}}" />
+        <van-cell title="证件号码" wx:else value="暂无检测人~" />
+      </van-cell-group>
+
+    </view>
+    <!-- 检测结果列表 -->
+    <view class="mid">
+            <view wx:if="{{!res.result}}">
+                <view class="mid-top">
+                    <text>核酸检测结果</text>
+                    <view>
+                        <text>阴性</text>
+                    </view>
+                </view>
+            </view>   
+            <view wx:else>
+                <view class="yymid-top"> 
+                     <text>核酸检测结果</text>
+                    <view>
+                        <text>阳性</text>
+                    </view>
+                </view>
+            </view>
+        <view class="detail-item">
+            <text>检测机构</text>
+            <text style="font-size:34rpx;color:#f79090;">{{res.group}}</text>
+        </view>
+
+        <view class="time">
+        <view class="detail-item">
+            <text>预约日期</text>
+            <text style="font-size:34rpx;color:#f79090;">{{res.yuyueDate}}</text>
+        </view>
+        <view class="detail-item">
+            <text>预约时间 </text>
+            <text style="font-size:34rpx;color:#f79090;">{{res.yuyueTime}} </text>
+        </view>
+        <view class="detail-item">
+            <text>创建时间</text>
+            <text style="font-size:34rpx;color:#f79090;">{{res.createTime}}</text>
+        </view>
+        <view class="detail-item">
+            <text>下单时间</text>
+            <text style="font-size:34rpx;color:#f79090;">{{res.payTime}}</text>
+        </view>
+        <view class="detail-item">
+            <text>检测时间</text>
+            <text style="font-size:34rpx;color:#f79090;">{{res.qiandaoTime}}</text>
+        </view>
+        <view class="detail-item">
+            <text>有效剩余时间</text>
+            <text style="font-size:34rpx;color:#f79090;" wx:if="{{isValid}}">{{leftTime}}</text>
+            <text style="font-size:34rpx;color:#f79090;"wx:else> 有效期两天已过,已经失效 </text>
+        </view>
+        
+        </view>
+    
+        <block wx:if="{{detail}}">
+            <view class="person">
+                <view class="detail-item">
+                    <text>姓名</text>
+                    <text >{{res.realName}}</text>
+                </view>
+                <view class="detail-item">
+                    <text>性别</text>
+                    <text>{{res.genderType}}</text>
+                </view>
+                <view class="detail-item">
+                    <text>年龄</text>
+                    <text>{{res.age}}岁</text>
+                </view>
+                <view class="detail-item">
+                    <text>居住地址</text>
+                    <text wx:if="{{res.address}}">{{res.address}}</text>
+                    <text wx:else>暂无录入</text>
+                </view>
+            </view>
+                 <view class="detail-item">
+                    <text>检测机构</text>
+                    <text>{{res.group}}</text>
+                </view>
+                <view class="detail-item">
+                     <text>检测机构地址</text>
+                    <text wx:if="{{groupAddress}}">{{groupAddress}}</text>
+                    <text wx:else>暂无录入</text>
+                </view>
+                <view class="detail-item">
+                    <text>订单号</text>
+                    <text>{{res.orderNum}}</text>
+                </view>
+                <view class="detail-item">
+                    <text>支付单号</text>
+                    <text>{{res.payNum}}</text>
+                </view>
+                <view class="detail-item">
+                    <text>支付金额</text>
+                    <text>{{res.price}}</text>
+                </view>
+         
+        </block>
+    </view>
+</view>
+
+
+<view wx:if="{{!detail}}">
+   <view wx:if="{{list.length == 0}}">
+  <text class="btn" style="float:right;text-align:right; font-size:27rpx;font-weight:470;color:blue" type="primary" bindtap="getMore"> 更多检测记录~</text> 
+    </view>
+   <view wx:else>
+    <view class="tt">
+      <van-cell-group >
+        <van-cell title="检测人姓名" wx:if="{{list[0].list.realName}}" value="{{list[0].list.realName}}" />
+        <van-cell title="检测人姓名" wx:else value="暂无检测人~" />
+        <!-- <van-cell title="检测人国籍" wx:if="{{}}" value="{{res.orderId}}" /> -->
+        <van-cell title="检测人国籍" value="中国" />
+        <van-cell title="证件号码" wx:if="{{list[0].list.idCard}}" value="{{list[0].list.idCard}}" />
+        <van-cell title="证件号码" wx:else value="暂无检测人~" />
+      </van-cell-group>
+
+    </view>
+    
+    <text> 最近5次的接种信息如下</text>
+    <view wx:for="{{list}}" wx:key="index">
+        <view class="listItem">
+            <view class="mid">
+               <view wx:if="{{index == 0}}" style="color:darkred; font-weight:450;font-size:34rpx;margin-left:-10rpx; margin-top:-12rpx">最新检测 </view> 
+                 <text style="font-size:22rpx; color:gray; margin-left:-10rpx; margin-top:-30rpx"> 检测时间： {{item.list.yuyueDate}}
+                 </text>
+            <view wx:if="{{!item.result}}">
+                <view class="mid-top">
+                    <text>核酸检测结果</text>
+                    <view>
+                        <text>阴性</text>
+                    </view>
+                </view>
+            </view>   
+            <view wx:else>
+                <view class="yymid-top"> 
+                     <text>核酸检测结果</text>
+                    <view>
+                        <text>阳性</text>
+                    </view>
+                </view>
+            </view>
+        <view class="detail-item">
+            <text>检测机构</text>
+            <text>{{item.list.group}}({{item.list.province}})</text>
+        </view>
+
+        <view class="time">
+        <view class="detail-item">
+            <text>预约日期</text>
+            <text>{{item.list.yuyueDate}}</text>
+        </view>
+        <view class="detail-item">
+            <text>预约时间 </text>
+            <text> {{item.list.yuyueTime}} </text>
+        </view>
+        <view class="detail-item">
+            <text>创建时间</text>
+            <text>{{item.list.createTime}}</text>
+        </view>
+        <view class="detail-item">
+            <text>下单时间</text>
+            <text>{{item.list.payTime}}</text>
+        </view>
+        <view class="detail-item">
+            <text>检测时间</text>
+            <text>{{item.list.qiandaoTime}}</text>
+        </view>
+        <view class="detail-item">
+            <text>有效剩余时间</text>
+            <text wx:if="{{item.isValid}}">{{item.leftTime}}</text>
+            <text wx:else> 有效期两天已过,已经失效 </text>
+        </view>
+        <view class="detail-item" style="margin-top:43rpx">
+            <text> 评定结果</text>
+            <text wx:if="{{!item.result}}" style= "font-size:34rpx; color:green; font-weight:550"> 正常</text>
+            <text wx:else style="font-size:34rpx; color:red; font-weight:550"> 处于有风险状态 </text>
+        </view>
+    </view>
+    </view>
+
+    </view>
+
+
+
+    </view>
+
+</view>
+</view>
+
+
+
+
+<van-popup
+  show="{{ show }}"
+  closeable
+  close-icon="close"
+  position="bottom"
+  custom-style="height: 70%; padding-top: 40rpx; background-color:#f5f5f5; padding-left:15rpx; padding-right: 15rpx"  
+  bind:close="onClose">
+   <view class="popup">注意注意 ！！！</view>
+
+   <view class="popup-text1"> 您最近的的核酸检测结果是阳性 ! 恭喜你呀 小阳人！！    </view>
+   
+    <view style="margin-top: 30rpx">请做好下面五点须知:</view>
+   <view class="popup-text">1.请您稳住心态，不必慌张，多喝点水，测量一下自己的体温 </view>
+   <view class="popup-text">2.根据自己的发烧程度和身体状况来评估自己需要不要连花清瘟和退烧药，其他的药不要乱吃</view>
+   <view class="popup-text">3.要对于国家的医护人员和抗疫人员有信心，大家都会尽全力去为您服务</view>
+   <!-- <view class="popup-text">4.检测后立即戴好，可准备一个备用口罩，污染后方便随时更换。</view>
+   <view class="popup-text">5.检测后可以在th快捷预约小程序上根据手机号进行快速查询。</view> -->
+   <view class="popup-text1">4.请马上单独隔离,并要戴口罩，以免新冠继续传播至他人</view>
+    <view class="popup-text1">5.医护人员和防疫人员马上就到，请保持电话畅通，预计结果出来20min之内就去接您到隔离场所进行治疗</view>
+  </van-popup> 
+
+
+
+  <l-dialog 
+  show="{{tshow}}"
+  type="alert"  
+  title="友情提醒~"
+  content="暂无核酸结果、请耐心等待~"
+  confirm-color="#f60"
+  cancel-color="#999" 
+>
+  <image class='dio-img' src="../../images/my/xiaomao.png"></image>
+  
+  </l-dialog>
+

@@ -1,0 +1,53 @@
+<import src="../../wxParse/wxParse.wxml" />
+
+<view class="content">
+<template is="wxParse" data="{{wxParseData:article.nodes}}" />
+</view>
+    <text style="margin-top:10rpx; color: rgb(207, 204, 204); font-size:34rpx; text-align: right; margin-left:50%;">{{last_update}}</text>
+ <view class="newdas">
+     <view class="mewicon1" bindtap="clickDz"> 
+        <image wx:if="{{isDz}}"  class="image1"  src ="{{dzimgUrl}}" > </image>
+        <image wx:else src="{{nonedzimgUrl}}" class="image1"> </image>
+        <view wx:if="{{sumDz}}"class="icon1-text"> 点赞{{sumDz}} </view>
+        <view wx:else class="icon1-text"> 暂无 </view>
+    </view>
+    <view class="newicon2" bindtap="clickSc">
+        <image wx:if="{{isSc}}"  class="image2"  src ="{{scimgUrl}}" > </image>
+        <image wx:else src="{{nonescimgUrl}}"  class="image2"> </image>
+        <view wx:if="{{sumSc}}"class="icon1-text"> 收藏{{sumSc}} </view>
+        <view wx:else class="icon2-text"> 暂无 </view>
+    </view>
+</view>
+
+
+<view class="comment">
+
+ <view wx:for="{{commentArray}}" wx:for-item="fitem" class="comlist" >
+        <view class="top">
+            <image src="{{fitem.avatarUrl}}"></image>
+            <text style="margin-left: 10rpx;  color: #ccc;">{{fitem.nickName}}:</text>
+        </view>
+        <view style="margin-top:30rpx; ">
+            <view style="margin-top:10rpx; margin-left:10rpx">{{fitem.content}}</view>
+            <view style="text-align: right; font-size:20rpx; color:black;">{{fitem.submitTime}}</view>
+        </view>
+     
+  </view>
+
+</view>
+
+<view style="height: 100rpx;"></view>
+
+
+
+<!-- 点击显示点赞爱心 -->
+<block wx:if="{{isShowLetter}}">
+    <view class="showSlectedLetter">
+        <image style="" src="../../images/articles/dianzan_test1.png"> </image>
+    </view>
+</block>
+
+
+
+<textarea  class ="input" placeholder="请输入评论内容" bindinput="getContent" value="{{content}}"> </textarea >
+<button class="submit"  bindtap="Submit"> 发表评论 </button>

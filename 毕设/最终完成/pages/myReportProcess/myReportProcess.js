@@ -3,7 +3,7 @@ const util = require('../../utils/util.js');
 
 Page({
     data: {
-        active: 1,
+        active: 0,
         list: [{
                 text: '未付款',
                 desc: '下单暂时还未支付',
@@ -26,6 +26,8 @@ Page({
         ],
         index: 0,
         res: {},
+        show: true,
+        tshow: false
 
     },
     onLoad: function(options) { // 记载这个页面信息
@@ -34,7 +36,6 @@ Page({
             userId: wx.getStorageSync('user')._id,
             phone: wx.getStorageSync('user').phone,
             type: 1,
-            tuanti: 0
         }).orderBy('createTime', 'desc').get({
             success: res => {
                 console.log("查询到最近的订单信息", res);
@@ -63,7 +64,8 @@ Page({
                         active: result.status - 1,
                         // index: 0,
                         // active: 0,
-                        res: ress
+                        res: ress,
+                        show: false,
                     })
                 }
             }

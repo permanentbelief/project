@@ -1,0 +1,50 @@
+.up {
+  background-color: rgba(205, 209, 248, 0.788);
+  margin-bottom: -5rpx;
+  justify-content: space-between;
+  text-align: right;
+  /*居右*/
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20rpx;
+    border-bottom: 1px solid #f0f0f0;
+    align-items: center;
+  }
+  .aaa{
+     color: red;
+  }
+
+  
+  .picker {
+    color: #3c48ed;
+  }
+  
+  .last {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50rpx;
+  }
+  
+  .last view {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10rpx;
+    background-color: #00479c;
+    color: #fff;
+    width: 60%;
+    padding: 20rpx 0;
+  }
+  
+
+  .center {
+    margin-top:90rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  

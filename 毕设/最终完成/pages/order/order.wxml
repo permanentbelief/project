@@ -1,0 +1,95 @@
+
+
+<van-tabs sticky active="{{ active }}" bind:change="onChange">
+  <van-tab title="全部"></van-tab>
+  <van-tab title="待付款"></van-tab>
+  <van-tab title="待签到"></van-tab>
+  <van-tab title="检测中"></van-tab>
+  <van-tab title="已完成"></van-tab>
+</van-tabs>
+
+    <block>
+        <view wx:for="{{list}}" class="detail">
+            <view class="top">
+                <view data-id="{{item._id}}" bindtap="skipDetail" class="left">
+                    <text style=" margin-left: 10rpx;font-size: 28rpx;">{{item.type==1?'核酸检测':'接种疫苗'}}-{{item.group}} ></text>
+                </view>
+                <view style="font-size:30rpx; color: #acacac;">
+                    <text wx:if="{{item.status==1}}">待付款</text>
+                    <text wx:elif="{{item.status==2}}">待签到</text>
+                    <text wx:elif="{{item.status==3}}">检测中</text>
+                    <text wx:else>订单完成</text>
+                </view>
+            </view>
+            <view class="personal">
+                <view wx:if="{{item.img}}" class="img">
+                    <image src="{{item.img}}"></image>
+                </view>
+                <view wx:else class="img">
+                    <image src="/images/hangtiancheng.png"></image>
+                </view>
+                <view>
+                        <text style="font-size:40rpx;font-weight:400;">{{item.type==1?'核酸检测服务':'疫苗预约服务'}} </text>
+                        <text class="price">￥{{item.price}}</text>
+                    <view class="message">
+                        <text>预约人姓名：{{item.realName}}</text>
+                        <text>联系方式{{item.phone}}</text>
+                        <text>检测时间{{item.yuyueDate + " "}} {{item.yuyueTime}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class="button">
+                <view data-id="{{item._id}}" bindtap="deleteOrder">删除订单</view>
+                <view class="pay" wx:if="{{item.status==1}}" data-index="{{index}}" bindtap="GoPay">去支付</view>
+                <view class="yuyue" wx:if="{{item.status==2}}" data-index="{{index}}" bindtap="goSM">去签到</view>
+            </view>
+        </view>
+    </block>
+
+    <view wx:if="{{!list.length}}" class="kong">
+        <text>暂无订单~</text>
+    </view>
+
+
+
+  <l-dialog 
+  show="{{dshow}}"
+  type="confirm"  
+  title="友情提示~"
+  content="您确定要删除这个订单吗"
+  confirm-text="yes~"
+  bind:linconfirm="delete"
+  confirm-color="#f60"
+  cancel-text="no~"
+  cancel-color="#999" />
+
+
+
+<l-toast
+  show="{{toastsuccess}}"
+  icon="success"
+  title="订单删除成功"
+/>
+
+
+
+
+<l-dialog 
+  show="{{deleteshow}}"
+  type="confirm"  
+  title="友情提示~"
+  content="确认支付此核酸订单吗，共计30元"
+  confirm-text="yes~"
+  bind:linconfirm="goPay"
+  confirm-color="#f60"
+  cancel-text="no~"
+  cancel-color="#999" />
+
+
+
+<l-toast
+  show="{{deletesuccess}}"
+  icon="success"
+  title="支付成功,订单信息已更新"
+/>
+

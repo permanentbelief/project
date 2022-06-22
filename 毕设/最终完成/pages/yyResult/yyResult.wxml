@@ -1,0 +1,32 @@
+<view class="box">
+    <!-- 本人的接种信息 -->
+       <view class="title">
+        <text style="font-size:32rpx; color: red; font-weight:650; margin-left:30rpx;">个人接种信息</text>
+    </view>
+
+    <view wx:for="{{self}}" class="item">
+<van-cell-group >
+    <van-cell title="剂次" value="{{item.vaccIndex?item.vaccIndex:'暂无录入'}}" />
+    <van-cell title="姓名" value="{{item.realName}}" />
+    <van-cell title="证件号码" value="{{item.idCard}}" />
+    <van-cell title="疫苗名称" value="新冠疫苗" />
+    <van-cell title="生产企业" value="{{item.vaccName ? item.vaccName : '暂无录入'}}" />
+    <van-cell title="接种日期" value="{{item.yuyueDate}}" />
+</van-cell-group>
+    </view>
+
+
+    <view class="title">
+        <text style="font-size:32rpx; color: red; font-weight:650; margin-left:30rpx;">关联人接种信息</text>
+    </view>
+    <view wx:for="{{fself}}" class="item">
+<van-cell-group >
+    <van-cell title="剂次" value="{{item.vaccIndex?item.vaccIndex:'暂无录入'}}" />
+    <van-cell title="姓名" value="{{item.realName}}" />
+    <van-cell title="证件号码" value="{{item.idCard}}" />
+    <van-cell title="疫苗名称" value="新冠疫苗" />
+    <van-cell title="生产企业" value="{{item.vaccName ? item.vaccName : '暂无录入'}}" />
+    <van-cell title="接种日期" value="{{item.yuyueDate}}" />
+</van-cell-group>
+    </view>
+</view>

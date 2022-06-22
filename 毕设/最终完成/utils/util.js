@@ -1,5 +1,5 @@
 // 获取时间
-const formatTime = date => {
+function formatTime(date){
     const year = date.getFullYear()
     const month = date.getMonth() + 1
     const day = date.getDate()
@@ -9,6 +9,20 @@ const formatTime = date => {
 
     return `${[year, month, day].map(formatNumber).join('-')} ${[hour, minute, second].map(formatNumber).join(':')}`
 }
+function formatTen(num) { 
+    return num > 9 ? (num + "") : ("0" + num); 
+} 
+function formatDateFrombz(date) { 
+    var date = new Date(date)
+    var year = date.getFullYear(); 
+    var month = date.getMonth() + 1; 
+    var day = date.getDate(); 
+    var hour = date.getHours(); 
+    var minute = date.getMinutes(); 
+    var second = date.getSeconds(); 
+    return year + "-" + formatTen(month) + "-" + formatTen(day)+ " " +formatTen(hour)+ ":" +formatTen(minute)+ ":" +formatTen(second); 
+} 
+
 const wxuuid = function() {
     var s = [];
     var hexDigits = "0123456789abcdef";
@@ -73,6 +87,18 @@ function checkData(id) {
     return false;
 }
 
+function conversionTime(timestamp) {
+    var date = new Date(); //若时间戳为10位，则需*1000；若时间戳为13位，则不需乘*1000
+    var year = date.getFullYear() + '-';
+    var month = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+    var day = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';
+    var hour = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+    var minute = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';
+    var second = (date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds());
+    startDate = year+month+day+hour+minute+second;
+    return startDate;
+}
+
 
 //   ------- 从缓存中去拿 数据 ------------------------
 
@@ -80,6 +106,8 @@ function checkData(id) {
 //  设置时效缓存，time为有效时间，（单位：小时，不填则默认24小时）
 function setStorageSyncHour(key, value, time) {
     wx.setStorageSync(key, value)
+    console.log(key);
+    console.log(value);
     var t = time ? time : 24;
     var seconds = parseInt(t * 3600);
     if (seconds > 0) {
@@ -124,7 +152,51 @@ function getStorageSyncTime(key, def) {
 
 
 }
+function myDate (value, type = 0){
+    var time = new Date(value * 1000);
+    var year = time.getFullYear();
+    var month = time.getMonth() + 1;
+    var date = time.getDate();
+    var hour = time.getHours();
+    var minute = time.getMinutes();
+    var second = time.getSeconds();
+    month = month < 10 ? "0" + month : month; 
+    date = date < 10 ? "0" + date : date; 
+    hour = hour < 10 ? "0" + hour : hour; 
+    minute = minute < 10 ? "0" + minute : minute; 
+    second = second < 10 ? "0" + second : second; 
+    var arr = [ 
+    year + "-" + month + "-" + date, 
+    year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second, 
+    year + "年" + month + "月" + date, 
+    year + "年" + month + "月" + date + " " + hour + ":" + minute + ":" + second, 
+    hour + ":" + minute + ":" + second 
+    ] 
+    return arr[type]; 
+}
+const _charStr = 'abacdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ0123456789';
 
+function RandomIndex(min, max, i){
+    let index = Math.floor(Math.random()*(max-min+1)+min),
+        numStart = _charStr.length - 10;
+    //如果字符串第一位是数字，则递归重新获取
+    if(i==0&&index>=numStart){
+        index = RandomIndex(min, max, i);
+    }
+    //返回最终索引值
+    return index;
+}
+function getRandomString(len){
+    let min = 0, max = _charStr.length-1, _str = '';
+    //判断是否指定长度，否则默认长度为15
+    len = len || 15;
+    //循环生成字符串
+    for(var i = 0, index; i < len; i++){
+        index = RandomIndex(min, max, i);
+        _str += _charStr[index];
+    }
+    return _str;
+}
 
 
 module.exports = {
@@ -135,5 +207,8 @@ module.exports = {
     checkData,
     setStorageSyncHour: setStorageSyncHour,
     setStorageSyncSecond: setStorageSyncSecond,
-    getStorageSyncTime: getStorageSyncTime
+    getStorageSyncTime: getStorageSyncTime,
+    myDate:myDate,
+    getRandomString:getRandomString,
+    formatDateFrombz:formatDateFrombz
 }

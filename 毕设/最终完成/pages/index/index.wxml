@@ -1,33 +1,14 @@
-<!-- 轮播图 -->
-<!-- <view class="swiper">
-  <swiper class="swiper" circular="true" autoplay="true" indicator-dots="true">
-    <block wx:for="{{banner}}">
-      <swiper-item>
-        <image src="{{item}}"></image>
-      </swiper-item>
-    </block>
-  </swiper>
-</view> -->
 
-<!-- 轮播图 -->
-<view class='aaa'> 
-  <swiper class="swiper" circular="true"  autoplay="true" interval="5000" duration="1000" 	indicator-dots='true'>
+  <swiper class="swiper" circular="true"  autoplay="true" interval="5000" duration="1000" >
     <block  wx:for="{{banner1}}" wx:for-index="index" wx:key='index'>
       <swiper-item >
         <image mode="aspectFill" src="{{item.img}}" class="slide-image" />
       </swiper-item>
     </block>
   </swiper>
-</view>
 
-<!-- 功能区域 -->
-<view class="function">
-  <view data-url="{{item.url}}" bindtap="skip" wx:for="{{tabbas}}">
-    <image src="{{item.icon}}"></image>
-    <text>{{item.name}}</text>
-  </view>
-</view>
-<!-- vant框架的功能区域 -->
+
+
 <view class="">
       <van-grid column-num="4" border="{{ false }}" icon-size='{{35}}'>
         <van-grid-item wx:for-items="{{navigation}}" wx:for-item="item" icon="{{item.image}}" text="{{item.name}}"
@@ -35,8 +16,6 @@
       </van-grid>
 </view>
 
-
-<!-- 疫情新增数据 -->
 <view class="page-wrapper">
   <view class="nav-title">
   <view class="title-line"></view> 
@@ -46,8 +25,6 @@
  </view>
 
  
-
- <!-- 洛阳 或者 西安 -->
  <view class="shengandshi">
    {{ops.data.result.addressComponent.province}}
    {{ops.data.result.addressComponent.city}}
@@ -73,56 +50,49 @@
     </view>
   </view>
 
-
-    <!-- 当前疫情数据获取 -->
-
 <view class="page-wrapper">
-  <!-- 导航栏 -->
   <view class="nav-title">
     <view class="title-line"></view>
     <view>当前数据</view>
     <view class="timeStamp"> 数据统计截止至  {{data.data.data.lastUpdateTime}} </view>
   </view>
-  <!--第一排的数据内容 -->
   <view class="title">
     <view class="title-item">
-      <text><text>较上日</text><text style="color:#D35400">+{{leijijingwaijia}}
+      <text><text>较上日</text><text style="color:#D35400;font-size:28rpx;">+{{leijijingwaijia}}
       </text></text>
-      <text class="num-text" style="color:#D35400">{{leijijingwai}}</text>
+      <text class="num-text" style="color:#D35400;font-size:34rpx;">{{leijijingwai}}</text>
       <text class="cn-text">境外输入</text>
     </view>
     <view class="title-item">
-      <text><text>较上日</text><text style="color:#F8C471">+{{wuzhengzhuangjia}}</text></text>
-      <text class="num-text" style="color:#F8C471">{{wuzhengzhuang}}</text>
+      <text><text>较上日</text><text style="color:#F8C471;font-size:28rpx;">+{{wuzhengzhuangjia}}</text></text>
+      <text class="num-text" style="color:#F8C471;font-size:34rpx;">{{wuzhengzhuang}}</text>
       <text class="cn-text">无症状感染者</text>
     </view>
     <view class="title-item">
-      <text><text>较上日</text><text>+{{xianyouquezhengjia}}</text></text>
+      <text><text>较上日</text><text style="font-size:28rpx">+{{xianyouquezhengjia}}</text></text>
       <text class="num-text">{{xianyouquezheng}}</text>
       <text class="cn-text">现有确诊</text>
     </view>
   </view>
-    <!--第二排的数据内容 -->
+
     <view class="title">
     <view class="title-item">
-      <text><text>较上日</text><text style="color:purple">+{{leijiquezhengjia}}</text></text>
+      <text><text>较上日</text><text style="color:purple;font-size:28rpx;">+{{leijiquezhengjia}}</text></text>
       <text class="num-text" style="color:purple">{{leijiquezheng}}</text>
       <text class="cn-text">累计确诊</text>
     </view>
     <view class="title-item">
-      <text><text>较上日</text><text style="color:red">+{{leijisiwangjia}}</text></text>
+      <text><text>较上日</text><text style="color:red;font-size:28rpx;">+{{leijisiwangjia}}</text></text>
       <text class="num-text" style="color:red">{{leijisiwang}}</text>
       <text class="cn-text">累计死亡</text>
     </view>
     <view class="title-item">
-      <text><text>较上日</text><text style="color:#45B39D">+{{leijizhiyujia}}</text></text>
+      <text><text>较上日</text><text style="color:#45B39D;font-size:28rpx;">+{{leijizhiyujia}}</text></text>
       <text class="num-text" style="color:#45B39D">{{leijizhiyu}}</text>
       <text class="cn-text">累计治愈</text>
     </view>
   </view>
 
-
-  <!-- 全国疫情数据 -->
   <view class="nav-title">
     <view class="title-line"></view>
     <view>疫情数据</view>
@@ -176,168 +146,25 @@
 
 
 
-<!-- 昨日本地疫情数据 -->
-<!-- <view class="yiqing">
-  <view class="item">
-    <view class="title">
-      <text>昨日本地疫情</text>
-      <text>数据统计截止至{{bendi[0].createTime}}</text>
-      <text></text>
-    </view>
-    <view class="last">
-      <view class="top">
-        <text>地区</text>
-        <text>本土新增</text>
-        <text>无症状新增</text>
-        <text>总新增</text>
-        <text>现存确诊</text>
-      </view>
-      <view wx:for="{{bendi}}" class="btom">
-        <text>{{item.province}}</text>
-        <text style="color: #d82827;">{{item.bentu}}</text>
-        <text style="color: #e86a29;">{{item.wuzhengzhuang}}</text>
-        <text style="color: #d61a18;">{{item.zongxinzeng}}</text>
-        <text style="color: #911afb;">{{item.xiancun}}</text>
-      </view>
-    </view>
-  </view>
-</view> -->
-<!-- 昨日全国疫情数据 -->
-<!-- <view class="yiqing">
-  
-  <view class="item">
-    <view class="title">
-      <text>昨日全国疫情</text>
-      <text>数据统计截止至{{quanguo[0].createTime}}</text>
-      <text></text>
-    </view>
-    <view class="last">
-      <view class="top">
-        <text>地区</text>
-        <text>本土新增</text>
-        <text>无症状新增</text>
-        <text>总新增</text>
-        <text>现存确诊</text>
-      </view>
-      <view wx:for="{{quanguo}}" class="btom">
-        <text>{{item.province}}</text>
-        <text style="color: #d82827;">{{item.bentu}}</text>
-        <text style="color: #e86a29;">{{item.wuzhengzhuang}}</text>
-        <text style="color: #d61a18;">{{item.zongxinzeng}}</text>
-        <text style="color: #911afb;">{{item.xiancun}}</text>
-      </view>
-    </view>
-  </view>
-</view> -->
-
-
-<!-- 实时资讯和疫情科普 -->
-<view class="over">
-  <view class="over-nav">
-    <view data-index="0" bindtap="chooseLastNav" class="{{lastIndex==0?'green':''}}">
-      <text>实时资讯</text>
-      <text></text>
-    </view>
-    <view data-index="1" bindtap="chooseLastNav" class="{{lastIndex==1?'green':''}}">
-      <text>疫情追踪</text>
-      <text></text>
-    </view>
-    <view data-index="2" bindtap="chooseLastNav" class="{{lastIndex==2?'green':''}}">
-      <text>疫情科普</text>
-      <text> </text>
-    </view>
-  </view>
-  <!-- 下面详情 -->
-
-    <!-- 实时资讯 -->
-  <view wx:if="{{lastIndex==0}}" class="detail">
-    <block wx:for="{{zixunRes}}">
-      <view class="time">
-        <text>{{item.list.createTime}}</text>
-        <text class="zuixin" wx:if="{{index==0}}">最新</text>
-      </view>
-      <view class="content">
-        <view class="last-title">
+<view class="bottom">
+    <view wx:for="{{trackRes}}">
+        <text style="margin-top: 30rpx; text-align: left; color:wheat">{{item.list.createTime}}</text>
+      <view class="item">
+        <view class="item-title">
           {{item.list.title}}
         </view>
         <view wx:if="{{!item.flag}}">
-          <view class="last-content">
+          <view class="zz-content">
             {{item.list.content}}  
           </view>
           <text style="font-size:25rpx; color: blue" bindtap="clickon" data-id="{{item.list._id}}"> 更多 </text>
         </view>
           <view wx:else>
-          <view class="last-content1">
+          <view style="color: #070707;">
             {{item.list.content}}  
           </view>
           <text style="font-size:25rpx; color: blue" bindtap="clickin" data-id="{{item.list._id}}"> 收起 </text>
         </view>
-        
-        <view class="laiyuan">
-          <text>来源：{{item.list.from}}</text>
-        </view>
       </view>
-    </block>
-  </view>
-
-  <!-- 疫情追踪 -->
-  <view wx:if="{{lastIndex==1}}" class="detail">
-      <block wx:for="{{trackRes}}">
-          <view class="time">
-            <text>{{item.list.createTime}}</text>
-            <text class="zuixin" wx:if="{{index==0}}">最新</text>
-          </view>
-          <view class="content">
-            <view class="last-title">
-              {{item.list.title}}
-            </view>
-            <!-- <view wx:if="{{!item.flag}}"> -->
-              <!-- <view class="last-content">
-                {{item.list.content}}  
-              </view> -->
-              <!-- <text style="font-size:25rpx; color: blue" bindtap="clickon" data-id="{{item.list._id}}"> 更多 </text> -->
-            <!-- </view> -->
-              <!-- <view wx:else> -->
-              <view class="last-content1">
-                {{item.list.content}}  
-              </view>
-              <!-- <text style="font-size:25rpx; color: blue" bindtap="clickin" data-id="{{item.list._id}}"> 收起 </text> -->
-            <!-- </view> -->
-            
-            <view class="laiyuan">
-              <text>来源：{{item.list.from}}</text>
-            </view>
-          </view>
-        </block>
-
-
-  </view>
-
-  <!-- 疫情科普 -->
-  <view wx:if="{{lastIndex==2}}" class="detail">
-    <view class="yq-title">
-      <text>疫情科普</text>
-      <view class="more">
-        <text bindtap="more">更多</text>
-        <text class="iconfont icon-youjiantou"></text>
-      </view>
-    </view>
-    <view class="yq-nav">
-      <view class="{{kpIndex==0?'bg':''}}" data-index="0" bindtap="chooseKp">全部</view>
-      <view class="{{kpIndex==1?'bg':''}}" data-index="1" bindtap="chooseKp">症状表现</view>
-      <view class="{{kpIndex==2?'bg':''}}" data-index="2" bindtap="chooseKp">如何预防</view>
-      <view class="{{kpIndex==3?'bg':''}}" data-index="3" bindtap="chooseKp">防疫焦点</view>
-    </view>
-    <view bindtap="skipDetail" data-id="{{item._id}}" wx:for="{{kepu}}" class="yq-content">
-      <view class="yq-bt">
-        <text>{{item.title}}</text>
-        <text wx:if="{{item.type==1}}">症状表现</text>
-        <text wx:if="{{item.type==2}}">如何预防</text>
-        <text wx:if="{{item.type==3}}">防疫焦点</text>
-      </view>
-      <view class="yq-img">
-        <image src="{{item.img}}"></image>
-      </view>
-    </view>
   </view>
 </view>

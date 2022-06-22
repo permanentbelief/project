@@ -1,0 +1,34 @@
+.first_tab .list_item {
+    display: flex;
+    border-bottom: 5rpx solid #ccc;
+}
+
+.first_tab .list_item .list_img_wrap {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10rpx;
+}
+
+.first_tab .list_item .list_img_wrap image {
+    width: 65%;
+}
+
+.first_tab .list_item .list_info_wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+
+.list_name {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical
+}

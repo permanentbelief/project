@@ -2,34 +2,23 @@
     "pages": [
         "pages/index/index",
         "pages/my/my",
-        "pages/luntan/luntan",
-        "pages/myOrder/myOrder",
+        "pages/order/order",
         "pages/orderDetail/orderDetail",
-        "pages/myPatient/myPatient",
-        "pages/addPatient/addPatient",
-        "pages/newDetail/newDetail",
-        "pages/fengxian/fengxian",
-        "pages/myDianzan/myDianzan",
-        "pages/myComment/myComment",
-        "pages/myCollect/myCollect",
-        "pages/group/group",
-        "pages/hesuanjiance/hesuanjiance",
-        "pages/hesuanjieguo/hesuanjieguo",
-        "pages/yimiaochaxun/yimiaochaxun",
-        "pages/yimiaoyuyue/yimiaoyuyue",
-        "pages/laoyouchaxun/laoyouchaxun",
-        "pages/yimiaoDetail/yimiaoDetail",
-        "pages/yiqingkepu/yiqingkepu",
-        "pages/yimiaoSubmit/yimiaoSubmit",
-        "pages/kepuDetail/kepuDetail",
-        "pages/tuanti/tuanti",
+        "pages/yqmore/yqmore",
         "pages/feedback/feedback",
-        "pages/myReportProcess/myReportProcess"
+        "pages/myReportProcess/myReportProcess",
+        "pages/hsResult/hsResult",
+        "pages/risk/risk",
+        "pages/hsyy/hsyy",
+        "pages/yyResult/yyResult",
+        "pages/article/article",
+        "pages/vaccineyy/vaccineyy",
+        "pages/articlelist/articlelist"
     ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#eee",
-        "navigationBarTitleText": "疫情小助手",
+        "navigationBarTitleText": "th检测",
         "navigationBarTextStyle": "black"
     },
     "tabBar": {
@@ -38,26 +27,20 @@
         "list": [{
                 "pagePath": "pages/index/index",
                 "text": "首页",
-                "iconPath": "/images/index.png",
-                "selectedIconPath": "/images/index-s.png"
+                "iconPath": "/images/home-off.png",
+                "selectedIconPath": "/images/home-on.png"
             },
             {
-                "pagePath": "pages/myOrder/myOrder",
-                "text": "我的订单",
-                "iconPath": "/images/order.png",
-                "selectedIconPath": "/images/order-s.png"
-            },
-            {
-                "pagePath": "pages/luntan/luntan",
-                "text": "防疫论坛",
-                "iconPath": "/images/lt.png",
-                "selectedIconPath": "/images/lt-s.png"
+                "pagePath": "pages/order/order",
+                "text": "订单",
+                "iconPath": "/images/order-off.png",
+                "selectedIconPath": "/images/order-on.png"
             },
             {
                 "pagePath": "pages/my/my",
-                "text": "个人中心",
-                "iconPath": "/images/my.png",
-                "selectedIconPath": "/images/my-s.png"
+                "text": "个人",
+                "iconPath": "/images/mine-off.png",
+                "selectedIconPath": "/images/mine-on.png"
             }
         ]
     },

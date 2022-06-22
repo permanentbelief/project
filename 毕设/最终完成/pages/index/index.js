@@ -2,69 +2,58 @@ const db = wx.cloud.database();
 const util = require('../../utils/util.js');
 Page({
 
-    /**
-     * 页面的初始数据
-     */
     data: {
         locationResult: "",
         ops: "",
-        banner1: [{
-                img: '../../images/index/bj1.png'
-            },
+        banner1: [
+
             {
                 img: '../../images/index/bj2.jpg'
             },
-            {
-                img: '../../images/index/bj3.png'
-            },
+
         ],
         navigation: [{
-                name: '核酸检测',
+                name: '核酸预约',
                 image: '/images/index/icon1.png',
-                url: '/pages/hesuanjiance/hesuanjiance'
-            },
-            {
-                name: '核酸结果',
-                image: '/images/index/icon2.png',
-                url: '/pages/hesuanjieguo/hesuanjieguo'
-            },
-            {
-                name: '疫苗查询',
-                image: '/images/index/icon3.png',
-                url: '/pages/yimiaochaxun/yimiaochaxun'
+                url: '/pages/hsyy/hsyy'
             },
             {
                 name: '疫苗预约',
                 image: '/images/index/icon4.png',
-                url: '/pages/yimiaoyuyue/yimiaoyuyue'
+                url: '/pages/vaccineyy/vaccineyy'
             },
             {
-                name: '机构查询',
-                image: '/images/index/icon5.png',
-                url: '/pages/group/group'
+                name: '核酸结果',
+                image: '/images/index/icon2.png',
+                url: '/pages/hsResult/hsResult'
             },
             {
-                name: '老幼助查',
-                image: '/images/index/icon6.png',
-                url: '/pages/laoyouchaxun/laoyouchaxun'
+                name: '疫苗记录',
+                image: '/images/index/icon3.png',
+                url: '/pages/yyResult/yyResult'
             },
             {
-                name: '团体预约',
-                image: '/images/index/icon7.png',
-                url: '/pages/tuanti/tuanti'
+                name: '贴吧服务',
+                image : "/images/index/icon9.png",
+                url : "/pages/articlelist/articlelist",
             },
             {
-                name: '风险区域',
+                name: '地区查询',
                 image: '/images/index/icon8.png',
-                url: '/pages/fengxian/fengxian'
+                url: '/pages/risk/risk'
+            },
+            {
+                name: '服务反馈',
+                image: '/images/index/yy.png',
+                url: '/pages/feedback/feedback'
+            },
+            {
+                name: '报告进度',
+                image: '/images/index/progress.png',
+                url: '/pages/myReportProcess/myReportProcess'
             },
         ],
-        lastIndex: 0,
-        kpIndex: 0
     },
-
-
-    // 指定跳转到多少页
     skip(e) {
         if (!wx.getStorageSync('user')) {
             wx.showToast({
@@ -83,127 +72,16 @@ Page({
         })
     },
 
-    // 选择最后一个标题栏
-    chooseLastNav(e) {
-
-        var index = e.currentTarget.dataset.index;
-        index = Number(index);
-        this.setData({
-            lastIndex: index
-        })
-    },
-
-    // 选择疫情科普导航栏
-    chooseKp(e) {
-        var index = e.currentTarget.dataset.index;
-        index = Number(index);
-        if (index == 0) {
-            this.getKpu({});
-        } else if (index == 1) {
-            this.getKpu({
-                type: 1
-            });
-        } else if (index == 2) {
-            this.getKpu({
-                type: 2
-            });
-        } else {
-            this.getKpu({
-                type: 3
-            });
-        }
-        this.setData({
-            kpIndex: index
-        })
-    },
-
-    // 疫情科普跳转到更多
-    more() {
-        wx.navigateTo({
-            url: '/pages/yiqingkepu/yiqingkepu',
-        })
-    },
-
-    // 跳转到详情
-    skipDetail(e) {
-        wx.navigateTo({
-            url: '/pages/kepuDetail/kepuDetail?id=' + e.currentTarget.dataset.id,
-        })
-    },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
     onShow: function() {
-        // // 获取昨日本地疫情
-        // this.getYiqing(1);
-        // // 获取全国本地疫情
-        // this.getYiqing(2);
-        // 获取实时资讯
 
-        this.getZixun();
-        // 获取疫情科普
-        this.getKpu({});
-
-        // 获取疫情追踪数据 
-        this.getZZ();
-
+        this.getTrack();
         //获取api数据
         this.GetAPI();
     },
 
-    // 获取科普数据
-    getKpu(tiaojian) {
-        db.collection('kepu').where(tiaojian).limit(5).get({
-            success: res => {
-                console.log(res);
-                this.setData({
-                    kepu: res.data
-                })
-            }
-        })
-    },
-
-    getYiqing(type) {
-        db.collection('yesterday').where({
-            type
-        }).orderBy('createTime', 'desc').get({
-            success: res => {
-                console.log(res);
-                var data = res.data;
-                for (let i = 0; i < data.length; i++) {
-                    data[i].createTime = util.formatTime(new Date(data[i]._createTime))
-                    data[i].createTime = data[i].createTime.substring(5, 16);
-                }
-                if (type == 1) {
-                    this.setData({
-                        bendi: data
-                    })
-                } else {
-                    this.setData({
-                        quanguo: data
-                    })
-                }
-            }
-        })
-    },
     clickon(e) {
         // console.log("更多", e.currentTarget.dataset.id)
-        var res = this.data.zixunRes;
+        var res = this.data.trackRes;
         for (var i = 0; i < res.length; i++) {
             // console.log("(res[i].list._id", res[i].list._id)
             if (res[i].list._id == e.currentTarget.dataset.id) {
@@ -212,12 +90,12 @@ Page({
             }
         }
         this.setData({
-            zixunRes: res
+            trackRes: res
         })
     },
 
     clickin(e) {
-        var res = this.data.zixunRes;
+        var res = this.data.trackRes;
         for (var i = 0; i < res.length; i++) {
             // console.log("(res[i].list._id", res[i].list._id)
             if (res[i].list._id == e.currentTarget.dataset.id) {
@@ -226,35 +104,13 @@ Page({
             }
         }
         this.setData({
-            zixunRes: res
+            trackRes: res
         })
 
     },
-    // 获取实时咨询
-    getZixun() {
-        // 首页只显示三条
-        db.collection('zixun').orderBy('_createTime', 'desc').limit(3).get({
-            success: res => {
-                var zixunRes = [];
-                var zixun = res.data;
-                console.log("zixun", zixun)
-                for (let i = 0; i < zixun.length; i++) {
-                    zixun[i].createTime = util.formatTime(new Date(zixun[i]._createTime));
-                    var obj = {}
-                    obj.list = zixun[i];
-                    obj.flag = false;
-                    zixunRes.push(obj)
-                }
-                console.log("zixunRes", zixunRes)
-                this.setData({
-                    zixunRes
-                })
-            }
-        })
-    },
-    getZZ() {
-        console.log("进入getZZ")
-        db.collection('track').orderBy('_createTime', 'desc').limit(3).get({
+  
+    getTrack() {
+        db.collection('track').orderBy('_createTime', 'desc').limit(5).get({
             success: res => {
                 console.log("res", res)
                 var trackRes = [];
@@ -278,9 +134,6 @@ Page({
         wx.getSetting({
             success: (res) => {
                 console.log("打印res结果信息", res.authSetting)
-                    // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
-                    // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
-                    // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
                 if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) {
                     //未授权
                     wx.showModal({
@@ -339,34 +192,54 @@ Page({
                 var latitude = res.latitude
                 var longitude = res.longitude
                 var speed = res.speed
-                var accuracy = res.accuracy
-                console.log("精度", res.latitude)
-                console.log("维度", res.longitude)
-                    // 这里的ak写死就可以了 
+                var accuracy = res.accuracy;
+                console.log("精度", res.latitude);
+                console.log("维度", res.longitude);
+                // 这里的ak写死就可以了 
                 wx.request({
                     url: 'https://api.map.baidu.com/reverse_geocoding/v3/?ak=jbpKuM8cQ2uBPgxEgCimeWDQAyQiFN2K&location=' + res.latitude + ',' + res.longitude + '&output=json',
                     data: {},
                     header: { 'Content-Type': 'application/json' },
                     success: function(ops) {
-                        console.log('定位城市：', ops),
-                            location = ops.data.result.addressComponent
-
-                        console.log("获取到的地理位置", location)
+                        location = ops.data.result.addressComponent
+                        console.log("定位获得城市信息", location)
                         var result = ""
-                        console.log("现在的城市", location)
-                        if (location.city === "洛阳市") {
-                            result = (that.data.diqushuju[8]).children[12]
-                            console.log("当前城市的result数据", result)
-                        } else if (location.city === "西安市") {
-                            result = (that.data.diqushuju[6]).children[1]
-                        } else {}
+                        var f = false;
+                        for (var i = 0; i < that.data.diqushuju.length; i++) {
+                            //console.log("当前省", that.data.diqushuju[i].name)
+                            if (that.data.diqushuju[i].name == location.province.substring(0, location.province.length - 1)) {
+                                // console.log("当前省", location.province.substring(0, 2));
+                                // console.log("当前省", that.data.diqushuju[i].name)
+                                for (var j = 0; j < that.data.diqushuju[i].children.length; j++) {
+                                    // console.log("当前市", that.data.diqushuju[i].children[j].name)
+                                    // console.log("当前市", location.city.substring(0, 2))
+                                    if (that.data.diqushuju[i].children[j].name == location.city.substring(0, location.city.length - 1)) {
+                                        result = (that.data.diqushuju[i]).children[j];
+                                        console.log("最终获取到的result", result);
+                                        f = true;
+                                        break;
+                                    }
+                                }
+                                if (f) {
+                                    break;
+                                }
+                            }
+                        }
+                        // old logic 
+                        // console.log("现在的城市", location)
+                        // if (location.city === "洛阳市") {
+                        //     result = (that.data.diqushuju[8]).children[12]
+                        //     console.log("当前城市的result数据", result)
+                        // } else if (location.city === "西安市") {
+                        //     result = (that.data.diqushuju[6]).children[1]
+                        // } else {}
                         that.setData({
                             locationResult: result,
                             ops: ops
-                        })
-                        console.log("location获取", that.data.locationResult)
-                        console.log("ops 省 ", that.data.ops.data.result.addressComponent.province),
-                            console.log("ops 市", that.data.ops.data.result.addressComponent.city)
+                        });
+                        // console.log("location获取", that.data.locationResult)
+                        console.log("ops 省", that.data.ops.data.result.addressComponent.province);
+                        console.log("ops 市", that.data.ops.data.result.addressComponent.city)
 
                     },
                     fail: function(resq) {
@@ -385,9 +258,9 @@ Page({
     GetAPI() {
 
         let that = this
-            //调用定位方法
-        that.getUserLocation();
-        console.log("获取定位信息结束", location)
+            // old logic 老的调用逻辑。调用定位方法
+            // that.getUserLocation();
+            // console.log("获取定位信息结束", location)
 
         //微信、百度等小程序参考代码，和 Jquery发送ajax请求是一样的
         //访问国家疫情的爬虫 新型冠状病毒全国疫情API接口
@@ -424,16 +297,13 @@ Page({
                         xianyouquezhengjia: res.data.data.chinaTotal.today.storeConfirm,
                         // 地区数据
                         diqushuju: res.data.data.areaTree[2].children,
-
-
                     }, () => {
-                        // lth
-                        console.log("data数据", that.data.data);
-                        console.log("地区数据", that.data.diqushuju);
-                        console.log("地区数据获取", (that.data.diqushuju[7]).children[11]);
+
+                        // console.log("data数据", that.data);
+                        //console.log("地区数据", that.data.diqushuju);
+                        // that.geo();
+                        that.getUserLocation();
                     })
-
-
                 } else {}
             },
             fail: function(err) {

@@ -92,3 +92,16 @@
     
     </block>
  </Tabs>
+
+ 
+<l-dialog 
+    show="{{ttshow}}"
+    type="confirm"  
+    title="友情提醒~"
+    content="提交成功"
+    confirm-color="#f60"
+    cancel-color="#999" 
+    >
+    <image class='dio-img' src="../../images/my/xiaomao.png"></image>
+  
+  </l-dialog>

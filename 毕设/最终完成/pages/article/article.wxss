@@ -1,0 +1,110 @@
+
+
+.content{
+    padding: 25rpx;
+}
+
+.comment {
+    padding: 20rpx;
+    background-color: whitesmoke;
+    border-radius: 30rpx;
+    margin-top: 40rpx;
+}
+.flex{
+    display: flex;
+    align-content:space-between;
+    margin-top:20rpx;
+}
+.top {
+    display: flex;
+    align-items: center;
+    margin-top: 10rpx;
+}
+
+.top image {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+}
+
+.showSlectedLetter {
+    /* background-color: rgba(0, 0, 0, 0.5); */
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    margin: -50px;
+    width: 400rpx;
+    height: 20%;
+    border-radius: 10px;
+    font-size: 26px;
+    z-index: 1
+}
+
+.red {
+    color: red !important;
+}
+
+.comlist {
+    margin-top: 30rpx;
+    border-radius: 20rpx;
+}
+
+.input {
+    border: 1px solid gainsboro;
+    margin-top: 25rpx;
+    margin-bottom: 60rpx;
+    height: 300rpx;
+    width: 100%;
+    margin-left: 3rpx;
+    margin-right: 3rpx;
+}
+
+.newdas {
+    display: flex;
+}
+
+.image1 {
+    height: 40px;
+    width: 40px;
+    margin-left: 30rpx;
+}
+
+.image2 {
+    height: 40px;
+    width: 40px;
+    margin-left: 20rpx;
+}
+
+.mewicon1 {
+    flex-direction: column;
+    justify-content: center;
+    width: 60px;
+    background-color: #8ff0c9;
+}
+
+.newicon2 {
+    flex-direction: column;
+    justify-content: center;
+    width: 60px;
+    background-color: salmon;
+    margin-left: 30rpx;
+}
+
+.icon1-text {
+    margin-left: 30rpx;
+    color: saddlebrown;
+}
+
+.submit {
+    margin-top: 40rpx;
+    background: linear-gradient(to right, #ead6ee, #a0f1ea);
+    color: black;
+    font-weight: 300;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    border-radius: 10rpx;
+}

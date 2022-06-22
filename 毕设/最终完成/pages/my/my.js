@@ -7,61 +7,21 @@ Page({
      */
     data: {
         // 我的服务
+        tabUrl1: '/pages/hsResult/hsResult?detail=true',
+        tabUrl2: '/pages/myReportProcess/myReportProcess',
+        tabUrl3: 'phone',
+        tabUrl4: '/pages/feedback/feedback',
+        tabUrl5: '**',
+        tabUrl6: '*',
+        tabUrl7: '***',
         userPhoto: "../../images/my/xiaomao.png",
-        disabled: true,
-        myService: [{
-                name: '我的就诊人',
-                tabUrl: '/pages/myPatient/myPatient'
-            },
-            {
-                name: '我的检验报告',
-                tabUrl: '/pages/hesuanjieguo/hesuanjieguo?detail=true'
-            },
-            {
-                name: '报告进度',
-                tabUrl: '/pages/myReportProcess/myReportProcess'
-            },
-            {
-                name: '绑定手机号',
-                tabUrl: 'phone'
-            },
-            {
-                name: '意见反馈',
-                tabUrl: '/pages/feedback/feedback'
-            },
-            {
-                name: '分享',
-                tabUrl: '**'
-            },
-            {
-                name: '设置',
-                tabUrl: '*'
-            },
-            {
-                name: '退出登录',
-                tabUrl: '***'
-            }
-
-        ],
-        // 防疫专区
-        personalArticleCentor: [{
-                name: '我的收藏',
-                tabUrl: '/pages/myCollect/myCollect'
-            },
-            {
-                name: '我的点赞',
-                tabUrl: '/pages/myDianzan/myDianzan'
-            },
-            {
-                name: '我的评论',
-                tabUrl: '/pages/myComment/myComment'
-            }
-        ],
+        value: "",
         isLogin: false, // 登录态
-        bindPhone: true, // 弹处手机号
         showShare: false,
         dshow: false, // linui框架 退出的dialog提示
         sshow: false, // 设置得dialog提示
+        phone1: false,
+        phone2: false,
         toastQuit: false, // toast退出的友情提示
         toastisLogin: false, // 成功登录的提示信息 
         options: [
@@ -70,6 +30,28 @@ Page({
             { name: '复制链接', icon: 'link', openType: 'share' },
             { name: '分享海报', icon: 'poster', openType: 'share' },
             { name: '二维码', icon: 'qrcode', openType: 'share' },
+        ],
+        grids:[
+            {
+                orderindex:1,
+                text:"付款中",
+                iamgeurl:"/images/my/first.png",
+            },
+            {
+                orderindex:2,
+                text:"签到中",
+                iamgeurl:"/images/my/second.png",
+            },
+            {
+                orrderindex:3,
+                text:"检测中",
+                iamgeurl:"/images/my/third.png",
+            },
+            {
+                orderindex:4,
+                text:"已完成",
+                iamgeurl:"/images/my/forth.png",
+            },
         ]
     },
     //  vant/weapp的 share分享界面
@@ -110,7 +92,6 @@ Page({
                                 },
                                 success: res => {
                                     user._id = res._id;
-                                    // 存入缓存
                                     wx.setStorageSync('user', user)
                                     this.setData({
                                         user,
@@ -120,19 +101,16 @@ Page({
                                 }
                             })
                         } else {
-                            // 存入缓存
                             wx.setStorageSync('user', res.data[0])
                             this.setData({
                                 user: res.data[0],
                                 isLogin: true
                             })
                         }
-
-                        // wx.showToast({
-                        //     title: '登录成功',
-                        //})
+                        var phone = this.data.user.phone;
                         this.setData({
-                            toastisLogin: true
+                            toastisLogin: true,
+                            value: phone
                         });
                     },
                     fail: err => {
@@ -154,108 +132,95 @@ Page({
             isLogin: false,
             toastQuit: true,
         })
-
     },
-    // 根据tabUrl跳转到防疫专区
-    skip(e) {
+    click1(e) {
+        console.log(e.currentTarget.dataset.url);
         var url = e.currentTarget.dataset.url;
-        console.log("已经跳转公共方法", e)
-        if (!url) {
-            return;
-        }
-        if (url == "*") { //设置按钮
-            this.setData({
-                sshow: true
-            })
-            return;
-        }
-        if (url == "**") {
-            this.onClick();
-            return;
-        }
-        if (url == "***") { // 退出按钮
-            this.setData({
-                dshow: true
-            });
-            return;
-        }
-        // 弹处绑定手机号的对话框
-        if (url == 'phone') {
-            console.log(e);
-            return wx.showModal({
-                title: '绑定手机号',
-                editable: true,
-                success: res => {
-                    console.log(res);
-                    if (res.confirm) {
-                        var phone = res.content;
-                        var tip = '';
-                        if (!phone) {
-                            tip = '手机号不能为空';
-                        }
-                        if (!this.checkPhone(phone)) {
-                            tip = '手机号格式错误';
-                        }
-                        if (tip) {
-                            return wx.showToast({
-                                title: tip,
-                                icon: 'none'
-                            })
-                        }
-                        // 没有问题就绑定成功  这里的_id 是什么？ 为什么 不是openid
-                        db.collection('user').doc(this.data.user._id).update({
-                            data: {
-                                phone
-                            },
-                            success: res => {
-                                wx.showToast({
-                                        title: '绑定成功',
-                                    })
-                                    // 更新本地变量
-                                var user = this.data.user;
-                                user.phone = phone;
-                                this.setData({
-                                        user
-                                    })
-                                    // 更新本地缓存
-                                wx.setStorageSync('user', user);
-                            }
-                        })
-                    }
-                }
-            })
-        }
         wx.navigateTo({
             url,
         })
     },
+    click2(e) {
+        var url = e.currentTarget.dataset.url;
+        wx.navigateTo({
+            url,
+        })
+    },
+    onChange(event) {
+        console.log(event.detail)
+        this.setData({
+            value: event.detail
+        })
+    },
+    click3(e) {
+        var message = ""
+        var phone = this.data.value;
+        console.log("phone", phone);
+        if (this.data.value) {
+            if (this.data.value.length != 11) {
+                this.setData({
+                    phone1: true
+                })
+            } else {
+                console.log("更新成功");
+            }
+        } else {
+            this.setData({
+                phone2: true
+            })
+        }
+        db.collection('user').doc(this.data.user._id).update({
+            data: {
+                phone
+            },
+            success: res => {
+                console.log("更新成功 success=>res")
+                var user = this.data.user;
+                user.phone = phone;
+                this.setData({
+                    user,
+                    value: phone
+                })
+                wx.setStorageSync('user', user);
+            }
+        })
+        console.log("流程结束")
+    },
+    click4(e) {
+        var url = e.currentTarget.dataset.url;
+        console.log(url)
+        wx.navigateTo({
+            url,
+        })
+    },
+    click5(e) {
+        this.onClick();
 
-    // 校验手机号格式是否正确
+    },
+    click6(e) {
+        this.setData({
+            sshow: true
+        })
+    },
+    click7(e) { // 退出按钮
+        this.setData({
+            dshow: true
+        });
+
+    },
     checkPhone(phone) {
-        var regu = /^1\d{10}$/;
-        return regu.test(phone);
+        var myreg = /^[1][3,4,5,7,8][0-9]{9}$/;
+        return myreg.test(phone);
     },
-
-    /**
-     * 生命周期函数--监听页面加载
-     */
-    onLoad: function(options) {
-
-    },
-
-    // 跳转到我的订单
-    skipMyOrder(e) {
+    skOrder(e) {
         var index = e.currentTarget.dataset.index;
-        // 设置跳转过去显示哪一页说
-        wx.setStorageSync('orderIndex', index);
+        wx.setStorageSync('Oindex', index);
         wx.switchTab({
-            url: '/pages/myOrder/myOrder',
+            url: '/pages/order/order',
         })
     },
 
     onShow: function() {
-        // 检测用户是否登录
-        console.log("检测用户是否已经登录")
         wx.getStorageSync('user') ? this.setData({
             user: wx.getStorageSync('user'),
             isLogin: true,

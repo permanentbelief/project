@@ -1,0 +1,15 @@
+{
+    "usingComponents": {
+        "van-row": "@vant/weapp/row/index",
+        "van-col": "@vant/weapp/col/index",
+        "van-button": "@vant/weapp/button/index",
+        "van-share-sheet": "@vant/weapp/share-sheet/index",
+        "l-dialog": "/miniprogram_npm/lin-ui/dialog/index",
+        "l-icon": "/miniprogram_npm/lin-ui/icon/index",
+        "l-toast": "/miniprogram_npm/lin-ui/toast/index",
+        "van-cell": "@vant/weapp/cell/index",
+        "van-cell-group": "@vant/weapp/cell-group/index",
+        "van-field": "@vant/weapp/field/index"
+    },
+    "navigationBarTitleText": "风险区域查询"
+}

@@ -1,5 +1,5 @@
 Page({
-    UpLoadImgs:[], // 外网图片的路径数组
+    UpLoadImgs: [], // 外网图片的路径数组
     data: {
         tabs: [{
                 id: 0,
@@ -21,15 +21,18 @@ Page({
         totalresult: [],
         //当前选中的
         index: [],
-        index1: "1",  //  功能
-        index2: "1",  //  使用
-        index3: "1",  //  性能
-        index4: "1",  //  建议
+        index1: "1", //  功能
+        index2: "1", //  使用
+        index3: "1", //  性能
+        index4: "1", //  建议
         //rate评分组件
-        star:0,//几颗星
-        status:'请评价',
-        textValTS:"",
-        others: [], uses : [], able : [], capa : [] 
+        star: 0, //几颗星
+        status: '请评价',
+        textValTS: "",
+        others: [],
+        uses: [],
+        able: [],
+        capa: []
     },
     onLoad: function(options) {
         console.log("开始了")
@@ -67,19 +70,18 @@ Page({
     // Tabs    标题点击事件，从子组件传递过来的
     handleTabsItemChange(e) {
         //1. 获取被点击的标题索引
-        console.log("获取点击事件的索引", e)
+        console.log("获取点击事件的索引", e);
         const { index } = e.detail;
-        console.log("获取的 index", index)
-            //2. 修改原数组
+        console.log("获取的 index", index);
+        //2. 修改原数组
         let { tabs } = this.data;
         tabs.forEach((v, i) => i === index ? v.isActive = true : v.isActive = false);
         //3. 赋值到数组中
         this.setData({
             tabs
-        })
-        console.log("获取的tabs ", tabs)
+        });
+        // console.log("获取的tabs ", tabs);
     },
-
     /*
      1. 点击"+" 触发tap点击事件  
         1. 调用小程序内置api 选择图片的api
@@ -97,18 +99,15 @@ Page({
             // 图片的来源 照相机 相册
             sourceType: ['album', 'camera'],
             success: (result) => {
-                console.log(result);
+                // console.log(result);
                 console.log("选取的图片列表", result.tempFilePaths)
                 this.setData({
                     // 图片数组进行拼接 
                     chooseImgs: [...this.data.chooseImgs, ...result.tempFilePaths],
                     // totalresult: [...this.totalresult, ...result] 不能拼接
-                    //chooseImags
+
                 })
-                console.log("qqq", this.data.chooseImgs)
             }
-
-
         });
         console.log("qwq选取的图片列表", this.chooseImgs)
 
@@ -147,14 +146,14 @@ Page({
         this.setData({
             textVal: e.detail.value
         })
-        
+
     },
     //handleFormSubmit 提交按钮的点击事件
     handleFormSubmit() {
         //1. 获取文本域内容
         const { textVal, chooseImgs } = this.data;
         console.log("提交事件", this.data)
-        // 2. 内容合法性的验证  
+            // 2. 内容合法性的验证  
         if (!textVal.trim()) {
             wx.showToast({
                 title: '输入不能为空',
@@ -170,22 +169,30 @@ Page({
             mask: true, //显示透明蒙层，防止触摸。为true提示的时候不可以对屏幕进行操作，不写或为false时可以操作屏幕
         });
         // 判断有没有需要上传的图片数组
-        if(chooseImgs.length == 0){
-           wx.hideLoading()
-           console.log("只是提交了文本")
-        //    this.setData({
-        //      textVal:""
-        //    })
+        if (chooseImgs.length == 0) {
+            wx.hideLoading()
+            console.log("只是提交了文本");
+            this.setData({
+                textVal: ""
+            });
+            wx.showToast({
+                title: '文本内容提交成功',
+                icon: 'none',
+                mask: true
+            });
+
+            return;
+            // 此时不需要返回 上一页。
             // wx.navigateBack({
-            //   delta: 1,
+            //     delta: 1,
             // })
         }
         // 3. 上传到专门的服务器
         // 上传文件的api 不支持多个文件同时上传 => 遍历数组进行上传
         // 使用 云函数开发 上传到远方 服务器 
         this.UpLoadImgs.forEach((v, i) => {
-            console.log("进入循环 v是" ,v)
-            console.log("进入循环 i是" ,i)
+            console.log("进入循环 v是", v)
+            console.log("进入循环 i是", i)
             wx.cloud.uploadFile({
                 cloudPath: 'img/feedback/' + new Date().getTime() + "-" + Math.floor(Math.random() * 1000),
                 name: 'feedback_file',
@@ -193,265 +200,261 @@ Page({
                 formData: {}, // 额外顺带的信息
                 success: (result) => {
                     console.log("获得答案", i, result);
-                   
+
                 },
                 fail: (result) => {
                     console.log("失败的原因", result)
                 }
             })
-            if(i == this.UpLoadImgs.length - 1){
+            if (i == this.UpLoadImgs.length - 1) {
                 wx.hideLoading()
                 console.log("将所有的文本内容和外网的图片数组 提交到后台")
-                // 所有的提交都成功了 重置页面并且返回上一个页面 
-                //上传到云服务器
-                // this.setData({
-                //     textVal: "",
-                //     chooseImgs:[]
-                // })
-                // wx.navigateBack({
-                //   delta: 1,
-                // })
+                    // 所有的提交都成功了 重置页面并且返回上一个页面 
+                    //上传到云服务器
+                    // this.setData({
+                    //     textVal: "",
+                    //     chooseImgs:[]
+                    // })
+                    // wx.navigateBack({
+                    //   delta: 1,
+                    // })
             }
         })
-        this.handleforSQL() 
-        // wx.navigateBack({
-        //   delta: 1,
-        // })
+        this.handleforSQL();
+        this.setData({
+            ttshow: true
+        });
+        wx.navigateBack({
+            delta: 1,
+        })
     },
     onChange(event) {
         this.setData({
-          star: event.detail,
+            star: event.detail,
         });
-        let status='';
-        switch(this.data.star){
-          case 1:
-            status='很差';
-            break;
-          case 2:
-            status='比较差';
-            break;
-          case 3:
-            status='一般';
-            break;
-          case 4:
-            status='比较满意';
-            break;
-          case 5:
-            status='很满意';
-            break;
-          case 0.5:
-            status='很差啊啊啊';
-            break;
-          case 1.5:
-            status='比较差啊啊啊';
-            break;
-          case 2.5:
-            status='一般啊啊啊';
-            break;
-          case 3.5:
-            status='比较满意啊啊啊';
-            break;
-          case 4.5:
-            status='很满意啊啊啊';
-            break;
-          case 6:
-            status='超级满意';
-            break;
+        let status = '';
+        switch (this.data.star) {
+            case 1:
+                status = '很差';
+                break;
+            case 2:
+                status = '比较差';
+                break;
+            case 3:
+                status = '一般';
+                break;
+            case 4:
+                status = '比较满意';
+                break;
+            case 5:
+                status = '很满意';
+                break;
+            case 0.5:
+                status = '很差啊啊啊';
+                break;
+            case 1.5:
+                status = '比较差啊啊啊';
+                break;
+            case 2.5:
+                status = '一般啊啊啊';
+                break;
+            case 3.5:
+                status = '比较满意啊啊啊';
+                break;
+            case 4.5:
+                status = '很满意啊啊啊';
+                break;
+            case 6:
+                status = '超级满意';
+                break;
         }
         this.setData({
-            status:status
+            status: status
         })
     },
-    handleTextInputTS(e){
-        console.log("获取输入的反馈信息", e.detail.value)
+    handleTextInputTS(e) {
         this.setData({
             textValTS: e.detail.value
         })
-        console.log("textValTS获取到的数值", this.data.textValTS)
-        
+
     },
-    handleforSQL(){
-        var newothers = [], newuses = [], newables = [], newcapas = []  
-        if(this.data.index1 == 0){
+    handleforSQL() {
+        var newothers = [],
+            newuses = [],
+            newables = [],
+            newcapas = []
+        if (this.data.index1 == 0) {
             this.setData({
-               ables: this.data.chooseImgs
+                ables: this.data.chooseImgs
             })
         }
-        if(this.data.index2 == 0){
-           this.setData({
-             uses: this.data.chooseImgs
-           })
+        if (this.data.index2 == 0) {
+            this.setData({
+                uses: this.data.chooseImgs
+            })
         }
-        if(this.data.index3 == 0){
+        if (this.data.index3 == 0) {
             this.setData({
                 capas: this.data.chooseImgs
-              })
+            })
         }
-        if(this.data.index4 == 0){
+        if (this.data.index4 == 0) {
             this.setData({
                 others: this.data.chooseImgs
-              })
+            })
         }
         var that = this
-        var open_id = wx.getStorageSync('openid')
-        console.log("取出来的open_id 为", open_id)
-        wx.cloud.database().collection("feedbackTY")
-        .where({
-            open_id: open_id,
-        })
-        .get()
-        .then(res =>{
-            console.log("feedbackTY查找到open_id",res)
-            // 更新最新的一次评价信息 
-            if(res.data.length > 0){
-                // 更新一下 
-                var id = res.data[0]._id
-                newcapas = res.data[0].capas.push(that.data.capas) 
-                newuses = res.data[0].uses.push(that.data.usess) 
-                newables = res.data[0].ables.push(that.data.ables) 
-                newothers = res.data[0].others.push(that.data.others) 
-                console.log(newcapas)
-                console.log(newuses)
-                console.log(newables)
-                console.log(newothers) 
-                wx.cloud.database().collection("feedbackTY")
-                wx.cloud.callFunction({
-                    name: 'feedbackUpdate',
-                    data: {
-                      type: 1,
-                      desc: that.data.textVal,
-                      open_id: open_id,
-                      id: id,
-                      capas: newcapas,
-                      uses: newuses,
-                      ables: newables,
-                      others: newothers
-                    },
-                    success: res => {
-                      console.log("handleFormSubmitTY 云函数更新成功", res)       
-                    },
-                    fail: res=>{
-                    console.log("handleFormSubmitTY 云函数更新失败",res)
-                    }
-                  })
-            }else{
-                //插入一下 
-                console.log("走到else 插入分支")
-                console.log(that.data.textVal)
-                wx.cloud.callFunction({
-                    name: 'feedbackAdd',
-                    data: {
-                      type: 1,
-                      capas: that.data.capas,
-                      uses: that.data.uses,
-                      ables: that.data.ables,
-                      others: that.data.others,
-                      desc: that.data.textVal,
-                      open_id: open_id
-                    },
-                    success: res => {
-                      console.log("handleFormSubmitTY 云函数插入成功", res)
-                      console.log("that.data.others", that.data.chooseImgs)
-                    },
-                    fail: res=>{
-                    console.log("handleFormSubmitTY 云函数插入失败",res)
-                    }
-                  })
+        var open_id = wx.getStorageSync('openid');
+        // console.log("取出来的open_id 为", open_id)
+        // wx.cloud.database().collection("feedbackTY")
+        //     .where({
+        //         open_id: open_id,
+        //     })
+        //     .get()
+        //     .then(res => {
+        //         console.log("feedbackTY查找到open_id", res);
+        // 更新最新的一次评价信息 
+        // if (res.data.length > 0) {
+        //     // 更新一下 
+        //     var id = res.data[0]._id
+        //     newcapas = res.data[0].capas.push(that.data.capas)
+        //     newuses = res.data[0].uses.push(that.data.usess)
+        //     newables = res.data[0].ables.push(that.data.ables)
+        //     newothers = res.data[0].others.push(that.data.others)
+        //     console.log(newcapas)
+        //     console.log(newuses)
+        //     console.log(newables)
+        //     console.log(newothers)
+        //     wx.cloud.database().collection("feedbackTY")
+        //     wx.cloud.callFunction({
+        //         name: 'feedbackUpdate',
+        //         data: {
+        //             type: 1,
+        //             desc: that.data.textVal,
+        //             open_id: open_id,
+        //             id: id,
+        //             capas: newcapas,
+        //             uses: newuses,
+        //             ables: newables,
+        //             others: newothers
+        //         },
+        //         success: res => {
+        //             console.log("handleFormSubmitTY 云函数更新成功", res)
+        //         },
+        //         fail: res => {
+        //             console.log("handleFormSubmitTY 云函数更新失败", res)
+        //         }
+        //     })
+        //} 
+        //else {
+        //插入一下 
+        //console.log("走到else 插入分支")
+        // console.log(that.data.textVal)
+        wx.cloud.callFunction({
+                name: 'feedbackAdd',
+                data: {
+                    type: 1,
+                    capas: that.data.capas,
+                    uses: that.data.uses,
+                    ables: that.data.ables,
+                    others: that.data.others,
+                    desc: that.data.textVal,
+                    open_id: open_id
+                },
+                success: res => {
+                    console.log("handleFormSubmitTY 云函数插入成功", res)
+                    console.log("that.data.others", that.data.chooseImgs)
+                },
+                fail: res => {
+                    console.log("handleFormSubmitTY 云函数插入失败", res)
                 }
-        })
-        .catch( res=>{
-            console.log("[handleFormSubmitTS] 查询失败table feedbackTS 失败", res)
-        })
+            })
+            // }
+
+        // .catch(res => {
+        //     console.log("[handleFormSubmitTS] 查询失败table feedbackTS 失败", res)
+        // })
     },
-
-
-
-    handleFormSubmitTS(e){
-       // console.log("status",this.data.status)
-       // console.log("textValTS",this.data.textValTS)
-       // console.log("进入handleFormSubmitTS")
-        var open_id = wx.getStorageSync('openid') 
+    handleFormSubmitTS(e) {
+        // console.log("status",this.data.status)
+        // console.log("textValTS",this.data.textValTS)
+        // console.log("进入handleFormSubmitTS")
+        var open_id = wx.getStorageSync('openid')
         console.log("获取open_id的值为", open_id)
         var that = this
-        if(!open_id){
+        if (!open_id) {
             console.log("handleFormSubmitTS 没有从缓存中获取到openid")
-            return 
-        } 
+            return
+        }
         wx.cloud.database().collection("feedbackTS")
-        .where({
-            open_id: open_id,
-        })
-        .get()
-        .then(res =>{
-            console.log("原生的查询函数",res)
-            // 更新最新的一次评价信息 
-            if(res.data.length > 0){
-                // 更新一下 
-                var id = res.data[0]._id
-                console.log("detaildesc",that.data.status)
-                console.log("id",id)
-                console.log("desc",that.data.textValTS)
-                wx.cloud.callFunction({
-                    name: 'feedbackUpdate',
-                    data: {
-                      type: 2,
-                      detaildesc: that.data.status,
-                      desc: that.data.textValTS,
-                      open_id: open_id,
-                      id: id
-                    },
-                    success: res => {
-                      console.log("handleFormSubmitTS调用云函数更新成功", res)
-                      this.setData({
-                        textValTS: "",
-                        status:"请评价",
-                        star:0,//几颗星 
-                      })
-                      wx.navigateBack({
-                        delta: 1,
-                      })
+            .where({
+                open_id: open_id,
+            })
+            .get()
+            .then(res => {
+                console.log("原生的查询函数", res)
+                    // 更新最新的一次评价信息 
+                if (res.data.length > 0) {
+                    // 更新一下 
+                    var id = res.data[0]._id
+                    console.log("detaildesc", that.data.status)
+                    console.log("id", id)
+                    console.log("desc", that.data.textValTS)
+                    wx.cloud.callFunction({
+                        name: 'feedbackUpdate',
+                        data: {
+                            type: 2,
+                            detaildesc: that.data.status,
+                            desc: that.data.textValTS,
+                            open_id: open_id,
+                            id: id
+                        },
+                        success: res => {
+                            console.log("handleFormSubmitTS调用云函数更新成功", res)
+                            this.setData({
+                                textValTS: "",
+                                status: "请评价",
+                                star: 0, //几颗星 
+                            })
+                            wx.navigateBack({
+                                delta: 1,
+                            })
 
-                    },
-                    fail: res=>{
-                    console.log("handleFormSubmitTS调用云函数更新失败原因",res)
-                    }
-                  })
-            }else{
-                //插入一下 
-                console.log("走到else 插入分支")
-                wx.cloud.callFunction({
-                    name: 'feedbackAdd',
-                    data: {
-                      type: 2,
-                      detaildesc: that.data.status,
-                      desc: that.data.textValTS,
-                      open_id: open_id
-                    },
-                    success: res => {
-                      console.log("handleFormSubmitTS调用云函数插入成功", res)
-                      this.setData({
-                        textValTS: "",
-                        status:"请评价",
-                        star:0,//几颗星 
-                      })
-                      wx.navigateBack({
-                        delta: 1,
-                      })
-                    },
-                    fail: res=>{
-                    console.log("handleFormSubmitTS调用云函数失败插入失败原因",res)
-                    }
-                  })
-            }
-
-            
-        })
-        .catch( res=>{
-            console.log("[handleFormSubmitTS] 查询失败table feedbackTS 失败", res)
-        })
-
-
+                        },
+                        fail: res => {
+                            console.log("handleFormSubmitTS调用云函数更新失败原因", res)
+                        }
+                    })
+                } else {
+                    //插入一下 
+                    console.log("走到else 插入分支")
+                    wx.cloud.callFunction({
+                        name: 'feedbackAdd',
+                        data: {
+                            type: 2,
+                            detaildesc: that.data.status,
+                            desc: that.data.textValTS,
+                            open_id: open_id
+                        },
+                        success: res => {
+                            console.log("handleFormSubmitTS调用云函数插入成功", res)
+                            this.setData({
+                                textValTS: "",
+                                status: "请评价",
+                                star: 0, //几颗星 
+                            })
+                            wx.navigateBack({
+                                delta: 1,
+                            })
+                        },
+                        fail: res => {
+                            console.log("handleFormSubmitTS调用云函数失败插入失败原因", res)
+                        }
+                    })
+                }
+            })
+            .catch(res => {
+                console.log("[handleFormSubmitTS] 查询失败table feedbackTS 失败", res)
+            })
     }
 })
-
- 

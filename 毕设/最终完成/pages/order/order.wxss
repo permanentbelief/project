@@ -1,0 +1,92 @@
+
+
+.select {
+  border-bottom: 1px solid #fd4b3e;
+  color: #fd4b3e;
+}
+
+.kong {
+  margin-top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size:55rpx;
+  color: #ced7e2;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 30rpx;
+  border-bottom: 1px solid #f4f5f7;
+
+}
+
+.detail {
+  background-color: #fff;
+  margin: 20rpx;
+  border-radius: 20rpx;
+  padding: 30rpx 20rpx;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+
+.personal {
+  display: flex;
+}
+
+.personal image {
+  width: 170rpx;
+  height: 170rpx;
+  margin-right:20rpx;
+}
+
+.img{
+  width: 170rpx;
+  height: 170rpx;
+}
+
+.price{
+  margin-left: 90rpx;
+  color:#e18459;
+}
+
+.message {
+  background-color: #f7f7f7;
+  display: flex;
+  flex-direction: column;
+  margin-top:30rpx;
+  margin-left:20rpx;
+  color: #050505;
+  font-size: 26rpx;
+  
+}
+
+
+.button {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 30rpx;
+  height:50rpx;
+  width:100%;
+  color: #2e2e2e; 
+  
+}
+
+.pay {
+  border-radius: 20rpx;
+  background-color: #62c1ff;
+  color: #fff;
+  margin-left:30rpx;
+}
+
+.yuyue {
+  border-radius: 20rpx;
+  background-color: #8bc34a;
+  color: #fff;
+  margin-left:30rpx;
+}

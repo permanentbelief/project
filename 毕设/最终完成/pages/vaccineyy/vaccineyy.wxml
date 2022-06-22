@@ -1,0 +1,117 @@
+<view class="up" bindtap="chooseOCRImg"> 
+  <text> 拍照识别身份证 </text>
+  <text style="font-size: 38rpx;color:#3c48ed;" class="iconfont icon-camera"></text>
+</view>
+
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>姓名</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">Full Name</text>
+    </view>
+    <input style="text-align: right;" bindinput="inputName" value="{{name}}" placeholder="请输入姓名" > </input>
+  </view>
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>证件类型</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">Category</text>
+    </view>
+    <picker bindchange="bindCIndex"  value="{{idCard}}" range="{{cate}}">
+      <view class="picker">
+        {{cate[cateIndex]}} >
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>证件号码</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">No</text>
+    </view>
+    <input style="text-align: right;"  bindinput="inputNo" placeholder="请输入证件号码" value="{{idNo}}" type="idcard"> </input>
+  </view>
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>性别</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">Sex</text>
+    </view>
+    <picker bindchange="bindChangeGender"  value="{{genIndex}}" range="{{gender}}">
+      <view class="picker">
+        {{gender[genIndex]}} >
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>年龄</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">Age</text>
+    </view>
+    <input style="text-align: right;"  bindinput="inputAge" placeholder="请输入年龄" value="{{age}}" type="number"> </input>
+  </view>
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>手机号码</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">Phone</text>
+    </view>
+    <input style="text-align: right;"  bindinput="inputPhone" placeholder="请输入手机号码" type="number" > </input>
+  </view>
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>疫苗种类</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">type</text>
+    </view>
+    <picker bindchange="bindTypes" value="{{typeIndex}}" range="{{types}}">
+      <view class="picker">
+        {{types[typeIndex]? types[typeIndex]:'疫苗厂商'}} 
+      </view>
+    </picker>
+  </view>
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>接种剂次</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">vacc</text>
+    </view>
+    <picker bindchange="bindChangeyyjc" value="{{countIndex}}" range="{{yyjc}}">
+      <view class="picker">
+        {{yyjc[countIndex]? yyjc[countIndex]:'疫苗剂次信息'}} 
+      </view>
+    </picker>
+  </view>
+
+
+  <view class="item">
+    <view style="display: flex; flex-direction: column;">
+      <text>预约时间</text>
+      <text style="color: rgb(211, 206, 206); font-size: 31rpx; text-align: left;">Time</text>
+    </view>
+      <picker mode="multiSelector" bindchange="bindPickTime" range-key="value" range="{{dateTimes}}">
+        <view class="picker">
+          {{dateTimes[0][timeIndex[0]].value}} {{dateTimes[1][timeIndex[1]].value}}
+        </view>
+      </picker>
+  </view>
+    <van-button class="center" type="primary" bindtap="submit"  color="linear-gradient(to right, #4bb0ff, #6149f6)"> 提交订单 </van-button>
+
+
+
+
+
+<l-dialog 
+  show="{{dshow}}"
+  type="confirm"  
+  title="友情提示~"
+  content="确认支付此疫苗订单吗，共计10元"
+  confirm-text="yes~"
+  bind:linconfirm="goPay"
+  confirm-color="#f60"
+  cancel-text="no~"
+  bind:lincancel="goOrder"
+  cancel-color="#999" />
+
+
+
+<l-toast
+  show="{{toastsuccess}}"
+  icon="success"
+  title="支付成功,订单信息已更新"
+/>
+
+
